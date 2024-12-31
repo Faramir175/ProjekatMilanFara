@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Common.Domain
 {
-    class StavkaRacuna
+    public class StavkaRacuna
     {
         public int IdRacun { get; set; }
         public int Rb { get; set; }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Common.Domain
 {
-    class Mesto
+    public class Mesto
     {
         public int IdMesto { get; set; }
         public int Naziv { get; set; }

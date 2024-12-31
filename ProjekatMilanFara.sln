@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34622.214
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{38EAA91C-2078-4A0E-B222-37D07938BC90}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "Common\Common.csproj", "{38EAA91C-2078-4A0E-B222-37D07938BC90}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client", "Client\Client.csproj", "{38BD7B23-BF62-440D-8F7A-3BA013DA88F5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Client", "Client\Client.csproj", "{38BD7B23-BF62-440D-8F7A-3BA013DA88F5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Broker", "Broker\Broker.csproj", "{1334DC52-C3C4-4D7F-9089-D08808EDBC51}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{38BD7B23-BF62-440D-8F7A-3BA013DA88F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{38BD7B23-BF62-440D-8F7A-3BA013DA88F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{38BD7B23-BF62-440D-8F7A-3BA013DA88F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1334DC52-C3C4-4D7F-9089-D08808EDBC51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1334DC52-C3C4-4D7F-9089-D08808EDBC51}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1334DC52-C3C4-4D7F-9089-D08808EDBC51}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1334DC52-C3C4-4D7F-9089-D08808EDBC51}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

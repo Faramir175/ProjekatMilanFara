@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Common.Domain
 {
-    class FrK
+    public class FrK
     {
         public int IdFrizer { get; set; }
         public DateOnly DatumSticanja { get; set; } 

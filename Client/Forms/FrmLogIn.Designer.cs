@@ -31,8 +31,8 @@
             btnPrijava = new Button();
             lblKorisnickoIme = new Label();
             lblSifra = new Label();
-            textBox1 = new TextBox();
-            textBox2 = new TextBox();
+            tbUsername = new TextBox();
+            tbPassword = new TextBox();
             SuspendLayout();
             // 
             // btnPrijava
@@ -43,6 +43,7 @@
             btnPrijava.TabIndex = 0;
             btnPrijava.Text = "Prijava";
             btnPrijava.UseVisualStyleBackColor = true;
+            btnPrijava.Click += btnPrijava_Click;
             // 
             // lblKorisnickoIme
             // 
@@ -62,27 +63,29 @@
             lblSifra.TabIndex = 2;
             lblSifra.Text = "Sifra";
             // 
-            // textBox1
+            // tbUsername
             // 
-            textBox1.Location = new Point(127, 71);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(116, 23);
-            textBox1.TabIndex = 3;
+            tbUsername.Location = new Point(127, 71);
+            tbUsername.Name = "tbUsername";
+            tbUsername.Size = new Size(116, 23);
+            tbUsername.TabIndex = 3;
+            tbUsername.Text = "Zoki2015";
             // 
-            // textBox2
+            // tbPassword
             // 
-            textBox2.Location = new Point(127, 161);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(116, 23);
-            textBox2.TabIndex = 4;
+            tbPassword.Location = new Point(127, 161);
+            tbPassword.Name = "tbPassword";
+            tbPassword.Size = new Size(116, 23);
+            tbPassword.TabIndex = 4;
+            tbPassword.Text = "zoki2015!";
             // 
             // FrmLogIn
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(360, 321);
-            Controls.Add(textBox2);
-            Controls.Add(textBox1);
+            Controls.Add(tbPassword);
+            Controls.Add(tbUsername);
             Controls.Add(lblSifra);
             Controls.Add(lblKorisnickoIme);
             Controls.Add(btnPrijava);
@@ -97,7 +100,10 @@
         private Button btnPrijava;
         private Label lblKorisnickoIme;
         private Label lblSifra;
-        private TextBox textBox1;
-        private TextBox textBox2;
+        private TextBox tbUsername;
+        private TextBox tbPassword;
+        public TextBox TbUsername { get => tbUsername; set => tbUsername = value; }
+        public TextBox TbPassword { get => tbPassword; set => tbPassword = value; }
+        public Button BtnPrijava { get => btnPrijava; set => btnPrijava = value; }
     }
 }

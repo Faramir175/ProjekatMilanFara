@@ -6,12 +6,17 @@ using System.Threading.Tasks;
 
 namespace Common.Domain
 {
-    class Frizer
+    public class Frizer
     {
         public int IdFrizer { get; set; }
         public string ImePrezime { get; set; }
         public string Kontakt { get; set; }
         public string KorisnickoIme { get; set; }
         public string Sifra { get; set; }
+
+        public override string? ToString()
+        {
+            return ImePrezime;
+        }
     }
 }

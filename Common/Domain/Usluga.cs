@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Common.Domain
 {
-    class Usluga
+    public class Usluga
     {
         public int IdUsluga { get; set; }
         public string Naziv { get; set; }

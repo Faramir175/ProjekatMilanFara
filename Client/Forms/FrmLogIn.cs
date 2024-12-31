@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Client.GuiController;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +16,11 @@ namespace Client
         public FrmLogIn()
         {
             InitializeComponent();
+        }
+
+        private void btnPrijava_Click(object sender, EventArgs e)
+        {
+            LogInGuiController.Instance.LogInUser(this);
         }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Common.Domain
 {
-    class Kvalifikacija
+    public class Kvalifikacija
     {
         public int IdKvalifikacija { get; set; }
         public string NazivKvalifikacije { get; set; }
