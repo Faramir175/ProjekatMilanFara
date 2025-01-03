@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Client.GuiController;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +13,16 @@ namespace Client.UserControls
 {
     public partial class UCRacunOpsta : UserControl
     {
+        FrmStavkeRacuna frmStavkeRacuna;
         public UCRacunOpsta()
         {
             InitializeComponent();
+        }
+
+        private void btnUnosNovogRacuna_Click(object sender, EventArgs e)
+        {
+            StavkeRacunaGuiController.Instance.PromeniFormu(frmStavkeRacuna);
+
         }
     }
 }

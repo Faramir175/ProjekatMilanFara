@@ -72,14 +72,15 @@ namespace Client.GuiController
 
                 foreach (Frizer user in users)
                 {
-                    if(username==user.KorisnickoIme && password == user.Sifra)
+                    if (username == user.KorisnickoIme && password == user.Sifra)
                     {
                         MessageBox.Show("Usesano ste se ulogovali");
-                        FrmMain.Instance.logedUser = user;
-                        FrmMain.Instance.ShowFrmMain(frmLogIn);
+                        MainGuiController.Instance.logedUser = user;
+                        MainGuiController.Instance.ShowFrmMain(frmLogIn);
                         return;
                     }
                 }
+                MessageBox.Show("Pogresni kredencijali");
             }
             finally
             {

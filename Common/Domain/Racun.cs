@@ -14,7 +14,6 @@ namespace Common.Domain
         public double UkupanIznos { get; set; }
         public int IdFrizer { get; set; }
         public int IdKlijent { get; set; }
-
-
+        public string KlijentImePrezime { get; set; }
     }
 }

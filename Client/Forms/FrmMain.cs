@@ -1,4 +1,5 @@
-﻿using Common.Domain;
+﻿using Client.GuiController;
+using Common.Domain;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,33 +14,15 @@ namespace Client
 {
     public partial class FrmMain : Form
     {
-        private static FrmMain instance;
-        private FrmMain frmMain;
-        public Frizer logedUser { get; set; }
-
-        public static FrmMain Instance
-        {
-            get 
-            { 
-                if (instance == null) instance = new FrmMain();
-                return instance; 
-            }
-        }
 
         public FrmMain()
         {
             InitializeComponent();
         }
 
-        internal void ShowFrmMain(FrmLogIn frmLogIn)
+        private void TSMIracun_Click(object sender, EventArgs e)
         {
-            frmMain = new FrmMain();
-            frmLogIn.Visible = false;
-            frmMain.Text = logedUser.ToString();
-            frmMain.AutoSize = true;
-            frmMain.ShowDialog();
-
-            frmLogIn.Visible = true;
+            MainGuiController.Instance.PanelRacun(this);
         }
     }
 }

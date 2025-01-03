@@ -30,8 +30,8 @@
         {
             dgvRacuni = new DataGridView();
             lblPretraziRacun = new Label();
-            lblKorisnik = new Label();
-            cmbKorisnik = new ComboBox();
+            lblKlijent = new Label();
+            cmbKlijent = new ComboBox();
             btnUnosNovogRacuna = new Button();
             btnPromeniRacun = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvRacuni).BeginInit();
@@ -56,22 +56,22 @@
             lblPretraziRacun.TabIndex = 1;
             lblPretraziRacun.Text = "Pretrazi racun";
             // 
-            // lblKorisnik
+            // lblKlijent
             // 
-            lblKorisnik.AutoSize = true;
-            lblKorisnik.Location = new Point(603, 91);
-            lblKorisnik.Name = "lblKorisnik";
-            lblKorisnik.Size = new Size(49, 15);
-            lblKorisnik.TabIndex = 2;
-            lblKorisnik.Text = "Korisnik";
+            lblKlijent.AutoSize = true;
+            lblKlijent.Location = new Point(603, 91);
+            lblKlijent.Name = "lblKlijent";
+            lblKlijent.Size = new Size(40, 15);
+            lblKlijent.TabIndex = 2;
+            lblKlijent.Text = "Klijent";
             // 
-            // cmbKorisnik
+            // cmbKlijent
             // 
-            cmbKorisnik.FormattingEnabled = true;
-            cmbKorisnik.Location = new Point(708, 86);
-            cmbKorisnik.Name = "cmbKorisnik";
-            cmbKorisnik.Size = new Size(121, 23);
-            cmbKorisnik.TabIndex = 3;
+            cmbKlijent.FormattingEnabled = true;
+            cmbKlijent.Location = new Point(708, 86);
+            cmbKlijent.Name = "cmbKlijent";
+            cmbKlijent.Size = new Size(121, 23);
+            cmbKlijent.TabIndex = 3;
             // 
             // btnUnosNovogRacuna
             // 
@@ -81,6 +81,7 @@
             btnUnosNovogRacuna.TabIndex = 4;
             btnUnosNovogRacuna.Text = "Unos novog racuna";
             btnUnosNovogRacuna.UseVisualStyleBackColor = true;
+            btnUnosNovogRacuna.Click += btnUnosNovogRacuna_Click;
             // 
             // btnPromeniRacun
             // 
@@ -97,8 +98,8 @@
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(btnPromeniRacun);
             Controls.Add(btnUnosNovogRacuna);
-            Controls.Add(cmbKorisnik);
-            Controls.Add(lblKorisnik);
+            Controls.Add(cmbKlijent);
+            Controls.Add(lblKlijent);
             Controls.Add(lblPretraziRacun);
             Controls.Add(dgvRacuni);
             Name = "UCRacunOpsta";
@@ -112,9 +113,19 @@
 
         private DataGridView dgvRacuni;
         private Label lblPretraziRacun;
-        private Label lblKorisnik;
-        private ComboBox cmbKorisnik;
+        private Label lblKlijent;
+        private ComboBox cmbKlijent;
         private Button btnUnosNovogRacuna;
         private Button btnPromeniRacun;
+
+        public DataGridView DgvRacuni
+        {
+            get { return dgvRacuni;}
+        }
+
+        public ComboBox CmbKlijent
+        {
+            get { return cmbKlijent;}
+        }
     }
 }

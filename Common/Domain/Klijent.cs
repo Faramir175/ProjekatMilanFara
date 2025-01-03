@@ -16,5 +16,9 @@ namespace Common.Domain
         public string Pol { get; set; }
         public int IdMesto { get; set; }
 
+        public override string? ToString()
+        {
+            return ImePrezime;
+        }
     }
 }

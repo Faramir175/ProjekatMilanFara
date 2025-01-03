@@ -50,6 +50,7 @@
             TSMIracun.Name = "TSMIracun";
             TSMIracun.Size = new Size(52, 20);
             TSMIracun.Text = "Racun";
+            TSMIracun.Click += TSMIracun_Click;
             // 
             // TSMIklijent
             // 
@@ -93,5 +94,10 @@
         private ToolStripMenuItem TSMIklijent;
         private ToolStripMenuItem TSMIkvalifikacija;
         private Panel pnlMain;
+
+        public Panel PnlMain
+        {
+            get { return pnlMain; }
+        }
     }
 }
