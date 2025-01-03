@@ -4,6 +4,7 @@ using Common.Domain;
 using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,7 +16,7 @@ namespace Client.GuiController
         private UCRacunOpsta ucRacunView;
         private TestBroker broker;
         private List<Racun> racuni;
-        private List<Klijent> klijenti;
+        private BindingList<Klijent> klijenti;
 
         public UserControl CreateUCRacun()
         {
@@ -63,7 +64,7 @@ namespace Client.GuiController
         {
             broker = new TestBroker();
             broker.Open();
-            klijenti = new List<Klijent>();
+            klijenti = new BindingList<Klijent>();
             using (SqlCommand command = broker.GetConnection().CreateCommand())
             {
                 command.CommandText = "select * from Klijent";

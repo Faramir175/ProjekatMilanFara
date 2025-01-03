@@ -30,7 +30,6 @@
         {
             dgvStavkeRacuna = new DataGridView();
             btnKrajUnosa = new Button();
-            tbKolicina = new TextBox();
             lblIznos = new Label();
             lblCenaName = new Label();
             lblKolicina = new Label();
@@ -43,7 +42,7 @@
             btnIzbaci = new Button();
             btnKrajUnosaStavki = new Button();
             lblUnosRacuna = new Label();
-            dateTimePicker1 = new DateTimePicker();
+            dtpDatum = new DateTimePicker();
             lblDatum = new Label();
             lblPopust = new Label();
             lblUkupanIznosName = new Label();
@@ -51,7 +50,9 @@
             lblUkupanIznos = new Label();
             lblKlijent = new Label();
             cmbKlijent = new ComboBox();
+            tbKolicina = new NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)dgvStavkeRacuna).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbKolicina).BeginInit();
             SuspendLayout();
             // 
             // dgvStavkeRacuna
@@ -71,13 +72,6 @@
             btnKrajUnosa.TabIndex = 1;
             btnKrajUnosa.Text = "Kraj unosa";
             btnKrajUnosa.UseVisualStyleBackColor = true;
-            // 
-            // tbKolicina
-            // 
-            tbKolicina.Location = new Point(641, 157);
-            tbKolicina.Name = "tbKolicina";
-            tbKolicina.Size = new Size(121, 23);
-            tbKolicina.TabIndex = 3;
             // 
             // lblIznos
             // 
@@ -121,6 +115,7 @@
             cmbUsluga.Name = "cmbUsluga";
             cmbUsluga.Size = new Size(121, 23);
             cmbUsluga.TabIndex = 8;
+            cmbUsluga.SelectedIndexChanged += cmbUsluga_SelectedIndexChanged;
             // 
             // lblUsluga
             // 
@@ -139,6 +134,7 @@
             btnDodaj.TabIndex = 10;
             btnDodaj.Text = "Dodaj stavku";
             btnDodaj.UseVisualStyleBackColor = true;
+            btnDodaj.Click += btnDodaj_Click;
             // 
             // lblNaslov
             // 
@@ -166,6 +162,7 @@
             btnIzbaci.TabIndex = 13;
             btnIzbaci.Text = "Izbaci stavku";
             btnIzbaci.UseVisualStyleBackColor = true;
+            btnIzbaci.Click += btnIzbaci_Click;
             // 
             // btnKrajUnosaStavki
             // 
@@ -186,12 +183,12 @@
             lblUnosRacuna.TabIndex = 15;
             lblUnosRacuna.Text = "Unos racuna";
             // 
-            // dateTimePicker1
+            // dtpDatum
             // 
-            dateTimePicker1.Location = new Point(889, 110);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(200, 23);
-            dateTimePicker1.TabIndex = 16;
+            dtpDatum.Location = new Point(889, 110);
+            dtpDatum.Name = "dtpDatum";
+            dtpDatum.Size = new Size(200, 23);
+            dtpDatum.TabIndex = 16;
             // 
             // lblDatum
             // 
@@ -253,11 +250,20 @@
             cmbKlijent.Size = new Size(200, 23);
             cmbKlijent.TabIndex = 22;
             // 
+            // tbKolicina
+            // 
+            tbKolicina.Location = new Point(641, 157);
+            tbKolicina.Name = "tbKolicina";
+            tbKolicina.Size = new Size(120, 23);
+            tbKolicina.TabIndex = 24;
+            tbKolicina.Leave += tbKolicina_Leave;
+            // 
             // FrmStavkeRacuna
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1127, 476);
+            Controls.Add(tbKolicina);
             Controls.Add(lblKlijent);
             Controls.Add(cmbKlijent);
             Controls.Add(lblPopust);
@@ -265,7 +271,7 @@
             Controls.Add(lblPopustName);
             Controls.Add(lblUkupanIznos);
             Controls.Add(lblDatum);
-            Controls.Add(dateTimePicker1);
+            Controls.Add(dtpDatum);
             Controls.Add(lblUnosRacuna);
             Controls.Add(btnKrajUnosaStavki);
             Controls.Add(btnIzbaci);
@@ -278,12 +284,12 @@
             Controls.Add(lblKolicina);
             Controls.Add(lblCenaName);
             Controls.Add(lblIznos);
-            Controls.Add(tbKolicina);
             Controls.Add(btnKrajUnosa);
             Controls.Add(dgvStavkeRacuna);
             Name = "FrmStavkeRacuna";
             Text = "Racun";
             ((System.ComponentModel.ISupportInitialize)dgvStavkeRacuna).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbKolicina).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -293,7 +299,6 @@
         private DataGridView dgvStavkeRacuna;
         private Button btnKrajUnosa;
         private TextBox tbCena;
-        private TextBox tbKolicina;
         private Label lblIznos;
         private Label lblCenaName;
         private Label lblKolicina;
@@ -306,7 +311,7 @@
         private Button btnIzbaci;
         private Button btnKrajUnosaStavki;
         private Label lblUnosRacuna;
-        private DateTimePicker dateTimePicker1;
+        private DateTimePicker dtpDatum;
         private Label lblDatum;
         private Label lblPopust;
         private Label lblUkupanIznosName;
@@ -314,5 +319,22 @@
         private Label lblUkupanIznos;
         private Label lblKlijent;
         private ComboBox cmbKlijent;
+        private NumericUpDown tbKolicina;
+
+        public ComboBox CmbKlijent { get { return cmbKlijent; } }
+        public ComboBox CmbUsluga { get { return cmbUsluga; } }
+        public DataGridView DgvStavkeRacuna { get { return dgvStavkeRacuna; } }
+        public DateTimePicker DtpDatum { get { return dtpDatum; } }
+        public Label LblDatum { get { return lblDatum; } }
+        public Label LblPopust { get { return lblPopust; } }
+        public Label LblUkupanIznos { get { return lblUkupanIznos; } }
+        public Label LblIznos { get { return lblIznos; } }
+        public Button BtnKrajUnosa { get { return btnKrajUnosa; } }
+        public Button BtnDodaj { get { return btnDodaj; } }
+        public Label LblNaslov { get { return lblNaslov; } }
+        public Label LblCena { get { return lblCena; } }
+        public Button BtnIzbaci { get { return btnIzbaci; } }
+        public Button BtnKrajUnosaStavki { get { return btnKrajUnosaStavki; } }
+        public NumericUpDown TbKolicina { get { return tbKolicina; } }
     }
 }

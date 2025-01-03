@@ -91,6 +91,7 @@
             btnPromeniRacun.TabIndex = 5;
             btnPromeniRacun.Text = "Promeni racun";
             btnPromeniRacun.UseVisualStyleBackColor = true;
+            btnPromeniRacun.Click += btnPromeniRacun_Click;
             // 
             // UCRacunOpsta
             // 

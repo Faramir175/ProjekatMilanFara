@@ -14,6 +14,7 @@ namespace Common.Domain
         public int Kolicina { get; set; }
         public int Cena { get; set; }
         public int IdUsluga { get; set; }
+        public string NazivUsluga { get; set; }
 
     }
 }

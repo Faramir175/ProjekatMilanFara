@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Broker;
+using Client.GuiController;
+using Common.Domain;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -16,5 +19,29 @@ namespace Client
         {
             InitializeComponent();
         }
+
+        private void btnDodaj_Click(object sender, EventArgs e)
+        {
+            StavkeRacunaGuiController.Instance.DodajStavku(this);
+        }
+
+        private void btnIzbaci_Click(object sender, EventArgs e)
+        {
+            var selektovanaStavka = (StavkaRacuna)dgvStavkeRacuna.SelectedRows[0].DataBoundItem;
+            StavkeRacunaGuiController.Instance.IzbaciStavku(this);
+        }
+
+        private void cmbUsluga_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            StavkeRacunaGuiController.Instance.InitCenaLbl(this);
+            StavkeRacunaGuiController.Instance.InitIznosLbl(this);
+        }
+
+        private void tbKolicina_Leave(object sender, EventArgs e)
+        {
+            StavkeRacunaGuiController.Instance.InitIznosLbl(this);
+
+        }
+
     }
 }

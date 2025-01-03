@@ -12,5 +12,10 @@ namespace Common.Domain
         public string Naziv { get; set; }
         public int Cena { get; set; }
         public int Trajanje { get; set; }
+
+        public override string? ToString()
+        {
+            return Naziv;
+        }
     }
 }
