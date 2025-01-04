@@ -43,5 +43,15 @@ namespace Client
 
         }
 
+        private void btnKrajUnosaStavki_Click(object sender, EventArgs e)
+        {
+            StavkeRacunaGuiController.Instance.UpisURacun(this, true);
+        }
+
+        private void cmbKlijent_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            StavkeRacunaGuiController.Instance.InitPopustLbl(this);
+            StavkeRacunaGuiController.Instance.InitUkupanIznosLbl(this);
+        }
     }
 }

@@ -172,6 +172,7 @@
             btnKrajUnosaStavki.TabIndex = 14;
             btnKrajUnosaStavki.Text = "Kraj unosa stavki";
             btnKrajUnosaStavki.UseVisualStyleBackColor = true;
+            btnKrajUnosaStavki.Click += btnKrajUnosaStavki_Click;
             // 
             // lblUnosRacuna
             // 
@@ -221,9 +222,9 @@
             lblPopustName.AutoSize = true;
             lblPopustName.Location = new Point(806, 207);
             lblPopustName.Name = "lblPopustName";
-            lblPopustName.Size = new Size(44, 15);
+            lblPopustName.Size = new Size(65, 15);
             lblPopustName.TabIndex = 19;
-            lblPopustName.Text = "Popust";
+            lblPopustName.Text = "Popust (%)";
             // 
             // lblUkupanIznos
             // 
@@ -249,6 +250,7 @@
             cmbKlijent.Name = "cmbKlijent";
             cmbKlijent.Size = new Size(200, 23);
             cmbKlijent.TabIndex = 22;
+            cmbKlijent.SelectedIndexChanged += cmbKlijent_SelectedIndexChanged;
             // 
             // tbKolicina
             // 

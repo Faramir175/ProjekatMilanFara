@@ -57,13 +57,11 @@ namespace Client.GuiController
             Usluga usluga = (Usluga)frmStavkeRacuna.CmbUsluga.SelectedItem;
             frmStavkeRacuna.LblCena.Text = usluga.Cena.ToString();
         }
-
         internal void InitIznosLbl(FrmStavkeRacuna frmStavkeRacuna)
         {
             Usluga usluga = (Usluga)frmStavkeRacuna.CmbUsluga.SelectedItem;
             frmStavkeRacuna.LblIznos.Text = (usluga.Cena * int.Parse(frmStavkeRacuna.TbKolicina.Text)).ToString();
         }
-
         private void InitKlijentCmb(FrmStavkeRacuna frmStavkeRacuna)
         {
             broker = new TestBroker();
@@ -90,7 +88,6 @@ namespace Client.GuiController
             broker.Close();
             frmStavkeRacuna.CmbKlijent.DataSource = klijenti;
         }
-
         private void InitUslugaCmb(FrmStavkeRacuna frmStavkeRacuna)
         {
             broker = new TestBroker();
@@ -145,7 +142,7 @@ namespace Client.GuiController
             frmStavkeRacuna.DgvStavkeRacuna.DataSource = stavke;
             InitDgvColumns(frmStavkeRacuna.DgvStavkeRacuna);
         }
-        private void UpisURacun(FrmStavkeRacuna frmStavkeRacuna, bool uslov)
+        internal void UpisURacun(FrmStavkeRacuna frmStavkeRacuna, bool uslov)
         {
             frmStavkeRacuna.DtpDatum.Enabled = uslov;
             frmStavkeRacuna.LblDatum.Enabled = uslov;
@@ -159,16 +156,16 @@ namespace Client.GuiController
             frmStavkeRacuna.LblNaslov.Enabled = !uslov;
             frmStavkeRacuna.LblCena.Enabled = !uslov;
             frmStavkeRacuna.BtnIzbaci.Enabled = !uslov;
-            frmStavkeRacuna.TbKolicina.Enabled = !uslov;
+            frmStavkeRacuna.TbKolicina.Enabled = !uslov; 
+            frmStavkeRacuna.CmbUsluga.Enabled = !uslov;
 
-    }
+        }
         private void InitDgvColumns(DataGridView dgvStavkeRacuna)
         {
             dgvStavkeRacuna.Columns["idRacun"].Visible = false;
             dgvStavkeRacuna.Columns["idUsluga"].Visible = false;
             dgvStavkeRacuna.Columns["rb"].Visible = false;
         }
-
         internal void DodajStavku(FrmStavkeRacuna frmStavkeRacuna)
         {
             Usluga u = (Usluga)frmStavkeRacuna.CmbUsluga.SelectedItem;
@@ -188,6 +185,57 @@ namespace Client.GuiController
         {
             var selektovanaStavka = (StavkaRacuna)frmStavkeRacuna.DgvStavkeRacuna.SelectedRows[0].DataBoundItem;
             stavke.Remove(selektovanaStavka);
+        }
+
+        internal void InitPopustLbl(FrmStavkeRacuna frmStavkeRacuna)
+        {
+            Klijent k = frmStavkeRacuna.CmbKlijent.SelectedItem as Klijent;
+            switch (int.Parse(k.TipKlijenta))
+            {
+                case (int)TipKlijentaEnum.StalniKlijent:
+                    frmStavkeRacuna.LblPopust.Text = "17.5";
+                    break;
+
+                case (int)TipKlijentaEnum.NovKlijent:
+                    frmStavkeRacuna.LblPopust.Text = "0";
+                    break;
+
+                case (int)TipKlijentaEnum.KlijentPreletac:
+                    frmStavkeRacuna.LblPopust.Text = "-17.5";
+                    break;
+
+                default:
+                    MessageBox.Show("Nepoznat tip klijenta.");
+                    break;
+            }
+        }
+
+        internal void InitUkupanIznosLbl(FrmStavkeRacuna frmStavkeRacuna)
+        {
+            double popust = double.Parse(frmStavkeRacuna.LblPopust.Text);
+            double uIznos = 0;
+            foreach (StavkaRacuna st in stavke)
+            {
+                uIznos += (double)st.Iznos;
+            }
+            switch (popust)
+            {
+                case 0:
+                    break;
+
+                case >0:
+                    uIznos = uIznos * (1-(popust / 100));
+                    break;
+
+                case <0:
+                    uIznos = uIznos * (1+(popust / 100));
+                    break;
+
+                default:
+                    MessageBox.Show("Ne moze da se izracuna ukupan iznos.");
+                    break;
+            }
+            frmStavkeRacuna.LblUkupanIznos.Text = uIznos.ToString();
         }
     }
 }
