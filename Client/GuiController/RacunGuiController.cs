@@ -34,12 +34,11 @@ namespace Client.GuiController
             ucRacunView = new UCRacunOpsta();
             InitCmbKlijent();
             InitDgvRacun();
-            MessageBox.Show(racuni[0].KlijentImePrezime);
 
             return ucRacunView;
         }
 
-        private void InitDgvRacun()
+        internal void InitDgvRacun()
         {
             broker = new TestBroker();
             broker.Open();

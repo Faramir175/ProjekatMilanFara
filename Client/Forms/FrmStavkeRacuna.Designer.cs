@@ -60,6 +60,7 @@
             dgvStavkeRacuna.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvStavkeRacuna.Location = new Point(12, 12);
             dgvStavkeRacuna.Name = "dgvStavkeRacuna";
+            dgvStavkeRacuna.ReadOnly = true;
             dgvStavkeRacuna.RowTemplate.Height = 25;
             dgvStavkeRacuna.Size = new Size(502, 454);
             dgvStavkeRacuna.TabIndex = 0;
@@ -72,6 +73,7 @@
             btnKrajUnosa.TabIndex = 1;
             btnKrajUnosa.Text = "Kraj unosa";
             btnKrajUnosa.UseVisualStyleBackColor = true;
+            btnKrajUnosa.Click += btnKrajUnosa_Click;
             // 
             // lblIznos
             // 

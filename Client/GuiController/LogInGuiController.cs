@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Common.Domain;
 using Microsoft.Data.SqlClient;
 using Microsoft.VisualBasic.ApplicationServices;
+using Microsoft.Identity.Client;
 
 namespace Client.GuiController
 {

@@ -44,12 +44,12 @@
             lblDodajMesto = new Label();
             lblDodajPromeniKlijenta = new Label();
             gbDodajPromeniKlijenta = new GroupBox();
-            cmbDodajMesto = new ComboBox();
-            cmbDodajPol = new ComboBox();
-            cmbDodajTipKlijenta = new ComboBox();
-            tbDodajImePrezime = new TextBox();
-            tbDodajKontakt = new TextBox();
             btnKrajUnosaKlijenta = new Button();
+            tbDodajKontakt = new TextBox();
+            tbDodajImePrezime = new TextBox();
+            cmbDodajTipKlijenta = new ComboBox();
+            cmbDodajPol = new ComboBox();
+            cmbDodajMesto = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)dgvKlijenti).BeginInit();
             gbDodajPromeniKlijenta.SuspendLayout();
             SuspendLayout();
@@ -59,6 +59,7 @@
             dgvKlijenti.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvKlijenti.Location = new Point(3, 3);
             dgvKlijenti.Name = "dgvKlijenti";
+            dgvKlijenti.ReadOnly = true;
             dgvKlijenti.RowTemplate.Height = 25;
             dgvKlijenti.Size = new Size(470, 465);
             dgvKlijenti.TabIndex = 0;
@@ -208,21 +209,28 @@
             gbDodajPromeniKlijenta.TabIndex = 15;
             gbDodajPromeniKlijenta.TabStop = false;
             // 
-            // cmbDodajMesto
+            // btnKrajUnosaKlijenta
             // 
-            cmbDodajMesto.FormattingEnabled = true;
-            cmbDodajMesto.Location = new Point(93, 181);
-            cmbDodajMesto.Name = "cmbDodajMesto";
-            cmbDodajMesto.Size = new Size(190, 23);
-            cmbDodajMesto.TabIndex = 16;
+            btnKrajUnosaKlijenta.Location = new Point(105, 219);
+            btnKrajUnosaKlijenta.Name = "btnKrajUnosaKlijenta";
+            btnKrajUnosaKlijenta.Size = new Size(98, 44);
+            btnKrajUnosaKlijenta.TabIndex = 21;
+            btnKrajUnosaKlijenta.Text = "Kraj unosa";
+            btnKrajUnosaKlijenta.UseVisualStyleBackColor = true;
             // 
-            // cmbDodajPol
+            // tbDodajKontakt
             // 
-            cmbDodajPol.FormattingEnabled = true;
-            cmbDodajPol.Location = new Point(93, 152);
-            cmbDodajPol.Name = "cmbDodajPol";
-            cmbDodajPol.Size = new Size(190, 23);
-            cmbDodajPol.TabIndex = 17;
+            tbDodajKontakt.Location = new Point(93, 94);
+            tbDodajKontakt.Name = "tbDodajKontakt";
+            tbDodajKontakt.Size = new Size(190, 23);
+            tbDodajKontakt.TabIndex = 20;
+            // 
+            // tbDodajImePrezime
+            // 
+            tbDodajImePrezime.Location = new Point(93, 65);
+            tbDodajImePrezime.Name = "tbDodajImePrezime";
+            tbDodajImePrezime.Size = new Size(190, 23);
+            tbDodajImePrezime.TabIndex = 19;
             // 
             // cmbDodajTipKlijenta
             // 
@@ -232,28 +240,21 @@
             cmbDodajTipKlijenta.Size = new Size(190, 23);
             cmbDodajTipKlijenta.TabIndex = 18;
             // 
-            // tbDodajImePrezime
+            // cmbDodajPol
             // 
-            tbDodajImePrezime.Location = new Point(93, 65);
-            tbDodajImePrezime.Name = "tbDodajImePrezime";
-            tbDodajImePrezime.Size = new Size(190, 23);
-            tbDodajImePrezime.TabIndex = 19;
+            cmbDodajPol.FormattingEnabled = true;
+            cmbDodajPol.Location = new Point(93, 152);
+            cmbDodajPol.Name = "cmbDodajPol";
+            cmbDodajPol.Size = new Size(190, 23);
+            cmbDodajPol.TabIndex = 17;
             // 
-            // tbDodajKontakt
+            // cmbDodajMesto
             // 
-            tbDodajKontakt.Location = new Point(93, 94);
-            tbDodajKontakt.Name = "tbDodajKontakt";
-            tbDodajKontakt.Size = new Size(190, 23);
-            tbDodajKontakt.TabIndex = 20;
-            // 
-            // btnKrajUnosaKlijenta
-            // 
-            btnKrajUnosaKlijenta.Location = new Point(105, 219);
-            btnKrajUnosaKlijenta.Name = "btnKrajUnosaKlijenta";
-            btnKrajUnosaKlijenta.Size = new Size(98, 44);
-            btnKrajUnosaKlijenta.TabIndex = 21;
-            btnKrajUnosaKlijenta.Text = "Kraj unosa";
-            btnKrajUnosaKlijenta.UseVisualStyleBackColor = true;
+            cmbDodajMesto.FormattingEnabled = true;
+            cmbDodajMesto.Location = new Point(93, 181);
+            cmbDodajMesto.Name = "cmbDodajMesto";
+            cmbDodajMesto.Size = new Size(190, 23);
+            cmbDodajMesto.TabIndex = 16;
             // 
             // UCKlijentiOpste
             // 

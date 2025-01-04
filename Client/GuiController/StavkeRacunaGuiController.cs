@@ -237,5 +237,68 @@ namespace Client.GuiController
             }
             frmStavkeRacuna.LblUkupanIznos.Text = uIznos.ToString();
         }
+
+        internal void KrajUnosaEvent(FrmStavkeRacuna frmStavkeRacuna)
+        {
+            Klijent k = (Klijent)frmStavkeRacuna.CmbKlijent.SelectedItem;
+            Racun racunZaBazu = new Racun();
+
+            racunZaBazu.Datum = frmStavkeRacuna.DtpDatum.Value;
+            racunZaBazu.Popust = (int)double.Parse(frmStavkeRacuna.LblPopust.Text);
+            racunZaBazu.UkupanIznos = double.Parse(frmStavkeRacuna.LblUkupanIznos.Text);
+            racunZaBazu.IdKlijent = k.IdKlijent;
+            racunZaBazu.IdFrizer = MainGuiController.Instance.logedUser.IdFrizer;
+
+            racunZaBazu = UpisRacunaUBazu(frmStavkeRacuna, racunZaBazu);
+            foreach (StavkaRacuna s in stavke)
+            {
+                s.IdRacun = racunZaBazu.IdRacun;
+            }
+            UpisStavkiRacunaUBazu(frmStavkeRacuna,stavke);
+            RacunGuiController.Instance.InitDgvRacun();
+            frmStavkeRacuna.Close();
+        }
+
+        private Racun UpisRacunaUBazu(FrmStavkeRacuna frmStavkeRacuna, Racun racunZaBazu)
+        {
+            broker = new TestBroker();
+            broker.Open();
+            using (SqlCommand cmd = broker.GetConnection().CreateCommand())
+            {
+                cmd.CommandText = $"insert into Racun (datum,popust,ukupanIznos,idFrizer,idKlijent) values" +
+                    $"(@datum, @popust, @ukupanIznos, @idFrizer, @idKlijent) select scope_identity()";
+                cmd.Parameters.AddWithValue("@datum", racunZaBazu.Datum);
+                cmd.Parameters.AddWithValue("@popust", racunZaBazu.Popust);
+                cmd.Parameters.AddWithValue("@ukupanIznos", racunZaBazu.UkupanIznos);
+                cmd.Parameters.AddWithValue("@idFrizer", racunZaBazu.IdFrizer);
+                cmd.Parameters.AddWithValue("@idKlijent", racunZaBazu.IdKlijent);
+                racunZaBazu.IdRacun = Convert.ToInt32((decimal)cmd.ExecuteScalar());
+            }
+            broker.Close();
+            return racunZaBazu;
+        }
+
+        private void UpisStavkiRacunaUBazu(FrmStavkeRacuna frmStavkeRacuna, BindingList<StavkaRacuna> stavke)
+        {
+            broker = new TestBroker();
+            broker.Open();
+            using (SqlCommand cmd = broker.GetConnection().CreateCommand())
+            {
+                cmd.CommandText = $"insert into StavkaRacuna (idRacun,iznos,kolicina,cena,idUsluga) values" +
+                  $"(@idRacun, @iznos, @kolicina, @cena, @idUsluga)";
+                foreach (StavkaRacuna s in stavke)
+                {
+                    cmd.Parameters.Clear();
+                    cmd.Parameters.AddWithValue("@idRacun", s.IdRacun);
+                    cmd.Parameters.AddWithValue("@iznos", s.Iznos);
+                    cmd.Parameters.AddWithValue("@kolicina", s.Kolicina);
+                    cmd.Parameters.AddWithValue("@cena", s.Cena);
+                    cmd.Parameters.AddWithValue("@idUsluga", s.IdUsluga);
+                    cmd.ExecuteNonQuery(); 
+                }
+
+            }
+            broker.Close();
+        }
     }
 }

@@ -53,5 +53,10 @@ namespace Client
             StavkeRacunaGuiController.Instance.InitPopustLbl(this);
             StavkeRacunaGuiController.Instance.InitUkupanIznosLbl(this);
         }
+
+        private void btnKrajUnosa_Click(object sender, EventArgs e)
+        {
+            StavkeRacunaGuiController.Instance.KrajUnosaEvent(this);
+        }
     }
 }
