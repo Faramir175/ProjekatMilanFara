@@ -37,5 +37,10 @@ namespace Client.UserControls
 
             StavkeRacunaGuiController.Instance.FormaZaPromenu(frmStavkeRacuna, selektovaniRacun);
         }
+
+        private void cmbKlijent_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            RacunGuiController.Instance.FiltrirajRacune(this);
+        }
     }
 }

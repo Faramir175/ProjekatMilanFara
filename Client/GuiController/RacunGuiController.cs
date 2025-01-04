@@ -6,6 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Net.Http.Headers;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -13,17 +15,26 @@ namespace Client.GuiController
 {
     public class RacunGuiController
     {
-        private UCRacunOpsta ucRacunView;
+        private static UCRacunOpsta ucRacunView;
         private TestBroker broker;
-        private List<Racun> racuni;
+        private static BindingList<Racun> racuni;
         private BindingList<Klijent> klijenti;
+        private static RacunGuiController instance;
+        public static RacunGuiController Instance
+        {
+            get
+            {
+                if (instance == null) instance = new RacunGuiController();
+                return instance;
+            }
+        }
 
         public UserControl CreateUCRacun()
         {
             ucRacunView = new UCRacunOpsta();
             InitCmbKlijent();
             InitDgvRacun();
-
+            MessageBox.Show(racuni[0].KlijentImePrezime);
 
             return ucRacunView;
         }
@@ -32,7 +43,7 @@ namespace Client.GuiController
         {
             broker = new TestBroker();
             broker.Open();
-            racuni = new List<Racun>();
+            racuni = new BindingList<Racun>();
             using (SqlCommand command = broker.GetConnection().CreateCommand())
             {
                 command.CommandText = @"SELECT r.IdRacun, r.datum, r.popust, r.ukupanIznos, r.idFrizer, r.idKlijent, k.imePrezime
@@ -93,6 +104,25 @@ namespace Client.GuiController
             dgv.Columns["IdFrizer"].Visible = false;
             dgv.Columns["IdKlijent"].Visible = false;
             dgv.Columns["IdRacun"].Visible = false;
+        }
+
+        internal void FiltrirajRacune(UCRacunOpsta uCRacunOpsta)
+        {
+
+            if (racuni != null) 
+            {
+            BindingList<Racun> filtriraniRacun = new BindingList<Racun>();
+            Klijent klijentZaFiltriranje = (Klijent)uCRacunOpsta.CmbKlijent.SelectedItem;
+                foreach (Racun r in racuni)
+                {
+                    if (r.IdKlijent == klijentZaFiltriranje.IdKlijent)
+                    {
+                        filtriraniRacun.Add(r);
+                    }
+                }
+            ucRacunView.DgvRacuni.DataSource = filtriraniRacun;
+            }
+
         }
     }
 }

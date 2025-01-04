@@ -72,6 +72,7 @@
             cmbKlijent.Name = "cmbKlijent";
             cmbKlijent.Size = new Size(121, 23);
             cmbKlijent.TabIndex = 3;
+            cmbKlijent.SelectedIndexChanged += cmbKlijent_SelectedIndexChanged;
             // 
             // btnUnosNovogRacuna
             // 
