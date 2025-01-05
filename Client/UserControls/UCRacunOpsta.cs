@@ -15,7 +15,6 @@ namespace Client.UserControls
     public partial class UCRacunOpsta : UserControl
     {
         FrmStavkeRacuna frmStavkeRacuna;
-        public event Action<Racun> PromeniRacunEvent;
         public UCRacunOpsta()
         {
             InitializeComponent();
@@ -35,9 +34,9 @@ namespace Client.UserControls
             }
 
             var selektovaniRacun = (Racun)dgvRacuni.SelectedRows[0].DataBoundItem;
-            PromeniRacunEvent?.Invoke(selektovaniRacun);
+            bool promena = true;
 
-            StavkeRacunaGuiController.Instance.FormaZaPromenu(frmStavkeRacuna, selektovaniRacun);
+            StavkeRacunaGuiController.Instance.FormaZaPromenu(frmStavkeRacuna, selektovaniRacun,promena);
         }
 
         private void cmbKlijent_SelectedIndexChanged(object sender, EventArgs e)

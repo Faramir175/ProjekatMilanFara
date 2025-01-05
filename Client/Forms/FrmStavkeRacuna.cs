@@ -17,23 +17,10 @@ namespace Client
     public partial class FrmStavkeRacuna : Form
     {
         private UCRacunOpsta ucRacunOpsta;
-        private Racun selektovaniRacun;
 
         public FrmStavkeRacuna()
         {
             InitializeComponent();
-        }
-
-        public FrmStavkeRacuna(UCRacunOpsta ucRacunOpsta)
-        {
-            this.ucRacunOpsta = ucRacunOpsta;
-
-            this.ucRacunOpsta.PromeniRacunEvent += OnPromeniRacun;
-        }
-
-        private void OnPromeniRacun(Racun racun)
-        {
-            selektovaniRacun = racun;
         }
 
         private void btnDodaj_Click(object sender, EventArgs e)
@@ -72,10 +59,6 @@ namespace Client
 
         private void btnKrajUnosa_Click(object sender, EventArgs e)
         {
-            if (selektovaniRacun != null)
-            {
-                StavkeRacunaGuiController.Instance.IzbaciStariRacun(this, selektovaniRacun);
-            }
             StavkeRacunaGuiController.Instance.KrajUnosaEvent(this);
         }
     }

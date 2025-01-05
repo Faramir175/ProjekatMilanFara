@@ -25,6 +25,8 @@ namespace Client.GuiController
                 return instance; 
             } 
         }
+        private bool pr=false;
+        private Racun racunZaIzbacivanje;
 
         internal void FormaZaUnos(FrmStavkeRacuna frmStavkeRacuna)
         {
@@ -40,15 +42,18 @@ namespace Client.GuiController
             frmStavkeRacuna.ShowDialog();
         }
 
-        internal void FormaZaPromenu(FrmStavkeRacuna frmStavkeRacuna,Racun selektovaniRacun)
+        internal void FormaZaPromenu(FrmStavkeRacuna frmStavkeRacuna,Racun selektovaniRacun, bool promena)
         {
             frmStavkeRacuna = new FrmStavkeRacuna();
+            pr = promena;
+            racunZaIzbacivanje = selektovaniRacun;
             frmStavkeRacuna.AutoSize = true;
             InitUslugaCmb(frmStavkeRacuna);
             InitKlijentCmb(frmStavkeRacuna);
             InitCenaLbl(frmStavkeRacuna);
             UpisURacun(frmStavkeRacuna, false);
             InitStavkeRacunaDgv(frmStavkeRacuna,selektovaniRacun);
+            if (pr) IzbaciStariRacun(frmStavkeRacuna, racunZaIzbacivanje);
             frmStavkeRacuna.ShowDialog();
         }
 
@@ -119,7 +124,7 @@ namespace Client.GuiController
             stavke = new BindingList<StavkaRacuna>();
             using (SqlCommand command = broker.GetConnection().CreateCommand())
             {
-                command.CommandText = @"SELECT sr.idRacun,sr.rb, sr.iznos, sr.kolicina, sr.cena, u.naziv
+                command.CommandText = @"SELECT sr.idRacun,sr.rb, sr.iznos, sr.kolicina, sr.cena,sr.idUsluga, u.naziv
                                         FROM StavkaRacuna sr
                                         INNER JOIN Usluga u ON sr.idUsluga = u.idUsluga";
                 using (SqlDataReader reader = command.ExecuteReader())
@@ -133,6 +138,7 @@ namespace Client.GuiController
                         stavka.Kolicina = (int)reader["kolicina"];
                         stavka.Cena = (int)reader["cena"];
                         stavka.NazivUsluga = (string)reader["naziv"];
+                        stavka.IdUsluga = (int)reader["idUsluga"];
                         if(selektovaniRacun.IdRacun == stavka.IdRacun)
                         stavke.Add(stavka);
                     }
@@ -250,7 +256,6 @@ namespace Client.GuiController
             racunZaBazu.UkupanIznos = double.Parse(frmStavkeRacuna.LblUkupanIznos.Text);
             racunZaBazu.IdKlijent = k.IdKlijent;
             racunZaBazu.IdFrizer = MainGuiController.Instance.logedUser.IdFrizer;
-
             racunZaBazu = UpisRacunaUBazu(frmStavkeRacuna, racunZaBazu);
             foreach (StavkaRacuna s in stavke)
             {
@@ -317,7 +322,7 @@ namespace Client.GuiController
             }
             using (SqlCommand command = broker.GetConnection().CreateCommand())
             {
-                command.CommandText = $"Delete from racun where idRacun=@idRacun";
+                command.CommandText = $"Delete from stavkaRacuna where idRacun=@idRacun";
 
                 foreach (StavkaRacuna s in stavkeZaBrisanje)
                 {
@@ -339,11 +344,6 @@ namespace Client.GuiController
                 
             }
             broker.Close();
-
-            foreach (StavkaRacuna s in stavkeZaBrisanje)
-            {
-                stavke.Remove(s);
-            }
         }
     }
 }
