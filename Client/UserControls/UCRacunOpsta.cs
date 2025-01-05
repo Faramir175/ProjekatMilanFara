@@ -15,6 +15,7 @@ namespace Client.UserControls
     public partial class UCRacunOpsta : UserControl
     {
         FrmStavkeRacuna frmStavkeRacuna;
+        public event Action<Racun> PromeniRacunEvent;
         public UCRacunOpsta()
         {
             InitializeComponent();
@@ -34,6 +35,7 @@ namespace Client.UserControls
             }
 
             var selektovaniRacun = (Racun)dgvRacuni.SelectedRows[0].DataBoundItem;
+            PromeniRacunEvent?.Invoke(selektovaniRacun);
 
             StavkeRacunaGuiController.Instance.FormaZaPromenu(frmStavkeRacuna, selektovaniRacun);
         }

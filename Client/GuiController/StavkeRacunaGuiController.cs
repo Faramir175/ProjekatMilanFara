@@ -214,26 +214,28 @@ namespace Client.GuiController
         {
             double popust = double.Parse(frmStavkeRacuna.LblPopust.Text);
             double uIznos = 0;
-            foreach (StavkaRacuna st in stavke)
+            if (stavke != null)
+            {foreach (StavkaRacuna st in stavke)
             {
                 uIznos += (double)st.Iznos;
             }
-            switch (popust)
-            {
-                case 0:
-                    break;
+                switch (popust)
+                {
+                    case 0:
+                        break;
 
-                case >0:
-                    uIznos = uIznos * (1-(popust / 100));
-                    break;
+                    case > 0:
+                        uIznos = uIznos * (1 - (popust / 100));
+                        break;
 
-                case <0:
-                    uIznos = uIznos * (1+(popust / 100));
-                    break;
+                    case < 0:
+                        uIznos = uIznos * (1 + (popust / 100));
+                        break;
 
-                default:
-                    MessageBox.Show("Ne moze da se izracuna ukupan iznos.");
-                    break;
+                    default:
+                        MessageBox.Show("Ne moze da se izracuna ukupan iznos.");
+                        break;
+                }
             }
             frmStavkeRacuna.LblUkupanIznos.Text = uIznos.ToString();
         }
@@ -299,6 +301,49 @@ namespace Client.GuiController
 
             }
             broker.Close();
+        }
+
+        internal void IzbaciStariRacun(FrmStavkeRacuna frmStavkeRacuna, Racun selektovaniRacun)
+        {
+            broker = new TestBroker();
+            broker.Open();
+            BindingList<StavkaRacuna> stavkeZaBrisanje = new BindingList<StavkaRacuna>();
+            foreach (StavkaRacuna s in stavke)
+            {
+                if(s.IdRacun == selektovaniRacun.IdRacun)
+                {
+                    stavkeZaBrisanje.Add(s);
+                }
+            }
+            using (SqlCommand command = broker.GetConnection().CreateCommand())
+            {
+                command.CommandText = $"Delete from racun where idRacun=@idRacun";
+
+                foreach (StavkaRacuna s in stavkeZaBrisanje)
+                {
+                    command.Parameters.Clear();
+                    command.Parameters.AddWithValue("idRacun", selektovaniRacun.IdRacun);
+                    command.ExecuteNonQuery();
+
+                }
+            }
+            broker.Close();
+
+            broker.Open();
+            using (SqlCommand command = broker.GetConnection().CreateCommand())
+            {
+                command.CommandText = $"Delete from racun where idRacun=@idRacun";
+
+                    command.Parameters.AddWithValue("idRacun", selektovaniRacun.IdRacun);
+                    command.ExecuteNonQuery();
+                
+            }
+            broker.Close();
+
+            foreach (StavkaRacuna s in stavkeZaBrisanje)
+            {
+                stavke.Remove(s);
+            }
         }
     }
 }
