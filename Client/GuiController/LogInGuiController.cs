@@ -75,7 +75,7 @@ namespace Client.GuiController
                 {
                     if (username == user.KorisnickoIme && password == user.Sifra)
                     {
-                        MessageBox.Show("Usesano ste se ulogovali");
+                        MessageBox.Show("Uspesno ste se ulogovali");
                         MainGuiController.Instance.logedUser = user;
                         MainGuiController.Instance.ShowFrmMain(frmLogIn);
                         return;
