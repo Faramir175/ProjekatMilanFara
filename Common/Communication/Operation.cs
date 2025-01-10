@@ -8,5 +8,6 @@ namespace Common.Communication
 {
     public enum Operation
     {
+        LogIn,
     }
 }

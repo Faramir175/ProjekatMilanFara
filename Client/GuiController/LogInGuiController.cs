@@ -9,6 +9,7 @@ using Common.Domain;
 using Microsoft.Data.SqlClient;
 using Microsoft.VisualBasic.ApplicationServices;
 using Microsoft.Identity.Client;
+using Client.ServerCommunication;
 
 namespace Client.GuiController
 {
@@ -34,6 +35,7 @@ namespace Client.GuiController
             {
                 broker = new TestBroker();
                 broker.Open();
+                Communication.Instance.Connect();
                 string username = frmLogIn.TbUsername.Text.Trim();
                 string password = frmLogIn.TbPassword.Text.Trim();
 
