@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 
 namespace Common.Domain
 {
+    [Serializable]
+
     public class Usluga : IEntity
     {
         public int IdUsluga { get; set; }

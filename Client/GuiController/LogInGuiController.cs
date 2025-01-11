@@ -16,7 +16,6 @@ namespace Client.GuiController
     class LogInGuiController
     {
         private static LogInGuiController instance;
-        private TestBroker broker;
         private FrmLogIn frmLogIn;
 
         public static LogInGuiController Instance
@@ -31,63 +30,37 @@ namespace Client.GuiController
 
         public void LogInUser(FrmLogIn frmLogIn)
         {
-            try
+            Communication.Instance.Connect();
+
+            this.frmLogIn = frmLogIn;
+
+            string username = frmLogIn.TbUsername.Text.Trim();
+            string password = frmLogIn.TbPassword.Text.Trim();
+
+            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
             {
-                broker = new TestBroker();
-                broker.Open();
-                Communication.Instance.Connect();
-                string username = frmLogIn.TbUsername.Text.Trim();
-                string password = frmLogIn.TbPassword.Text.Trim();
-
-                if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+                if (string.IsNullOrEmpty(username))
                 {
-                    if (string.IsNullOrEmpty(username))
-                    {
-                        frmLogIn.TbUsername.BackColor = Color.Salmon;
-                    }
-                    if (string.IsNullOrEmpty(password))
-                    {
-                        frmLogIn.TbPassword.BackColor = Color.Salmon;
-                    }
-                    MessageBox.Show("Some field is empthy!");
-                    return;
+                    frmLogIn.TbUsername.BackColor = Color.Salmon;
                 }
-
-                List<Frizer> users = new List<Frizer>();
-
-                using(SqlCommand command = broker.GetConnection().CreateCommand()) {
-
-                    command.CommandText = "select * from Frizer";
-                    using(SqlDataReader reader = command.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            Frizer user = new Frizer();
-                            user.IdFrizer = reader.GetInt32(0);
-                            user.ImePrezime = (string)reader["imePrezime"];
-                            user.Kontakt = (string)reader["kontakt"];
-                            user.KorisnickoIme = (string)reader["korisnickoIme"];
-                            user.Sifra = (string)reader["sifra"];
-                            users.Add(user); 
-                        }
-                    }
-                }
-
-                foreach (Frizer user in users)
+                if (string.IsNullOrEmpty(password))
                 {
-                    if (username == user.KorisnickoIme && password == user.Sifra)
-                    {
-                        MessageBox.Show("Uspesno ste se ulogovali");
-                        MainGuiController.Instance.logedUser = user;
-                        MainGuiController.Instance.ShowFrmMain(frmLogIn);
-                        return;
-                    }
+                    frmLogIn.TbPassword.BackColor = Color.Salmon;
                 }
-                MessageBox.Show("Pogresni kredencijali");
+                MessageBox.Show("Some field is empthy!");
+                return;
             }
-            finally
+
+            List<Frizer> users = Communication.Instance.LoginUser(username, password);
+            if(users.Count == 1 && users.First<Frizer>().KorisnickoIme != null)
             {
-                broker.Close();
+                MessageBox.Show("Successfully login!");
+                MainGuiController.Instance.logedUser = users.First<Frizer>();
+                MainGuiController.Instance.ShowFrmMain(frmLogIn);
+            }
+            else
+            {
+                MessageBox.Show("Wrong credentials!");
             }
         }
     }

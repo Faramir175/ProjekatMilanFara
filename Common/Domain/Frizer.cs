@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Common.Domain
 {
+    [Serializable]
     public class Frizer : IEntity
     {
         public int IdFrizer { get; set; }
@@ -29,7 +30,7 @@ namespace Common.Domain
 
         public object ForeignKey2 => throw new NotImplementedException();
 
-        public string Criteria => throw new NotImplementedException();
+        public string Criteria => $"korisnickoIme = '{KorisnickoIme}' and sifra = '{Sifra}'";
 
         public string Search => throw new NotImplementedException();
 

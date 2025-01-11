@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using Common;
 using Response = Common.Communication.Response;
 using Operation = Common.Communication.Operation;
+using Microsoft.VisualBasic.ApplicationServices;
+using Common.Domain;
 
 namespace Server
 {
@@ -50,9 +52,8 @@ namespace Server
                 switch (request.Operation)
                 {
                     case Operation.LogIn:
-                        response.Result = "The end!";
+                        response.Result = Controller.Instance.LoginUser((Frizer)request.Object);
                         break;
-                
                     default:
                         response.Exception = new Exception("Operation is not implemented!");
                     break;

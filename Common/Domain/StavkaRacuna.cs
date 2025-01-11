@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 
 namespace Common.Domain
 {
+    [Serializable]
+
     public class StavkaRacuna : IEntity
     {
         public int IdRacun { get; set; }

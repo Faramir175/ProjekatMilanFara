@@ -25,7 +25,8 @@ namespace Server
                 serverSocket.Bind(endpoint);
                 serverSocket.Listen(10);
 
-
+                Thread listener = new Thread(Listen);
+                listener.Start();
             }
             catch (Exception ex)
             {

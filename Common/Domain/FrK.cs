@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace Common.Domain
 {
+    [Serializable]
+
     public class FrK
     {
         public int IdFrizer { get; set; }

@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 
 namespace Common.Domain
 {
+    [Serializable]
+
     public class Kvalifikacija : IEntity
     {
         public int IdKvalifikacija { get; set; }

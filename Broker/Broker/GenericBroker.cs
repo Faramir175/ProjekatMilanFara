@@ -67,6 +67,7 @@ namespace Broker.Broker
             cmd.CommandText = $"select * from {entity.NazivTabele}";
             SqlDataReader reader = cmd.ExecuteReader();
             result  = entity.GetEntities(reader);
+            reader.Close();
             return result;
         }
 
@@ -77,6 +78,7 @@ namespace Broker.Broker
             cmd.CommandText = $"select * from {entity.NazivTabele} a join {joinEntity.NazivTabele} b on (a.{entity.ForeignKey}= b.{joinEntity.PrimaryKey})";
             SqlDataReader reader = cmd.ExecuteReader();
             result = entity.GetEntities(reader);
+            reader.Close();
             return result;
         }
 
@@ -87,6 +89,7 @@ namespace Broker.Broker
             cmd.CommandText = $"select * from {entity.NazivTabele} where {entity.Criteria}";
             SqlDataReader reader = cmd.ExecuteReader();
             result = entity.GetEntities(reader);
+            reader.Close();
             return result;
         }
 
@@ -97,6 +100,7 @@ namespace Broker.Broker
             cmd.CommandText = $"select * from {entity.NazivTabele} where {entity.PrimaryKey}='{id}'";
             SqlDataReader reader = cmd.ExecuteReader();
             result = entity.GetEntity(reader);
+            reader.Close();
             return result;
         }
 
@@ -107,6 +111,7 @@ namespace Broker.Broker
             cmd.CommandText = $"select * from {entity.NazivTabele} a join {joinEntity.NazivTabele} b on (a.{entity.PrimaryKey} = b.{joinEntity.ForeignKey2}) join {joinEntity2.NazivTabele} c on (a.{entity.ForeignKey} = c.{joinEntity2.PrimaryKey}) where b.{joinEntity.ForeignKey} = {criteria}";
             SqlDataReader reader = cmd.ExecuteReader();
             result = entity.GetEntities(reader);
+            reader.Close();
             return result;
         }
 

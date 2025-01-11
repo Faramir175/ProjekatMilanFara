@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace Common.Domain
 {
+    [Serializable]
+
     public class Mesto
     {
         public int IdMesto { get; set; }
