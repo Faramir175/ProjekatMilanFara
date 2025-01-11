@@ -27,5 +27,40 @@ namespace Server
             so.Execute();
             return ((LogInSysOp)so).Result;
         }
+
+        internal object VratiListuSviKlijent()
+        {
+            SystemOperationBase so = new VratiListuSviKlijentSysOp();
+            so.Execute();
+            return ((VratiListuSviKlijentSysOp)so).Result;
+        }
+
+        internal object VratiListuSviFrizer()
+        {
+            SystemOperationBase so = new VratiListuSviFrizerSysOp();
+            so.Execute();
+            return ((VratiListuSviFrizerSysOp)so).Result;
+        }
+
+        internal object VratiListuSviUsluga()
+        {
+            SystemOperationBase so = new VratiListuSviUslugaSysOp();
+            so.Execute();
+            return ((VratiListuSviUslugaSysOp)so).Result;
+        }
+
+        internal object VratiListuSviRacun()
+        {
+            SystemOperationBase so = new VratiListuSviRacunSysOp();
+            so.Execute();
+            return ((VratiListuSviRacunSysOp)so).Result;
+        }
+
+        internal object VratiStavkeRacuna(Racun selektovaniRacun)
+        {
+            SystemOperationBase so = new VratiStavkeRacunaSysOp(selektovaniRacun);
+            so.Execute();
+            return ((VratiStavkeRacunaSysOp)so).Result;
+        }
     }
 }

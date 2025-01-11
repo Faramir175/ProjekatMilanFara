@@ -1,4 +1,5 @@
 ﻿using Broker;
+using Client.ServerCommunication;
 using Client.UserControls;
 using Common.Domain;
 using Microsoft.Data.SqlClient;
@@ -16,7 +17,6 @@ namespace Client.GuiController
     public class RacunGuiController
     {
         private static UCRacunOpsta ucRacunView;
-        private TestBroker broker;
         private static BindingList<Racun> racuni;
         private BindingList<Klijent> klijenti;
         private static RacunGuiController instance;
@@ -40,62 +40,32 @@ namespace Client.GuiController
 
         internal void InitDgvRacun()
         {
-            broker = new TestBroker();
-            broker.Open();
+            List<Racun> listaRacuna = Communication.Instance.VratiListuSviRacun();
             racuni = new BindingList<Racun>();
-            using (SqlCommand command = broker.GetConnection().CreateCommand())
+            foreach (Racun r in listaRacuna)
             {
-                command.CommandText = @"SELECT r.IdRacun, r.datum, r.popust, r.ukupanIznos, r.idFrizer, r.idKlijent, k.imePrezime
-                                        FROM Racun r
-                                        INNER JOIN Klijent k ON r.idKlijent = k.IdKlijent";
-                using (SqlDataReader reader = command.ExecuteReader())
+                foreach(Klijent klijent in klijenti)
                 {
-                    while (reader.Read())
+                    if (klijent.IdKlijent == r.IdKlijent)
                     {
-                        Racun racun = new Racun();
-                        racun.IdRacun = reader.GetInt32(0);
-                        racun.Datum = (DateTime)reader["datum"];
-                        racun.Popust = (int)reader["popust"];
-                        racun.UkupanIznos = (double)reader["ukupanIznos"];
-                        racun.IdFrizer = (int)reader["idFrizer"];
-                        racun.IdKlijent = (int)reader["idKlijent"];
-                        racun.KlijentImePrezime = (string)reader["imePrezime"];
-                        racuni.Add(racun);
+                        r.KlijentImePrezime = klijent.ImePrezime;
                     }
                 }
+                racuni.Add(r);
             }
-            broker.Close();
             ucRacunView.DgvRacuni.DataSource = racuni;
             InitDgvColumns(ucRacunView.DgvRacuni);
-
         }
 
         private void InitCmbKlijent()
         {
-            broker = new TestBroker();
-            broker.Open();
+            List<Klijent> frizeri = Communication.Instance.VratiListuSviKlijent();
             klijenti = new BindingList<Klijent>();
-            using (SqlCommand command = broker.GetConnection().CreateCommand())
+            foreach (Klijent f in frizeri)
             {
-                command.CommandText = "select * from Klijent";
-                using (SqlDataReader reader = command.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
-                        Klijent klijent = new Klijent();
-                        klijent.IdKlijent = reader.GetInt32(0);
-                        klijent.ImePrezime = (string)reader["imePrezime"];
-                        klijent.Kontakt = (string)reader["kontakt"];
-                        klijent.TipKlijenta = (string)reader["tipKlijenta"];
-                        klijent.Pol = (string)reader["pol"];
-                        klijent.IdMesto = (int)reader["idMesto"];
-                        klijenti.Add(klijent);
-                    }
-                }
+                klijenti.Add(f);
             }
-            broker.Close();
             ucRacunView.CmbKlijent.DataSource = klijenti;
-
         }
 
         private void InitDgvColumns(DataGridView dgv)
@@ -103,6 +73,15 @@ namespace Client.GuiController
             dgv.Columns["IdFrizer"].Visible = false;
             dgv.Columns["IdKlijent"].Visible = false;
             dgv.Columns["IdRacun"].Visible = false;
+            dgv.Columns["NazivTabele"].Visible = false;
+            dgv.Columns["InsertKolone"].Visible = false;
+            dgv.Columns["InsertVrednosti"].Visible = false;
+            dgv.Columns["UpdateVrednost"].Visible = false;
+            dgv.Columns["PrimaryKey"].Visible = false;
+            dgv.Columns["ForeignKey"].Visible = false;
+            dgv.Columns["ForeignKey2"].Visible = false;
+            dgv.Columns["Criteria"].Visible = false;
+            dgv.Columns["Search"].Visible = false;
         }
 
         internal void FiltrirajRacune(UCRacunOpsta uCRacunOpsta)

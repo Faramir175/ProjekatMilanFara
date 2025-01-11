@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 namespace Common.Domain
 {
     [Serializable]
-
     public class Klijent : IEntity
     {
         public int IdKlijent { get; set; }
@@ -22,7 +21,7 @@ namespace Common.Domain
 
         public string NazivTabele => "Klijent";
 
-        public object InsertKolone => "imePrezime,korisnickoIme,kontakt,tipKlijenta,pol";
+        public object InsertKolone => "imePrezime,kontakt,tipKlijenta,pol,idMesto";
 
         public string InsertVrednosti => $"'{ImePrezime}','{Kontakt}','{TipKlijenta}','{Pol}','{IdMesto}'";
 

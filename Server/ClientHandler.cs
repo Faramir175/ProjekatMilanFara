@@ -54,6 +54,21 @@ namespace Server
                     case Operation.LogIn:
                         response.Result = Controller.Instance.LoginUser((Frizer)request.Object);
                         break;
+                    case Operation.VratiListuSviKlijent:
+                        response.Result = Controller.Instance.VratiListuSviKlijent();
+                        break;
+                    case Operation.VratiListuSviFrizer:
+                        response.Result = Controller.Instance.VratiListuSviFrizer();
+                        break;
+                    case Operation.VratiListuSviUsluga:
+                        response.Result = Controller.Instance.VratiListuSviUsluga();
+                        break;
+                    case Operation.VratiListuSviRacun:
+                        response.Result = Controller.Instance.VratiListuSviRacun();
+                        break;
+                    case Operation.VratiStavkeRacuna:
+                        response.Result = Controller.Instance.VratiStavkeRacuna((Racun)request.Object);
+                        break;
                     default:
                         response.Exception = new Exception("Operation is not implemented!");
                     break;

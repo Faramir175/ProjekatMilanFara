@@ -50,7 +50,77 @@ namespace Client.ServerCommunication
                 throw response.Exception;
             }
             return (List<Frizer>)response.Result;
+        }
 
+        internal List<Klijent> VratiListuSviKlijent()
+        {
+            Request request = new Request();
+            request.Operation = Operation.VratiListuSviKlijent;
+            sender.Send(request);
+
+            Response response = receiver.Receive<Response>();
+            if (response.Exception != null)
+            {
+                throw response.Exception;
+            }
+            return (List<Klijent>)response.Result;
+        }
+
+        internal List<Frizer> VratiListuSviFrizer()
+        {
+            Request request = new Request();
+            request.Operation = Operation.VratiListuSviFrizer;
+            sender.Send(request);
+
+            Response response = receiver.Receive<Response>();
+            if (response.Exception != null)
+            {
+                throw response.Exception;
+            }
+            return (List<Frizer>)response.Result;
+        }
+
+        internal List<Usluga> VratiListuSviUsluga()
+        {
+            Request request = new Request();
+            request.Operation = Operation.VratiListuSviUsluga;
+            sender.Send(request);
+
+            Response response = receiver.Receive<Response>();
+            if (response.Exception != null)
+            {
+                throw response.Exception;
+            }
+            return (List<Usluga>)response.Result;
+        }
+
+        internal List<Racun> VratiListuSviRacun()
+        {
+            Request request = new Request();
+            request.Operation = Operation.VratiListuSviRacun;
+            sender.Send(request);
+
+            Response response = receiver.Receive<Response>();
+            if (response.Exception != null)
+            {
+                throw response.Exception;
+            }
+            return (List<Racun>)response.Result;
+        }
+
+        internal List<StavkaRacuna> VratiStavkeRacuna(Racun selektovaniRacun)
+        {
+            Request request = new Request();
+            request.Operation = Operation.VratiStavkeRacuna;
+            request.Object = selektovaniRacun;
+            sender.Send(request);
+
+            Response response = receiver.Receive<Response>();
+            if (response.Exception != null)
+            {
+                throw response.Exception;
+            }
+            return (List<StavkaRacuna>)response.Result;
         }
     }
 }

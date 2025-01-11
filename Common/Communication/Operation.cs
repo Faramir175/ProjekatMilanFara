@@ -9,5 +9,10 @@ namespace Common.Communication
     public enum Operation
     {
         LogIn,
+        VratiListuSviFrizer,
+        VratiListuSviKlijent,
+        VratiListuSviUsluga,
+        VratiListuSviRacun,
+        VratiStavkeRacuna,
     }
 }

@@ -38,11 +38,13 @@ namespace Server
         }
         public void Listen()
         {
-            Socket klijentSocket = serverSocket.Accept();
-
-            ClientHandler handler = new ClientHandler(klijentSocket);
-            Thread thread = new Thread(handler.HandleRequest);
-            thread.Start();
+            while (true)
+            {
+                Socket klijentSocket = serverSocket.Accept();
+                ClientHandler handler = new ClientHandler(klijentSocket);
+                Thread thread = new Thread(handler.HandleRequest);
+                thread.Start();
+            }
         }
         public void Stop()
         {

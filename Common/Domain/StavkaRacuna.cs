@@ -31,13 +31,13 @@ namespace Common.Domain
 
         public object PrimaryKey => "rb";
 
-        public object ForeignKey => "idUsluga";
+        public object ForeignKey => "idRacun";
 
-        public object ForeignKey2 => throw new NotImplementedException();
+        public object ForeignKey2 => "idUsluga";
 
-        public string Criteria => throw new NotImplementedException();
+        public string Criteria => "";
 
-        public string Search => throw new NotImplementedException();
+        public string Search => "";
 
         public List<IEntity> GetEntities(SqlDataReader reader)
         {
@@ -60,7 +60,6 @@ namespace Common.Domain
                 stavka.Iznos = (double)reader["iznos"];
                 stavka.Kolicina = (int)reader["kolicina"];
                 stavka.Cena = (int)reader["cena"];
-                stavka.NazivUsluga = (string)reader["naziv"];
                 stavka.IdUsluga = (int)reader["idUsluga"];
                 stavke.Add(stavka);
             }

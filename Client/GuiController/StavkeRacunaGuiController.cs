@@ -1,4 +1,5 @@
 ﻿using Broker;
+using Client.ServerCommunication;
 using Common.Domain;
 using Microsoft.Data.SqlClient;
 using System;
@@ -69,82 +70,30 @@ namespace Client.GuiController
         }
         private void InitKlijentCmb(FrmStavkeRacuna frmStavkeRacuna)
         {
-            broker = new TestBroker();
-            broker.Open();
-            klijenti = new List<Klijent>();
-            using (SqlCommand command = broker.GetConnection().CreateCommand())
-            {
-                command.CommandText = "select * from Klijent";
-                using (SqlDataReader reader = command.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
-                        Klijent klijent = new Klijent();
-                        klijent.IdKlijent = reader.GetInt32(0);
-                        klijent.ImePrezime = (string)reader["imePrezime"];
-                        klijent.Kontakt = (string)reader["kontakt"];
-                        klijent.TipKlijenta = (string)reader["tipKlijenta"];
-                        klijent.Pol = (string)reader["pol"];
-                        klijent.IdMesto = (int)reader["idMesto"];
-                        klijenti.Add(klijent);
-                    }
-                }
-            }
-            broker.Close();
+            klijenti = Communication.Instance.VratiListuSviKlijent();
             frmStavkeRacuna.CmbKlijent.DataSource = klijenti;
         }
         private void InitUslugaCmb(FrmStavkeRacuna frmStavkeRacuna)
         {
-            broker = new TestBroker();
-            broker.Open();
-            usluge = new List<Usluga>();
-            using (SqlCommand command = broker.GetConnection().CreateCommand())
-            {
-                command.CommandText = "select * from Usluga";
-                using (SqlDataReader reader = command.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
-                        Usluga usluga = new Usluga();
-                        usluga.IdUsluga = reader.GetInt32(0);
-                        usluga.Naziv = (string)reader["naziv"];
-                        usluga.Cena = (int)reader["cena"];
-                        usluga.Trajanje = (int)reader["trajanje"];
-                        usluge.Add(usluga);
-                    }
-                }
-            }
-            broker.Close();
+            usluge = Communication.Instance.VratiListuSviUsluga();
             frmStavkeRacuna.CmbUsluga.DataSource = usluge;
         }
         private void InitStavkeRacunaDgv(FrmStavkeRacuna frmStavkeRacuna, Racun selektovaniRacun)
         {
-            broker = new TestBroker();
-            broker.Open();
+            List<StavkaRacuna> listaStavki = Communication.Instance.VratiStavkeRacuna(selektovaniRacun);
             stavke = new BindingList<StavkaRacuna>();
-            using (SqlCommand command = broker.GetConnection().CreateCommand())
+            foreach (StavkaRacuna s in listaStavki)
             {
-                command.CommandText = @"SELECT sr.idRacun,sr.rb, sr.iznos, sr.kolicina, sr.cena,sr.idUsluga, u.naziv
-                                        FROM StavkaRacuna sr
-                                        INNER JOIN Usluga u ON sr.idUsluga = u.idUsluga";
-                using (SqlDataReader reader = command.ExecuteReader())
+                foreach (Usluga u in usluge)
                 {
-                    while (reader.Read())
+                    if (u.IdUsluga == s.IdUsluga)
                     {
-                        StavkaRacuna stavka = new StavkaRacuna();
-                        stavka.IdRacun = (int)reader["idRacun"];
-                        stavka.Rb = (int)reader["rb"];
-                        stavka.Iznos = (double)reader["iznos"];
-                        stavka.Kolicina = (int)reader["kolicina"];
-                        stavka.Cena = (int)reader["cena"];
-                        stavka.NazivUsluga = (string)reader["naziv"];
-                        stavka.IdUsluga = (int)reader["idUsluga"];
-                        if(selektovaniRacun.IdRacun == stavka.IdRacun)
-                        stavke.Add(stavka);
+                        s.NazivUsluga = u.Naziv;
                     }
                 }
+                stavke.Add(s);
             }
-            broker.Close();
+
             frmStavkeRacuna.DgvStavkeRacuna.DataSource = stavke;
             InitDgvColumns(frmStavkeRacuna.DgvStavkeRacuna);
         }
@@ -171,6 +120,15 @@ namespace Client.GuiController
             dgvStavkeRacuna.Columns["idRacun"].Visible = false;
             dgvStavkeRacuna.Columns["idUsluga"].Visible = false;
             dgvStavkeRacuna.Columns["rb"].Visible = false;
+            dgvStavkeRacuna.Columns["NazivTabele"].Visible = false;
+            dgvStavkeRacuna.Columns["InsertKolone"].Visible = false;
+            dgvStavkeRacuna.Columns["InsertVrednosti"].Visible = false;
+            dgvStavkeRacuna.Columns["UpdateVrednost"].Visible = false;
+            dgvStavkeRacuna.Columns["PrimaryKey"].Visible = false;
+            dgvStavkeRacuna.Columns["ForeignKey"].Visible = false;
+            dgvStavkeRacuna.Columns["ForeignKey2"].Visible = false;
+            dgvStavkeRacuna.Columns["Criteria"].Visible = false;
+            dgvStavkeRacuna.Columns["Search"].Visible = false;
         }
         internal void DodajStavku(FrmStavkeRacuna frmStavkeRacuna)
         {
@@ -310,40 +268,40 @@ namespace Client.GuiController
 
         internal void IzbaciStariRacun(FrmStavkeRacuna frmStavkeRacuna, Racun selektovaniRacun)
         {
-            broker = new TestBroker();
-            broker.Open();
-            BindingList<StavkaRacuna> stavkeZaBrisanje = new BindingList<StavkaRacuna>();
-            foreach (StavkaRacuna s in stavke)
-            {
-                if(s.IdRacun == selektovaniRacun.IdRacun)
-                {
-                    stavkeZaBrisanje.Add(s);
-                }
-            }
-            using (SqlCommand command = broker.GetConnection().CreateCommand())
-            {
-                command.CommandText = $"Delete from stavkaRacuna where idRacun=@idRacun";
+            //broker = new TestBroker();
+            //broker.Open();
+            //BindingList<StavkaRacuna> stavkeZaBrisanje = new BindingList<StavkaRacuna>();
+            //foreach (StavkaRacuna s in stavke)
+            //{
+            //    if(s.IdRacun == selektovaniRacun.IdRacun)
+            //    {
+            //        stavkeZaBrisanje.Add(s);
+            //    }
+            //}
+            //using (SqlCommand command = broker.GetConnection().CreateCommand())
+            //{
+            //    command.CommandText = $"Delete from stavkaRacuna where idRacun=@idRacun";
 
-                foreach (StavkaRacuna s in stavkeZaBrisanje)
-                {
-                    command.Parameters.Clear();
-                    command.Parameters.AddWithValue("idRacun", selektovaniRacun.IdRacun);
-                    command.ExecuteNonQuery();
+            //    foreach (StavkaRacuna s in stavkeZaBrisanje)
+            //    {
+            //        command.Parameters.Clear();
+            //        command.Parameters.AddWithValue("idRacun", selektovaniRacun.IdRacun);
+            //        command.ExecuteNonQuery();
 
-                }
-            }
-            broker.Close();
+            //    }
+            //}
+            //broker.Close();
 
-            broker.Open();
-            using (SqlCommand command = broker.GetConnection().CreateCommand())
-            {
-                command.CommandText = $"Delete from racun where idRacun=@idRacun";
+            //broker.Open();
+            //using (SqlCommand command = broker.GetConnection().CreateCommand())
+            //{
+            //    command.CommandText = $"Delete from racun where idRacun=@idRacun";
 
-                    command.Parameters.AddWithValue("idRacun", selektovaniRacun.IdRacun);
-                    command.ExecuteNonQuery();
+            //        command.Parameters.AddWithValue("idRacun", selektovaniRacun.IdRacun);
+            //        command.ExecuteNonQuery();
                 
-            }
-            broker.Close();
+            //}
+            //broker.Close();
         }
     }
 }

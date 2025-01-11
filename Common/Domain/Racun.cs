@@ -22,7 +22,7 @@ namespace Common.Domain
 
         public string NazivTabele => "Racun";
 
-        public object InsertKolone => "datum,popust,ukupanIznos";
+        public object InsertKolone => "datum,popust,ukupanIznos,idFrizer,idKlijent";
 
         public string InsertVrednosti => $"'{Datum}','{Popust}','{UkupanIznos}','{IdFrizer}','{IdKlijent}'";
 
@@ -34,21 +34,10 @@ namespace Common.Domain
 
         public object ForeignKey2 => "idFrizer";
 
-        public string Criteria => throw new NotImplementedException();
+        public string Criteria => "";
 
-        public string Search => throw new NotImplementedException();
-
+        public string Search => "";
         public List<IEntity> GetEntities(SqlDataReader reader)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEntity GetEntity(SqlDataReader reader)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<IEntity> GetJoinEntities(SqlDataReader reader)
         {
             List<IEntity> racuni = new List<IEntity>();
             while (reader.Read())
@@ -60,10 +49,19 @@ namespace Common.Domain
                 racun.UkupanIznos = (double)reader["ukupanIznos"];
                 racun.IdFrizer = (int)reader["idFrizer"];
                 racun.IdKlijent = (int)reader["idKlijent"];
-                racun.KlijentImePrezime = (string)reader["imePrezime"];
                 racuni.Add(racun);
             }
             return racuni;
+        }
+
+        public IEntity GetEntity(SqlDataReader reader)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<IEntity> GetJoinEntities(SqlDataReader reader)
+        {
+            throw new NotImplementedException();
         }
 
         public IEntity GetJoinEntity(SqlDataReader reader)

@@ -77,7 +77,7 @@ namespace Broker.Broker
             SqlCommand cmd = DbBroker.Instance.GetConnection().GetCommand();
             cmd.CommandText = $"select * from {entity.NazivTabele} a join {joinEntity.NazivTabele} b on (a.{entity.ForeignKey}= b.{joinEntity.PrimaryKey})";
             SqlDataReader reader = cmd.ExecuteReader();
-            result = entity.GetEntities(reader);
+            result = entity.GetJoinEntities(reader);
             reader.Close();
             return result;
         }
