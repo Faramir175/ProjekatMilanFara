@@ -12,15 +12,15 @@ namespace Common.Domain
         public int IdKvalifikacija { get; set; }
         public string NazivKvalifikacije { get; set; }
 
-        public string NazivTabele => throw new NotImplementedException();
+        public string NazivTabele => "Kvalifikacija";
 
-        public object InsertKolone => throw new NotImplementedException();
+        public object InsertKolone => "nazivKvalifikacije";
 
-        public string InsertVrednosti => throw new NotImplementedException();
+        public string InsertVrednosti => $"'{NazivKvalifikacije}'";
 
-        public string UpdateVrednost => throw new NotImplementedException();
+        public string UpdateVrednost => $"nazivKvalifikacije='{NazivKvalifikacije}'";
 
-        public object PrimaryKey => throw new NotImplementedException();
+        public object PrimaryKey => "idKvalifikacija";
 
         public object ForeignKey => throw new NotImplementedException();
 
@@ -32,7 +32,15 @@ namespace Common.Domain
 
         public List<IEntity> GetEntities(SqlDataReader reader)
         {
-            throw new NotImplementedException();
+            List<IEntity> kvalifikacije = new List<IEntity>();
+            while (reader.Read())
+            {
+                Kvalifikacija kvalifikacija = new Kvalifikacija();
+                kvalifikacija.IdKvalifikacija = reader.GetInt32(0);
+                kvalifikacija.NazivKvalifikacije = (string)reader["nazivKvalifikacije"];
+                kvalifikacije.Add(kvalifikacija);
+            }
+            return kvalifikacije;
         }
 
         public IEntity GetEntity(SqlDataReader reader)

@@ -1,7 +1,9 @@
 ﻿using Microsoft.Data.SqlClient;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Intrinsics.X86;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -17,17 +19,17 @@ namespace Common.Domain
         public int IdUsluga { get; set; }
         public string NazivUsluga { get; set; }
 
-        public string NazivTabele => throw new NotImplementedException();
+        public string NazivTabele => "StavkaRacuna";
 
-        public object InsertKolone => throw new NotImplementedException();
+        public object InsertKolone => "idRacun,iznos,kolicina,cena,idUsluga";
 
-        public string InsertVrednosti => throw new NotImplementedException();
+        public string InsertVrednosti => $"'{IdRacun}','{Iznos}','{Kolicina}','{Cena}','{IdUsluga}'";
 
-        public string UpdateVrednost => throw new NotImplementedException();
+        public string UpdateVrednost => $"idRacun='{IdRacun}',iznos= '{Iznos}',kolicina='{Kolicina}',cena='{Cena}',idUsluga'{IdUsluga}'";
 
-        public object PrimaryKey => throw new NotImplementedException();
+        public object PrimaryKey => "rb";
 
-        public object ForeignKey => throw new NotImplementedException();
+        public object ForeignKey => "idUsluga";
 
         public object ForeignKey2 => throw new NotImplementedException();
 
@@ -47,7 +49,20 @@ namespace Common.Domain
 
         public List<IEntity> GetJoinEntities(SqlDataReader reader)
         {
-            throw new NotImplementedException();
+            List<IEntity> stavke = new List<IEntity>();
+            while (reader.Read())
+            {
+                StavkaRacuna stavka = new StavkaRacuna();
+                stavka.IdRacun = (int)reader["idRacun"];
+                stavka.Rb = (int)reader["rb"];
+                stavka.Iznos = (double)reader["iznos"];
+                stavka.Kolicina = (int)reader["kolicina"];
+                stavka.Cena = (int)reader["cena"];
+                stavka.NazivUsluga = (string)reader["naziv"];
+                stavka.IdUsluga = (int)reader["idUsluga"];
+                stavke.Add(stavka);
+            }
+            return stavke;
         }
 
         public IEntity GetJoinEntity(SqlDataReader reader)

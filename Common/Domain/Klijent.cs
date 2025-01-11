@@ -1,6 +1,7 @@
 ﻿using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,17 +18,17 @@ namespace Common.Domain
         public string Pol { get; set; }
         public int IdMesto { get; set; }
 
-        public string NazivTabele => throw new NotImplementedException();
+        public string NazivTabele => "Klijent";
 
-        public object InsertKolone => throw new NotImplementedException();
+        public object InsertKolone => "imePrezime,korisnickoIme,kontakt,tipKlijenta,pol";
 
-        public string InsertVrednosti => throw new NotImplementedException();
+        public string InsertVrednosti => $"'{ImePrezime}','{Kontakt}','{TipKlijenta}','{Pol}','{IdMesto}'";
 
-        public string UpdateVrednost => throw new NotImplementedException();
+        public string UpdateVrednost => $"imePrezime='{ImePrezime}',kontakt= '{Kontakt}',tipKlijenta='{TipKlijenta}',pol='{Pol}',idMesto'{IdMesto}'";
 
-        public object PrimaryKey => throw new NotImplementedException();
+        public object PrimaryKey => "idKlijent";
 
-        public object ForeignKey => throw new NotImplementedException();
+        public object ForeignKey => "idMesto";
 
         public object ForeignKey2 => throw new NotImplementedException();
 
@@ -37,7 +38,19 @@ namespace Common.Domain
 
         public List<IEntity> GetEntities(SqlDataReader reader)
         {
-            throw new NotImplementedException();
+            List<IEntity> klijenti = new List<IEntity>();
+            while (reader.Read())
+            {
+                Klijent klijent = new Klijent();
+                klijent.IdKlijent = reader.GetInt32(0);
+                klijent.ImePrezime = (string)reader["imePrezime"];
+                klijent.Kontakt = (string)reader["kontakt"];
+                klijent.TipKlijenta = (string)reader["tipKlijenta"];
+                klijent.Pol = (string)reader["pol"];
+                klijent.IdMesto = (int)reader["idMesto"];
+                klijenti.Add(klijent);
+            }
+            return klijenti;
         }
 
         public IEntity GetEntity(SqlDataReader reader)

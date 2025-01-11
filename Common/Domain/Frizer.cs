@@ -15,15 +15,15 @@ namespace Common.Domain
         public string KorisnickoIme { get; set; }
         public string Sifra { get; set; }
 
-        public string NazivTabele => throw new NotImplementedException();
+        public string NazivTabele => "Frizer";
 
-        public object InsertKolone => throw new NotImplementedException();
+        public object InsertKolone => "imePrezime,korisnickoIme,kontakt,sifra";
 
-        public string InsertVrednosti => throw new NotImplementedException();
+        public string InsertVrednosti => $"'{ImePrezime}','{Kontakt}','{KorisnickoIme}','{Sifra}'";
 
-        public string UpdateVrednost => throw new NotImplementedException();
+        public string UpdateVrednost => $"imePrezime='{ImePrezime}',kontakt= '{Kontakt}',korisnickoIme='{KorisnickoIme}',sifra='{Sifra}'";
 
-        public object PrimaryKey => throw new NotImplementedException();
+        public object PrimaryKey => "idFrizer";
 
         public object ForeignKey => throw new NotImplementedException();
 
@@ -35,7 +35,18 @@ namespace Common.Domain
 
         public List<IEntity> GetEntities(SqlDataReader reader)
         {
-            throw new NotImplementedException();
+            List<IEntity> users = new List<IEntity>();
+            while (reader.Read())
+            {
+                Frizer user = new Frizer();
+                user.IdFrizer = reader.GetInt32(0);
+                user.ImePrezime = (string)reader["imePrezime"];
+                user.Kontakt = (string)reader["kontakt"];
+                user.KorisnickoIme = (string)reader["korisnickoIme"];
+                user.Sifra = (string)reader["sifra"];
+                users.Add(user);
+            }
+            return users;
         }
 
         public IEntity GetEntity(SqlDataReader reader)
