@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Client.GuiController;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +16,11 @@ namespace Client.UserControls
         public UCUnosKvalifikacije()
         {
             InitializeComponent();
+        }
+
+        private void cbPromenaKvalifikacije_CheckedChanged(object sender, EventArgs e)
+        {
+            KvalifikacijaGuiController.Instance.PromenaCheck(this);
         }
     }
 }

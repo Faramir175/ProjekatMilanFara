@@ -13,6 +13,7 @@ namespace Client.GuiController
     {
         private static MainGuiController instance;
         private RacunGuiController racunGuiController;
+        private KvalifikacijaGuiController kvalifikacijaGuiController;
         private FrmMain frmMain;
 
         public Frizer logedUser { get; set; }
@@ -29,6 +30,7 @@ namespace Client.GuiController
         public MainGuiController()
         {
             racunGuiController = new RacunGuiController();
+            kvalifikacijaGuiController = new KvalifikacijaGuiController();
         }
         internal void ShowFrmMain(FrmLogIn frmLogIn)
         {
@@ -56,6 +58,11 @@ namespace Client.GuiController
             pnl.AutoSize = true;
 
             uc.Width = pnl.Width;
+        }
+
+        internal void PanelKvalifikacija(FrmMain frmMain)
+        {
+            PromeniPanel(kvalifikacijaGuiController.CreateUCUnosKvalifikacije(), frmMain.PnlMain);
         }
     }
 }

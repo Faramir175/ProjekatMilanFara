@@ -89,5 +89,12 @@ namespace Server
             SystemOperationBase so = new PromeniRacun(racun);
             so.Execute();
         }
+
+        internal object VratiListuSviKvalifikacija()
+        {
+            SystemOperationBase so = new VratiListuSviKvalifikacija();
+            so.Execute();
+            return ((VratiListuSviKvalifikacija)so).Result;
+        }
     }
 }

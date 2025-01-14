@@ -18,5 +18,6 @@ namespace Common.Communication
         KreirajStavke,
         PromeniRacun,
         PromeniStavkeRacuna,
+        VratiListuSviKvalifikacija,
     }
 }

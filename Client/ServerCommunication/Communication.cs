@@ -180,5 +180,19 @@ namespace Client.ServerCommunication
                 throw response.Exception;
             }
         }
+
+        internal List<Kvalifikacija> VratiListuSviKvalifikacija()
+        {
+            Request request = new Request();
+            request.Operation = Operation.VratiListuSviKvalifikacija;
+            sender.Send(request);
+
+            Response response = receiver.Receive<Response>();
+            if (response.Exception != null)
+            {
+                throw response.Exception;
+            }
+            return (List<Kvalifikacija>)response.Result;
+        }
     }
 }

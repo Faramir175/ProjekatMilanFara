@@ -63,6 +63,7 @@
             TSMIkvalifikacija.Name = "TSMIkvalifikacija";
             TSMIkvalifikacija.Size = new Size(81, 20);
             TSMIkvalifikacija.Text = "Kvalifikacija";
+            TSMIkvalifikacija.Click += TSMIkvalifikacija_Click;
             // 
             // pnlMain
             // 

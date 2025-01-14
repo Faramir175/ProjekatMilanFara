@@ -24,5 +24,10 @@ namespace Client
         {
             MainGuiController.Instance.PanelRacun(this);
         }
+
+        private void TSMIkvalifikacija_Click(object sender, EventArgs e)
+        {
+            MainGuiController.Instance.PanelKvalifikacija(this);
+        }
     }
 }
