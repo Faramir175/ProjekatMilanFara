@@ -20,7 +20,7 @@ namespace Client.GuiController
         public UserControl CreateUCUnosKvalifikacije()
         {
             ucKvalifikacijeView = new UCUnosKvalifikacije();
-            InitCmbKvalifikacija();
+            InitCmbKvalifikacija(ucKvalifikacijeView);
             PromenaCheck(ucKvalifikacijeView);
 
             return ucKvalifikacijeView;
@@ -36,7 +36,7 @@ namespace Client.GuiController
             uc.CmbKvalifikacija.Enabled = uslov;
         }
 
-        private void InitCmbKvalifikacija()
+        private void InitCmbKvalifikacija(UCUnosKvalifikacije uc)
         {
             List<Kvalifikacija> kvalifikacijas = Communication.Instance.VratiListuSviKvalifikacija();
             kvalifikacije = new BindingList<Kvalifikacija>();
@@ -44,7 +44,23 @@ namespace Client.GuiController
             {
                 kvalifikacije.Add(k);
             }
-            ucKvalifikacijeView.CmbKvalifikacija.DataSource = kvalifikacije;
+            uc.CmbKvalifikacija.DataSource = kvalifikacije;
+        }
+
+        internal void UnosNoveKvalifikacije(UCUnosKvalifikacije uc)
+        {
+            Kvalifikacija novaKvalifikacija = new Kvalifikacija();
+            novaKvalifikacija.NazivKvalifikacije = uc.TbNazivKvalifikacije.Text;
+            Communication.Instance.UbaciKvalifikacija(novaKvalifikacija);
+            InitCmbKvalifikacija(uc);
+        }
+
+        internal void UnosPromenjeneKvalifikacije(UCUnosKvalifikacije uc)
+        {
+            Kvalifikacija kvalifikacijaZaPromenu = (Kvalifikacija)uc.CmbKvalifikacija.SelectedItem;
+            kvalifikacijaZaPromenu.NazivKvalifikacije = uc.TbNazivKvalifikacije.Text;
+            Communication.Instance.PromeniKvalifikacija(kvalifikacijaZaPromenu);
+            InitCmbKvalifikacija(uc);
         }
     }
 }

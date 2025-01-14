@@ -22,5 +22,17 @@ namespace Client.UserControls
         {
             KvalifikacijaGuiController.Instance.PromenaCheck(this);
         }
+
+        private void btnUnesi_Click(object sender, EventArgs e)
+        {
+            if(this.cbPromenaKvalifikacije.Checked)
+            {
+                KvalifikacijaGuiController.Instance.UnosPromenjeneKvalifikacije(this);
+            }
+            else
+            {
+                KvalifikacijaGuiController.Instance.UnosNoveKvalifikacije(this);
+            }
+        }
     }
 }

@@ -45,6 +45,7 @@
             btnUnesi.TabIndex = 0;
             btnUnesi.Text = "Unesi";
             btnUnesi.UseVisualStyleBackColor = true;
+            btnUnesi.Click += btnUnesi_Click;
             // 
             // lblUnosKvalifikacije
             // 

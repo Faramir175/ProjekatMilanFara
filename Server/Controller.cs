@@ -96,5 +96,17 @@ namespace Server
             so.Execute();
             return ((VratiListuSviKvalifikacija)so).Result;
         }
+
+        internal void UbaciKvalifikacija(Kvalifikacija kvalifikacija)
+        {
+            SystemOperationBase so = new UbaciKvalifikacija(kvalifikacija);
+            so.Execute();
+        }
+
+        internal void PromeniKvalifikacija(Kvalifikacija kvalifikacijaZaPromenu)
+        {
+            SystemOperationBase so = new PromeniKvalifikacija(kvalifikacijaZaPromenu);
+            so.Execute();
+        }
     }
 }

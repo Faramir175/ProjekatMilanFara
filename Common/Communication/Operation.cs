@@ -19,5 +19,7 @@ namespace Common.Communication
         PromeniRacun,
         PromeniStavkeRacuna,
         VratiListuSviKvalifikacija,
+        UbaciKvalifikacija,
+        PromeniKvalifikacija,
     }
 }

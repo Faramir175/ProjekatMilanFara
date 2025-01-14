@@ -194,5 +194,33 @@ namespace Client.ServerCommunication
             }
             return (List<Kvalifikacija>)response.Result;
         }
+
+        internal void UbaciKvalifikacija(Kvalifikacija novaKvalifikacija)
+        {
+            Request request = new Request();
+            request.Operation = Operation.UbaciKvalifikacija;
+            request.Object = novaKvalifikacija;
+            sender.Send(request);
+
+            Response response = receiver.Receive<Response>();
+            if (response.Exception != null)
+            {
+                throw response.Exception;
+            }
+        }
+
+        internal void PromeniKvalifikacija(Kvalifikacija kvalifikacijaZaPromenu)
+        {
+            Request request = new Request();
+            request.Operation = Operation.PromeniKvalifikacija;
+            request.Object = kvalifikacijaZaPromenu;
+            sender.Send(request);
+
+            Response response = receiver.Receive<Response>();
+            if (response.Exception != null)
+            {
+                throw response.Exception;
+            }
+        }
     }
 }

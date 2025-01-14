@@ -85,6 +85,12 @@ namespace Server
                     case Operation.VratiListuSviKvalifikacija:
                         response.Result = Controller.Instance.VratiListuSviKvalifikacija();
                         break;
+                    case Operation.UbaciKvalifikacija:
+                        Controller.Instance.UbaciKvalifikacija((Kvalifikacija)request.Object);
+                        break;
+                    case Operation.PromeniKvalifikacija:
+                        Controller.Instance.PromeniKvalifikacija((Kvalifikacija)request.Object);
+                        break;
                     default:
                         response.Exception = new Exception("Operation is not implemented!");
                     break;
