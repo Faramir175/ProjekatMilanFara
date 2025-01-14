@@ -24,9 +24,9 @@ namespace Common.Domain
 
         public object InsertKolone => "datum,popust,ukupanIznos,idFrizer,idKlijent";
 
-        public string InsertVrednosti => $"'{Datum}','{Popust}','{UkupanIznos}','{IdFrizer}','{IdKlijent}'";
+        public string InsertVrednosti => $"'{Datum.ToString("yyyyMMdd")}','{Popust}','{UkupanIznos}','{IdFrizer}','{IdKlijent}'";
 
-        public string UpdateVrednost => $"datum='{Datum}',popust= '{Popust}',ukupanIznos='{UkupanIznos}',idFrizer='{IdFrizer}',idKlijent'{IdKlijent}'";
+        public string UpdateVrednost => $"datum='{Datum.ToString("yyyyMMdd")}',popust= '{Popust}',ukupanIznos='{UkupanIznos}',idFrizer='{IdFrizer}',idKlijent='{IdKlijent}'";
 
         public object PrimaryKey => "idRacun";
 

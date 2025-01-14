@@ -14,7 +14,6 @@ namespace Client.GuiController
 {
     internal class StavkeRacunaGuiController
     {
-        private TestBroker broker;
         private static StavkeRacunaGuiController instance;
         private List<Klijent> klijenti;
         private List<Usluga> usluge;
@@ -27,7 +26,7 @@ namespace Client.GuiController
             } 
         }
         private bool pr=false;
-        private Racun racunZaIzbacivanje;
+        private Racun racunZaPromenu;
 
         internal void FormaZaUnos(FrmStavkeRacuna frmStavkeRacuna)
         {
@@ -47,14 +46,13 @@ namespace Client.GuiController
         {
             frmStavkeRacuna = new FrmStavkeRacuna();
             pr = promena;
-            racunZaIzbacivanje = selektovaniRacun;
+            racunZaPromenu = selektovaniRacun;
             frmStavkeRacuna.AutoSize = true;
             InitUslugaCmb(frmStavkeRacuna);
             InitKlijentCmb(frmStavkeRacuna);
             InitCenaLbl(frmStavkeRacuna);
-            UpisURacun(frmStavkeRacuna, false);
+            UpisURacun(frmStavkeRacuna, true);
             InitStavkeRacunaDgv(frmStavkeRacuna,selektovaniRacun);
-            if (pr) IzbaciStariRacun(frmStavkeRacuna, racunZaIzbacivanje);
             frmStavkeRacuna.ShowDialog();
         }
 
@@ -80,18 +78,21 @@ namespace Client.GuiController
         }
         private void InitStavkeRacunaDgv(FrmStavkeRacuna frmStavkeRacuna, Racun selektovaniRacun)
         {
-            List<StavkaRacuna> listaStavki = Communication.Instance.VratiStavkeRacuna(selektovaniRacun);
+            List<StavkaRacuna> listaStavki = Communication.Instance.VratiStavkeRacuna();
             stavke = new BindingList<StavkaRacuna>();
             foreach (StavkaRacuna s in listaStavki)
             {
-                foreach (Usluga u in usluge)
+                if (s.IdRacun == selektovaniRacun.IdRacun)
                 {
-                    if (u.IdUsluga == s.IdUsluga)
+                    foreach (Usluga u in usluge)
                     {
-                        s.NazivUsluga = u.Naziv;
+                        if (u.IdUsluga == s.IdUsluga)
+                        {
+                            s.NazivUsluga = u.Naziv;
+                        }
                     }
+                    stavke.Add(s);
                 }
-                stavke.Add(s);
             }
 
             frmStavkeRacuna.DgvStavkeRacuna.DataSource = stavke;
@@ -207,6 +208,7 @@ namespace Client.GuiController
         internal void KrajUnosaEvent(FrmStavkeRacuna frmStavkeRacuna)
         {
             Klijent k = (Klijent)frmStavkeRacuna.CmbKlijent.SelectedItem;
+            if (!pr) {
             Racun racunZaBazu = new Racun();
 
             racunZaBazu.Datum = frmStavkeRacuna.DtpDatum.Value;
@@ -220,88 +222,36 @@ namespace Client.GuiController
                 s.IdRacun = racunZaBazu.IdRacun;
             }
             UpisStavkiRacunaUBazu(frmStavkeRacuna,stavke);
+            }
+            else
+            {
+            racunZaPromenu.Datum = frmStavkeRacuna.DtpDatum.Value;
+            racunZaPromenu.Popust = (int)double.Parse(frmStavkeRacuna.LblPopust.Text);
+            racunZaPromenu.UkupanIznos = double.Parse(frmStavkeRacuna.LblUkupanIznos.Text);
+            racunZaPromenu.IdKlijent = k.IdKlijent;
+            racunZaPromenu.IdFrizer = MainGuiController.Instance.logedUser.IdFrizer;
+            PromenaRacuna(racunZaPromenu);
+            }
             RacunGuiController.Instance.InitDgvRacun();
             frmStavkeRacuna.Close();
         }
 
         private Racun UpisRacunaUBazu(FrmStavkeRacuna frmStavkeRacuna, Racun racunZaBazu)
         {
-            broker = new TestBroker();
-            broker.Open();
-            using (SqlCommand cmd = broker.GetConnection().CreateCommand())
-            {
-                cmd.CommandText = $"insert into Racun (datum,popust,ukupanIznos,idFrizer,idKlijent) values" +
-                    $"(@datum, @popust, @ukupanIznos, @idFrizer, @idKlijent) select scope_identity()";
-                cmd.Parameters.AddWithValue("@datum", racunZaBazu.Datum);
-                cmd.Parameters.AddWithValue("@popust", racunZaBazu.Popust);
-                cmd.Parameters.AddWithValue("@ukupanIznos", racunZaBazu.UkupanIznos);
-                cmd.Parameters.AddWithValue("@idFrizer", racunZaBazu.IdFrizer);
-                cmd.Parameters.AddWithValue("@idKlijent", racunZaBazu.IdKlijent);
-                racunZaBazu.IdRacun = Convert.ToInt32((decimal)cmd.ExecuteScalar());
-            }
-            broker.Close();
-            return racunZaBazu;
+            return Communication.Instance.KreirajRacun(racunZaBazu);
         }
 
         private void UpisStavkiRacunaUBazu(FrmStavkeRacuna frmStavkeRacuna, BindingList<StavkaRacuna> stavke)
         {
-            broker = new TestBroker();
-            broker.Open();
-            using (SqlCommand cmd = broker.GetConnection().CreateCommand())
+            foreach (StavkaRacuna stavka in stavke)
             {
-                cmd.CommandText = $"insert into StavkaRacuna (idRacun,iznos,kolicina,cena,idUsluga) values" +
-                  $"(@idRacun, @iznos, @kolicina, @cena, @idUsluga)";
-                foreach (StavkaRacuna s in stavke)
-                {
-                    cmd.Parameters.Clear();
-                    cmd.Parameters.AddWithValue("@idRacun", s.IdRacun);
-                    cmd.Parameters.AddWithValue("@iznos", s.Iznos);
-                    cmd.Parameters.AddWithValue("@kolicina", s.Kolicina);
-                    cmd.Parameters.AddWithValue("@cena", s.Cena);
-                    cmd.Parameters.AddWithValue("@idUsluga", s.IdUsluga);
-                    cmd.ExecuteNonQuery(); 
-                }
-
+                Communication.Instance.KreirajStavke(stavka); 
             }
-            broker.Close();
         }
 
-        internal void IzbaciStariRacun(FrmStavkeRacuna frmStavkeRacuna, Racun selektovaniRacun)
+        private void PromenaRacuna( Racun selektovaniRacun)
         {
-            //broker = new TestBroker();
-            //broker.Open();
-            //BindingList<StavkaRacuna> stavkeZaBrisanje = new BindingList<StavkaRacuna>();
-            //foreach (StavkaRacuna s in stavke)
-            //{
-            //    if(s.IdRacun == selektovaniRacun.IdRacun)
-            //    {
-            //        stavkeZaBrisanje.Add(s);
-            //    }
-            //}
-            //using (SqlCommand command = broker.GetConnection().CreateCommand())
-            //{
-            //    command.CommandText = $"Delete from stavkaRacuna where idRacun=@idRacun";
-
-            //    foreach (StavkaRacuna s in stavkeZaBrisanje)
-            //    {
-            //        command.Parameters.Clear();
-            //        command.Parameters.AddWithValue("idRacun", selektovaniRacun.IdRacun);
-            //        command.ExecuteNonQuery();
-
-            //    }
-            //}
-            //broker.Close();
-
-            //broker.Open();
-            //using (SqlCommand command = broker.GetConnection().CreateCommand())
-            //{
-            //    command.CommandText = $"Delete from racun where idRacun=@idRacun";
-
-            //        command.Parameters.AddWithValue("idRacun", selektovaniRacun.IdRacun);
-            //        command.ExecuteNonQuery();
-                
-            //}
-            //broker.Close();
+            Communication.Instance.PromeniRacun(selektovaniRacun);
         }
     }
 }

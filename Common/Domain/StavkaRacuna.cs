@@ -41,16 +41,6 @@ namespace Common.Domain
 
         public List<IEntity> GetEntities(SqlDataReader reader)
         {
-            throw new NotImplementedException();
-        }
-
-        public IEntity GetEntity(SqlDataReader reader)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<IEntity> GetJoinEntities(SqlDataReader reader)
-        {
             List<IEntity> stavke = new List<IEntity>();
             while (reader.Read())
             {
@@ -64,6 +54,16 @@ namespace Common.Domain
                 stavke.Add(stavka);
             }
             return stavke;
+        }
+
+        public IEntity GetEntity(SqlDataReader reader)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<IEntity> GetJoinEntities(SqlDataReader reader)
+        {
+            throw new NotImplementedException();
         }
 
         public IEntity GetJoinEntity(SqlDataReader reader)

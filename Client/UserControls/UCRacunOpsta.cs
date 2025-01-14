@@ -15,6 +15,8 @@ namespace Client.UserControls
     public partial class UCRacunOpsta : UserControl
     {
         FrmStavkeRacuna frmStavkeRacuna;
+        public Racun selektovaniRacun;
+        public bool promena = true;
         public UCRacunOpsta()
         {
             InitializeComponent();
@@ -32,9 +34,8 @@ namespace Client.UserControls
                 MessageBox.Show("Molimo vas da selektujete red za promenu.");
                 return;
             }
-
-            var selektovaniRacun = (Racun)dgvRacuni.SelectedRows[0].DataBoundItem;
-            bool promena = true;
+            selektovaniRacun = (Racun)dgvRacuni.SelectedRows[0]?.DataBoundItem;
+            promena = true;
 
             StavkeRacunaGuiController.Instance.FormaZaPromenu(frmStavkeRacuna, selektovaniRacun,promena);
         }

@@ -14,5 +14,9 @@ namespace Common.Communication
         VratiListuSviUsluga,
         VratiListuSviRacun,
         VratiStavkeRacuna,
+        KreirajRacun,
+        KreirajStavke,
+        PromeniRacun,
+        PromeniStavkeRacuna,
     }
 }

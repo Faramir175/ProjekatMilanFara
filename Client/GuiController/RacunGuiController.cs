@@ -42,6 +42,7 @@ namespace Client.GuiController
         {
             List<Racun> listaRacuna = Communication.Instance.VratiListuSviRacun();
             racuni = new BindingList<Racun>();
+            InitCmbKlijent();
             foreach (Racun r in listaRacuna)
             {
                 foreach(Klijent klijent in klijenti)

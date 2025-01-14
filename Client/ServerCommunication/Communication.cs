@@ -1,7 +1,9 @@
 ﻿using Common.Communication;
 using Common.Domain;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
@@ -108,11 +110,10 @@ namespace Client.ServerCommunication
             return (List<Racun>)response.Result;
         }
 
-        internal List<StavkaRacuna> VratiStavkeRacuna(Racun selektovaniRacun)
+        internal List<StavkaRacuna> VratiStavkeRacuna()
         {
             Request request = new Request();
             request.Operation = Operation.VratiStavkeRacuna;
-            request.Object = selektovaniRacun;
             sender.Send(request);
 
             Response response = receiver.Receive<Response>();
@@ -121,6 +122,63 @@ namespace Client.ServerCommunication
                 throw response.Exception;
             }
             return (List<StavkaRacuna>)response.Result;
+        }
+
+        internal Racun KreirajRacun(Racun racunZaBazu)
+        {
+            Request request = new Request();
+            request.Operation = Operation.KreirajRacun;
+            request.Object = racunZaBazu;
+            sender.Send(request);
+
+            Response response = receiver.Receive<Response>();
+            if (response.Exception != null)
+            {
+                throw response.Exception;
+            }
+            return (Racun)response.Result;
+        }
+
+        internal void KreirajStavke(StavkaRacuna stavka)
+        {
+            Request request = new Request();
+            request.Operation = Operation.KreirajStavke;
+            request.Object = stavka;
+            sender.Send(request);
+
+            Response response = receiver.Receive<Response>();
+            if (response.Exception != null)
+            {
+                throw response.Exception;
+            }
+        }
+
+        internal void PromeniStavkeRacuna(StavkaRacuna s)
+        {
+            Request request = new Request();
+            request.Operation = Operation.PromeniStavkeRacuna;
+            request.Object = s;
+            sender.Send(request);
+
+            Response response = receiver.Receive<Response>();
+            if (response.Exception != null)
+            {
+                throw response.Exception;
+            }
+        }
+
+        internal void PromeniRacun(Racun selektovaniRacun)
+        {
+            Request request = new Request();
+            request.Operation = Operation.PromeniRacun;
+            request.Object = selektovaniRacun;
+            sender.Send(request);
+
+            Response response = receiver.Receive<Response>();
+            if (response.Exception != null)
+            {
+                throw response.Exception;
+            }
         }
     }
 }

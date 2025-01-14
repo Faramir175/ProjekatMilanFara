@@ -11,6 +11,7 @@ using Response = Common.Communication.Response;
 using Operation = Common.Communication.Operation;
 using Microsoft.VisualBasic.ApplicationServices;
 using Common.Domain;
+using System.ComponentModel;
 
 namespace Server
 {
@@ -67,7 +68,19 @@ namespace Server
                         response.Result = Controller.Instance.VratiListuSviRacun();
                         break;
                     case Operation.VratiStavkeRacuna:
-                        response.Result = Controller.Instance.VratiStavkeRacuna((Racun)request.Object);
+                        response.Result = Controller.Instance.VratiStavkeRacuna();
+                        break;
+                    case Operation.KreirajRacun:
+                        response.Result = Controller.Instance.KreirajRacun((Racun)request.Object);
+                        break;
+                    case Operation.KreirajStavke:
+                        Controller.Instance.KreirajStavke((StavkaRacuna)request.Object);
+                        break;
+                    case Operation.PromeniStavkeRacuna:
+                        Controller.Instance.PromeniStavkeRacuna((StavkaRacuna)request.Object);
+                        break;
+                    case Operation.PromeniRacun:
+                        Controller.Instance.PromeniRacun((Racun)request.Object);
                         break;
                     default:
                         response.Exception = new Exception("Operation is not implemented!");
