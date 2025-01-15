@@ -19,7 +19,7 @@ namespace SysOp
 
         protected override void ExecuteConcreteOperation()
         {
-            Result = broker.GetAllForeignKey2(new Racun(), frizer.IdFrizer).OfType<Racun>().ToList(); ;
+            Result = broker.GetAllForeignKey2(new Racun(), frizer.IdFrizer).OfType<Racun>().ToList(); 
         }
     }
 }

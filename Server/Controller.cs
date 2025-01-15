@@ -130,5 +130,11 @@ namespace Server
             return ((VratiListuRacunKriterijumUsluga)so).Result;
         }
 
+        internal object VratiListuRacun(double cena)
+        {
+            SystemOperationBase so = new VratiListuRacunKriterijumRacun(cena);
+            so.Execute();
+            return ((VratiListuRacunKriterijumRacun)so).Result;
+        }
     }
 }

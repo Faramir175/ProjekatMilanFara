@@ -55,5 +55,10 @@ namespace Client.UserControls
             RacunGuiController.Instance.FiltrirajUsluga(this);
 
         }
+
+        private void tbCenaRacuna_TextChanged(object sender, EventArgs e)
+        {
+            RacunGuiController.Instance.FiltrirajCenaRacun(this);
+        }
     }
 }

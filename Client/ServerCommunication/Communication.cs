@@ -267,5 +267,20 @@ namespace Client.ServerCommunication
             }
             return (List<Racun>)response.Result;
         }
+
+        internal List<Racun> VratiListuRacun(double cenaZaFiltriranje)
+        {
+            Request request = new Request();
+            request.Operation = Operation.VratiListuRacunRacun;
+            request.Object = cenaZaFiltriranje;
+            sender.Send(request);
+
+            Response response = receiver.Receive<Response>();
+            if (response.Exception != null)
+            {
+                throw response.Exception;
+            }
+            return (List<Racun>)response.Result;
+        }
     }
 }

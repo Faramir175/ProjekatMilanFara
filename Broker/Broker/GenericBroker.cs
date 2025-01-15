@@ -54,7 +54,8 @@ namespace Broker.Broker
         {
             List<IEntity> result;
             SqlCommand cmd = DbBroker.Instance.GetConnection().GetCommand();
-            cmd.CommandText = $"select * from {entity.NazivTabele} where {entity.Criteria} and {entity.Search} = '{criteria}'";
+            cmd.CommandText = $"select * from {entity.NazivTabele} where {entity.Search}{criteria}";
+            Debug.WriteLine(cmd.CommandText);
             SqlDataReader reader = cmd.ExecuteReader();
             result = entity.GetEntities(reader);
             reader.Close();

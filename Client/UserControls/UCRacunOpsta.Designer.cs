@@ -38,6 +38,8 @@
             lblFrizer = new Label();
             cmbUsluga = new ComboBox();
             lblUsluga = new Label();
+            lblCenaRacun = new Label();
+            tbCenaRacuna = new TextBox();
             ((System.ComponentModel.ISupportInitialize)dgvRacuni).BeginInit();
             SuspendLayout();
             // 
@@ -81,7 +83,7 @@
             // 
             // btnUnosNovogRacuna
             // 
-            btnUnosNovogRacuna.Location = new Point(608, 185);
+            btnUnosNovogRacuna.Location = new Point(608, 229);
             btnUnosNovogRacuna.Name = "btnUnosNovogRacuna";
             btnUnosNovogRacuna.Size = new Size(99, 47);
             btnUnosNovogRacuna.TabIndex = 4;
@@ -91,7 +93,7 @@
             // 
             // btnPromeniRacun
             // 
-            btnPromeniRacun.Location = new Point(755, 186);
+            btnPromeniRacun.Location = new Point(755, 230);
             btnPromeniRacun.Name = "btnPromeniRacun";
             btnPromeniRacun.Size = new Size(96, 46);
             btnPromeniRacun.TabIndex = 5;
@@ -135,10 +137,29 @@
             lblUsluga.TabIndex = 8;
             lblUsluga.Text = "Usluga";
             // 
+            // lblCenaRacun
+            // 
+            lblCenaRacun.AutoSize = true;
+            lblCenaRacun.Location = new Point(625, 184);
+            lblCenaRacun.Name = "lblCenaRacun";
+            lblCenaRacun.Size = new Size(73, 15);
+            lblCenaRacun.TabIndex = 10;
+            lblCenaRacun.Text = "Cena racuna";
+            // 
+            // tbCenaRacuna
+            // 
+            tbCenaRacuna.Location = new Point(730, 181);
+            tbCenaRacuna.Name = "tbCenaRacuna";
+            tbCenaRacuna.Size = new Size(121, 23);
+            tbCenaRacuna.TabIndex = 11;
+            tbCenaRacuna.TextChanged += tbCenaRacuna_TextChanged;
+            // 
             // UCRacunOpsta
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(tbCenaRacuna);
+            Controls.Add(lblCenaRacun);
             Controls.Add(cmbUsluga);
             Controls.Add(lblUsluga);
             Controls.Add(cmbFrizer);
@@ -168,6 +189,8 @@
         private Label lblFrizer;
         private ComboBox cmbUsluga;
         private Label lblUsluga;
+        private Label lblCenaRacun;
+        private TextBox tbCenaRacuna;
 
         public DataGridView DgvRacuni
         {
@@ -187,6 +210,11 @@
         public ComboBox CmbUsluga
         {
             get { return cmbUsluga; }
+        }
+
+        public TextBox TbCenaRacuna
+        {
+            get { return tbCenaRacuna; }
         }
     }
 }

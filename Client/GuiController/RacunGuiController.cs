@@ -203,5 +203,34 @@ namespace Client.GuiController
             }
             ucRacunView.DgvRacuni.DataSource = racuni;
         }
+
+        internal void FiltrirajCenaRacun(UCRacunOpsta uCRacunOpsta)
+        {
+            racuni = new BindingList<Racun>();
+            double cenaZaFiltriranje;
+            double.TryParse(uCRacunOpsta.TbCenaRacuna.Text, out cenaZaFiltriranje);
+            List<Racun> listaracuna = Communication.Instance.VratiListuRacun(cenaZaFiltriranje);
+            InitCmbKlijent();
+            InitCmbFrizer();
+            foreach (Racun r in listaracuna)
+            {
+                foreach (Klijent klijent in klijenti)
+                {
+                    if (klijent.IdKlijent == r.IdKlijent)
+                    {
+                        r.KlijentImePrezime = klijent.ImePrezime;
+                    }
+                }
+                foreach (Frizer f in frizeri)
+                {
+                    if (f.IdFrizer == r.IdFrizer)
+                    {
+                        r.FrizerImePrezime = f.ImePrezime;
+                    }
+                }
+                racuni.Add(r);
+            }
+            ucRacunView.DgvRacuni.DataSource = racuni;
+        }
     }
 }

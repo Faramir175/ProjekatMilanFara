@@ -37,7 +37,7 @@ namespace Common.Domain
 
         public string Criteria => "";
 
-        public string Search => "";
+        public string Search => "ukupanIznos";
 
 
         public List<IEntity> GetEntities(SqlDataReader reader)
