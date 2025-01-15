@@ -91,6 +91,12 @@ namespace Server
                     case Operation.PromeniKvalifikacija:
                         Controller.Instance.PromeniKvalifikacija((Kvalifikacija)request.Object);
                         break;
+                    case Operation.VratiListuRacunKlijent:
+                        response.Result = Controller.Instance.VratiListuRacun((Klijent)request.Object);
+                        break;
+                    case Operation.VratiListuRacunFrizer:
+                        response.Result = Controller.Instance.VratiListuRacun((Frizer)request.Object);
+                        break;
                     default:
                         response.Exception = new Exception("Operation is not implemented!");
                     break;

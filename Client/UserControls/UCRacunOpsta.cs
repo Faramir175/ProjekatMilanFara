@@ -40,9 +40,14 @@ namespace Client.UserControls
             StavkeRacunaGuiController.Instance.FormaZaPromenu(frmStavkeRacuna, selektovaniRacun,promena);
         }
 
-        private void cmbKlijent_SelectedIndexChanged(object sender, EventArgs e)
+        private void cmbKlijent_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            RacunGuiController.Instance.FiltrirajRacune(this);
+            RacunGuiController.Instance.FiltrirajKlijent(this);
+        }
+
+        private void cmbFrizer_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            RacunGuiController.Instance.FiltrirajFrizer(this);
         }
     }
 }

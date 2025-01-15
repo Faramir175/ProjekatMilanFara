@@ -19,6 +19,7 @@ namespace Client.GuiController
         private static UCRacunOpsta ucRacunView;
         private static BindingList<Racun> racuni;
         private BindingList<Klijent> klijenti;
+        private BindingList<Frizer> frizeri;
         private static RacunGuiController instance;
         public static RacunGuiController Instance
         {
@@ -43,6 +44,7 @@ namespace Client.GuiController
             List<Racun> listaRacuna = Communication.Instance.VratiListuSviRacun();
             racuni = new BindingList<Racun>();
             InitCmbKlijent();
+            InitCmbFrizer();
             foreach (Racun r in listaRacuna)
             {
                 foreach(Klijent klijent in klijenti)
@@ -50,6 +52,13 @@ namespace Client.GuiController
                     if (klijent.IdKlijent == r.IdKlijent)
                     {
                         r.KlijentImePrezime = klijent.ImePrezime;
+                    }
+                }
+                foreach (Frizer f in frizeri)
+                {
+                    if (f.IdFrizer == r.IdFrizer)
+                    {
+                        r.FrizerImePrezime = f.ImePrezime;
                     }
                 }
                 racuni.Add(r);
@@ -69,6 +78,17 @@ namespace Client.GuiController
             ucRacunView.CmbKlijent.DataSource = klijenti;
         }
 
+        private void InitCmbFrizer()
+        {
+            List<Frizer> frizers = Communication.Instance.VratiListuSviFrizer();
+            frizeri = new BindingList<Frizer>();
+            foreach (Frizer f in frizers)
+            {
+                frizeri.Add(f);
+            }
+            ucRacunView.CmbFrizer.DataSource = frizeri;
+        }
+
         private void InitDgvColumns(DataGridView dgv)
         {
             dgv.Columns["IdFrizer"].Visible = false;
@@ -85,23 +105,61 @@ namespace Client.GuiController
             dgv.Columns["Search"].Visible = false;
         }
 
-        internal void FiltrirajRacune(UCRacunOpsta uCRacunOpsta)
+        internal void FiltrirajKlijent(UCRacunOpsta uCRacunOpsta)
         {
-
-            if (racuni != null) 
-            {
-            BindingList<Racun> filtriraniRacun = new BindingList<Racun>();
+            racuni = new BindingList<Racun>();
             Klijent klijentZaFiltriranje = (Klijent)uCRacunOpsta.CmbKlijent.SelectedItem;
-                foreach (Racun r in racuni)
+            List<Racun> listaRacuna = Communication.Instance.VratiListuRacun(klijentZaFiltriranje);
+            InitCmbKlijent();
+            InitCmbFrizer();
+            foreach (Racun r in listaRacuna)
+            {
+                foreach (Klijent klijent in klijenti)
                 {
-                    if (r.IdKlijent == klijentZaFiltriranje.IdKlijent)
+                    if (klijent.IdKlijent == r.IdKlijent)
                     {
-                        filtriraniRacun.Add(r);
+                        r.KlijentImePrezime = klijent.ImePrezime;
                     }
                 }
-            ucRacunView.DgvRacuni.DataSource = filtriraniRacun;
+                foreach (Frizer f in frizeri)
+                {
+                    if (f.IdFrizer == r.IdFrizer)
+                    {
+                        r.FrizerImePrezime = f.ImePrezime;
+                    }
+                }
+                racuni.Add(r);
             }
+            ucRacunView.DgvRacuni.DataSource = racuni;
 
+        }
+
+        internal void FiltrirajFrizer(UCRacunOpsta uCRacunOpsta)
+        {
+            racuni = new BindingList<Racun>();
+            Frizer frizerZaFiltriranje = (Frizer)uCRacunOpsta.CmbFrizer.SelectedItem;
+            List<Racun> listaRacuna = Communication.Instance.VratiListuRacun(frizerZaFiltriranje);
+            InitCmbFrizer();
+            InitCmbKlijent();
+            foreach (Racun r in listaRacuna)
+            {
+                foreach (Klijent klijent in klijenti)
+                {
+                    if (klijent.IdKlijent == r.IdKlijent)
+                    {
+                        r.KlijentImePrezime = klijent.ImePrezime;
+                    }
+                }
+                foreach (Frizer f in frizeri)
+                {
+                    if (f.IdFrizer == r.IdFrizer)
+                    {
+                        r.FrizerImePrezime = f.ImePrezime;
+                    }
+                }
+                racuni.Add(r);
+            }
+            ucRacunView.DgvRacuni.DataSource = racuni;
         }
     }
 }

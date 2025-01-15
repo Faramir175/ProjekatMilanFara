@@ -19,6 +19,7 @@ namespace Common.Domain
         public int IdFrizer { get; set; }
         public int IdKlijent { get; set; }
         public string KlijentImePrezime { get; set; }
+        public string FrizerImePrezime { get; set; }
 
         public string NazivTabele => "Racun";
 
@@ -37,6 +38,8 @@ namespace Common.Domain
         public string Criteria => "";
 
         public string Search => "";
+
+
         public List<IEntity> GetEntities(SqlDataReader reader)
         {
             List<IEntity> racuni = new List<IEntity>();
@@ -65,6 +68,11 @@ namespace Common.Domain
         }
 
         public IEntity GetJoinEntity(SqlDataReader reader)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static explicit operator Racun(List<IEntity> v)
         {
             throw new NotImplementedException();
         }

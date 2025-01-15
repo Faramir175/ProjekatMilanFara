@@ -23,7 +23,8 @@ namespace Broker.Broker
         List<TEntity> GetAll(TEntity entity);
         List<IEntity> GetCriteria(TEntity entity);
         TEntity GetOne(TEntity entity, object id);
-
+        List<IEntity> GetAllForeignKey(IEntity entity, object id);
+        List<IEntity> GetAllForeignKey2(IEntity entity, object id);
         List<TEntity> GetAllJoin(IEntity entity, IEntity joinEntity);
         List<IEntity> GetOneJoin(IEntity entity, IEntity joinEntity, IEntity joinEntity2, object criteria);
         List<IEntity> GetTwoJoin(IEntity entity, IEntity joinEntity, IEntity joinEntity2, object criteria);

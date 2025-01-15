@@ -108,5 +108,26 @@ namespace Server
             SystemOperationBase so = new PromeniKvalifikacija(kvalifikacijaZaPromenu);
             so.Execute();
         }
+
+        internal object VratiListuRacun(Klijent klijent)
+        {
+            SystemOperationBase so = new VratiListuRacunKriterijumKlijent(klijent);
+            so.Execute();
+            return ((VratiListuRacunKriterijumKlijent)so).Result;
+        }
+
+        internal object VratiListuRacun(Frizer frizer)
+        {
+            SystemOperationBase so = new VratiListuRacunKriterijumFrizer(frizer);
+            so.Execute();
+            return ((VratiListuRacunKriterijumFrizer)so).Result;
+        }
+
+        //internal object VratiListuRacun(Frizer frizer)
+        //{
+        //    SystemOperationBase so = new VratiListuRacunKriterijumFrizer(frizer);
+        //    so.Execute();
+        //    return ((VratiListuRacunKriterijumFrizer)so).Result;
+        //}
     }
 }

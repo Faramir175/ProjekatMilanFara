@@ -222,5 +222,35 @@ namespace Client.ServerCommunication
                 throw response.Exception;
             }
         }
+
+        internal List<Racun> VratiListuRacun(Klijent klijentZaFiltriranje)
+        {
+            Request request = new Request();
+            request.Operation = Operation.VratiListuRacunKlijent;
+            request.Object = klijentZaFiltriranje;
+            sender.Send(request);
+
+            Response response = receiver.Receive<Response>();
+            if (response.Exception != null)
+            {
+                throw response.Exception;
+            }
+            return (List<Racun>)response.Result;
+        }
+
+        internal List<Racun> VratiListuRacun(Frizer frizerZaFiltriranje)
+        {
+            Request request = new Request();
+            request.Operation = Operation.VratiListuRacunFrizer;
+            request.Object = frizerZaFiltriranje;
+            sender.Send(request);
+
+            Response response = receiver.Receive<Response>();
+            if (response.Exception != null)
+            {
+                throw response.Exception;
+            }
+            return (List<Racun>)response.Result;
+        }
     }
 }

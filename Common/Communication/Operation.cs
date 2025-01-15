@@ -21,5 +21,9 @@ namespace Common.Communication
         VratiListuSviKvalifikacija,
         UbaciKvalifikacija,
         PromeniKvalifikacija,
+        VratiListuRacunKlijent,
+        VratiListuRacunUsluga,
+        VratiListuRacunFrizer,
+        VratiListuRacunRacun,
     }
 }

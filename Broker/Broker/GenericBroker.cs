@@ -104,6 +104,27 @@ namespace Broker.Broker
             return result;
         }
 
+        public List<IEntity> GetAllForeignKey(IEntity entity, object id)
+        {
+            List<IEntity> result;
+            SqlCommand cmd = DbBroker.Instance.GetConnection().GetCommand();
+            cmd.CommandText = $"select * from {entity.NazivTabele} where {entity.ForeignKey}='{id}'";
+            SqlDataReader reader = cmd.ExecuteReader();
+            result = entity.GetEntities(reader);
+            reader.Close();
+            return result;
+        }
+        public List<IEntity> GetAllForeignKey2(IEntity entity, object id)
+        {
+            List<IEntity> result;
+            SqlCommand cmd = DbBroker.Instance.GetConnection().GetCommand();
+            cmd.CommandText = $"select * from {entity.NazivTabele} where {entity.ForeignKey2}='{id}'";
+            SqlDataReader reader = cmd.ExecuteReader();
+            result = entity.GetEntities(reader);
+            reader.Close();
+            return result;
+        }
+        
         public List<IEntity> GetOneJoin(IEntity entity, IEntity joinEntity, IEntity joinEntity2, object criteria)
         {
             List<IEntity> result;

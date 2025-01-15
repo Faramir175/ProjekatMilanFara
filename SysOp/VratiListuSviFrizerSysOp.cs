@@ -9,11 +9,11 @@ namespace SysOp
 {
     public class VratiListuSviFrizerSysOp : SystemOperationBase
     {
-        public List<Usluga> Result { get; set; }
+        public List<Frizer> Result { get; set; }
 
         protected override void ExecuteConcreteOperation()
         {
-            Result = broker.GetAll(new Usluga()).OfType<Usluga>().ToList();
+            Result = broker.GetAll(new Frizer()).OfType<Frizer>().ToList();
 
         }
     }
