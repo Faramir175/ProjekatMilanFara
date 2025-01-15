@@ -26,8 +26,7 @@ namespace Broker.Broker
         List<IEntity> GetAllForeignKey(IEntity entity, object id);
         List<IEntity> GetAllForeignKey2(IEntity entity, object id);
         List<TEntity> GetAllJoin(IEntity entity, IEntity joinEntity);
-        List<IEntity> GetOneJoin(IEntity entity, IEntity joinEntity, IEntity joinEntity2, object criteria);
-        List<IEntity> GetTwoJoin(IEntity entity, IEntity joinEntity, IEntity joinEntity2, object criteria);
+        List<IEntity> GetAllForeignKeyJoin(IEntity entity, IEntity joinEntity, object id);
         object GetMaxId(TEntity entity);
 
     }

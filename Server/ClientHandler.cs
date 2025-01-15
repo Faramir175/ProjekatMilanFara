@@ -97,6 +97,9 @@ namespace Server
                     case Operation.VratiListuRacunFrizer:
                         response.Result = Controller.Instance.VratiListuRacun((Frizer)request.Object);
                         break;
+                    case Operation.VratiListuRacunUsluga:
+                        response.Result = Controller.Instance.VratiListuRacun((Usluga)request.Object);
+                        break;
                     default:
                         response.Exception = new Exception("Operation is not implemented!");
                     break;

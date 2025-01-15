@@ -20,6 +20,7 @@ namespace Client.GuiController
         private static BindingList<Racun> racuni;
         private BindingList<Klijent> klijenti;
         private BindingList<Frizer> frizeri;
+        private BindingList<Usluga> usluge;
         private static RacunGuiController instance;
         public static RacunGuiController Instance
         {
@@ -35,6 +36,7 @@ namespace Client.GuiController
             ucRacunView = new UCRacunOpsta();
             InitCmbKlijent();
             InitDgvRacun();
+            InitCmbUsluga();
 
             return ucRacunView;
         }
@@ -76,6 +78,17 @@ namespace Client.GuiController
                 klijenti.Add(f);
             }
             ucRacunView.CmbKlijent.DataSource = klijenti;
+        }
+
+        private void InitCmbUsluga()
+        {
+            usluge = new BindingList<Usluga>();
+            List<Usluga> usluges = Communication.Instance.VratiListuSviUsluga();
+            foreach (Usluga u in usluges)
+            {
+                usluge.Add(u);
+            }
+            ucRacunView.CmbUsluga.DataSource = usluge;
         }
 
         private void InitCmbFrizer()
@@ -142,6 +155,35 @@ namespace Client.GuiController
             InitCmbFrizer();
             InitCmbKlijent();
             foreach (Racun r in listaRacuna)
+            {
+                foreach (Klijent klijent in klijenti)
+                {
+                    if (klijent.IdKlijent == r.IdKlijent)
+                    {
+                        r.KlijentImePrezime = klijent.ImePrezime;
+                    }
+                }
+                foreach (Frizer f in frizeri)
+                {
+                    if (f.IdFrizer == r.IdFrizer)
+                    {
+                        r.FrizerImePrezime = f.ImePrezime;
+                    }
+                }
+                racuni.Add(r);
+            }
+            ucRacunView.DgvRacuni.DataSource = racuni;
+        }
+
+        internal void FiltrirajUsluga(UCRacunOpsta uCRacunOpsta)
+        {
+            racuni = new BindingList<Racun>();
+            Usluga uslugazafiltriranje = (Usluga)uCRacunOpsta.CmbUsluga.SelectedItem;
+            List<Racun> listaracuna = Communication.Instance.VratiListuRacun(uslugazafiltriranje);
+            InitCmbFrizer();
+            InitCmbKlijent();
+            InitCmbUsluga();
+            foreach (Racun r in listaracuna)
             {
                 foreach (Klijent klijent in klijenti)
                 {

@@ -3,6 +3,7 @@ using Common.Domain;
 using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -81,29 +82,6 @@ namespace Broker.Broker
             reader.Close();
             return result;
         }
-
-        public List<IEntity> GetCriteria(IEntity entity)
-        {
-            List<IEntity> result;
-            SqlCommand cmd = DbBroker.Instance.GetConnection().GetCommand();
-            cmd.CommandText = $"select * from {entity.NazivTabele} where {entity.Criteria}";
-            SqlDataReader reader = cmd.ExecuteReader();
-            result = entity.GetEntities(reader);
-            reader.Close();
-            return result;
-        }
-
-        public IEntity GetOne(IEntity entity, object id)
-        {
-            IEntity result;
-            SqlCommand cmd = DbBroker.Instance.GetConnection().GetCommand();
-            cmd.CommandText = $"select * from {entity.NazivTabele} where {entity.PrimaryKey}='{id}'";
-            SqlDataReader reader = cmd.ExecuteReader();
-            result = entity.GetEntity(reader);
-            reader.Close();
-            return result;
-        }
-
         public List<IEntity> GetAllForeignKey(IEntity entity, object id)
         {
             List<IEntity> result;
@@ -124,28 +102,38 @@ namespace Broker.Broker
             reader.Close();
             return result;
         }
-        
-        public List<IEntity> GetOneJoin(IEntity entity, IEntity joinEntity, IEntity joinEntity2, object criteria)
+        public List<IEntity> GetAllForeignKeyJoin(IEntity entity, IEntity joinEntity, object id)
         {
             List<IEntity> result;
             SqlCommand cmd = DbBroker.Instance.GetConnection().GetCommand();
-            cmd.CommandText = $"select * from {entity.NazivTabele} a join {joinEntity.NazivTabele} b on (a.{entity.PrimaryKey} = b.{joinEntity.ForeignKey2}) join {joinEntity2.NazivTabele} c on (a.{entity.ForeignKey} = c.{joinEntity2.PrimaryKey}) where b.{joinEntity.ForeignKey} = {criteria}";
+            cmd.CommandText = $"select * from {entity.NazivTabele} a join {joinEntity.NazivTabele} b on (a.{entity.PrimaryKey}= b.{joinEntity.ForeignKey}) where b.{joinEntity.ForeignKey2}='{id}'";
+            Debug.WriteLine(cmd.CommandText);
+            SqlDataReader reader = cmd.ExecuteReader();
+            result = entity.GetEntities(reader);
+            reader.Close();
+            return result;
+        }
+        public List<IEntity> GetCriteria(IEntity entity)
+        {
+            List<IEntity> result;
+            SqlCommand cmd = DbBroker.Instance.GetConnection().GetCommand();
+            cmd.CommandText = $"select * from {entity.NazivTabele} where {entity.Criteria}";
             SqlDataReader reader = cmd.ExecuteReader();
             result = entity.GetEntities(reader);
             reader.Close();
             return result;
         }
 
-        public List<IEntity> GetTwoJoin(IEntity entity, IEntity joinEntity, IEntity joinEntity2, object criteria)
+        public IEntity GetOne(IEntity entity, object id)
         {
-            List<IEntity> result;
+            IEntity result;
             SqlCommand cmd = DbBroker.Instance.GetConnection().GetCommand();
-            cmd.CommandText = $"select * from {joinEntity.NazivTabele} a join {entity.NazivTabele} b on (a.{joinEntity.PrimaryKey} = b.{entity.ForeignKey}) join {joinEntity2.NazivTabele} c on (a.{joinEntity.ForeignKey} = c.{joinEntity2.PrimaryKey}) where b.{entity.ForeignKey2} = {criteria} ";
+            cmd.CommandText = $"select * from {entity.NazivTabele} where {entity.PrimaryKey}='{id}'";
             SqlDataReader reader = cmd.ExecuteReader();
-            result = joinEntity.GetJoinEntities(reader);
+            result = entity.GetEntity(reader);
             reader.Close();
             return result;
-        }
+        }  
 
         public List<IEntity> Search(IEntity entity, string criteria)
         {

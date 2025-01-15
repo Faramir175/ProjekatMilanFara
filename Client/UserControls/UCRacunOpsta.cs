@@ -37,7 +37,7 @@ namespace Client.UserControls
             selektovaniRacun = (Racun)dgvRacuni.SelectedRows[0]?.DataBoundItem;
             promena = true;
 
-            StavkeRacunaGuiController.Instance.FormaZaPromenu(frmStavkeRacuna, selektovaniRacun,promena);
+            StavkeRacunaGuiController.Instance.FormaZaPromenu(frmStavkeRacuna, selektovaniRacun, promena);
         }
 
         private void cmbKlijent_SelectionChangeCommitted(object sender, EventArgs e)
@@ -48,6 +48,12 @@ namespace Client.UserControls
         private void cmbFrizer_SelectionChangeCommitted(object sender, EventArgs e)
         {
             RacunGuiController.Instance.FiltrirajFrizer(this);
+        }
+
+        private void cmbUsluga_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            RacunGuiController.Instance.FiltrirajUsluga(this);
+
         }
     }
 }

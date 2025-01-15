@@ -123,11 +123,12 @@ namespace Server
             return ((VratiListuRacunKriterijumFrizer)so).Result;
         }
 
-        //internal object VratiListuRacun(Frizer frizer)
-        //{
-        //    SystemOperationBase so = new VratiListuRacunKriterijumFrizer(frizer);
-        //    so.Execute();
-        //    return ((VratiListuRacunKriterijumFrizer)so).Result;
-        //}
+        internal object VratiListuRacun(Usluga usluga)
+        {
+            SystemOperationBase so = new VratiListuRacunKriterijumUsluga(usluga);
+            so.Execute();
+            return ((VratiListuRacunKriterijumUsluga)so).Result;
+        }
+
     }
 }

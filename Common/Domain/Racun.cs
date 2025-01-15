@@ -46,7 +46,7 @@ namespace Common.Domain
             while (reader.Read())
             {
                 Racun racun = new Racun();
-                racun.IdRacun = reader.GetInt32(0);
+                racun.IdRacun = (int)reader["idRacun"]; ;
                 racun.Datum = (DateTime)reader["datum"];
                 racun.Popust = (int)reader["popust"];
                 racun.UkupanIznos = (double)reader["ukupanIznos"];

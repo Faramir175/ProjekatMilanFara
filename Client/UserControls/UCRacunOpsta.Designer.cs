@@ -36,6 +36,8 @@
             btnPromeniRacun = new Button();
             cmbFrizer = new ComboBox();
             lblFrizer = new Label();
+            cmbUsluga = new ComboBox();
+            lblUsluga = new Label();
             ((System.ComponentModel.ISupportInitialize)dgvRacuni).BeginInit();
             SuspendLayout();
             // 
@@ -115,10 +117,30 @@
             lblFrizer.TabIndex = 6;
             lblFrizer.Text = "Frizer";
             // 
+            // cmbUsluga
+            // 
+            cmbUsluga.FormattingEnabled = true;
+            cmbUsluga.Location = new Point(730, 144);
+            cmbUsluga.Name = "cmbUsluga";
+            cmbUsluga.Size = new Size(121, 23);
+            cmbUsluga.TabIndex = 9;
+            cmbUsluga.SelectionChangeCommitted += cmbUsluga_SelectionChangeCommitted;
+            // 
+            // lblUsluga
+            // 
+            lblUsluga.AutoSize = true;
+            lblUsluga.Location = new Point(625, 149);
+            lblUsluga.Name = "lblUsluga";
+            lblUsluga.Size = new Size(43, 15);
+            lblUsluga.TabIndex = 8;
+            lblUsluga.Text = "Usluga";
+            // 
             // UCRacunOpsta
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(cmbUsluga);
+            Controls.Add(lblUsluga);
             Controls.Add(cmbFrizer);
             Controls.Add(lblFrizer);
             Controls.Add(btnPromeniRacun);
@@ -144,6 +166,8 @@
         private Button btnPromeniRacun;
         private ComboBox cmbFrizer;
         private Label lblFrizer;
+        private ComboBox cmbUsluga;
+        private Label lblUsluga;
 
         public DataGridView DgvRacuni
         {
@@ -158,6 +182,11 @@
         public ComboBox CmbFrizer
         {
             get { return cmbFrizer; }
+        }
+
+        public ComboBox CmbUsluga
+        {
+            get { return cmbUsluga; }
         }
     }
 }
