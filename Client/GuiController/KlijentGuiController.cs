@@ -120,38 +120,68 @@ namespace Client.GuiController
             uCKlijentiOpste.DgvKlijenti.DataSource = klijenti;
         }
 
-        internal void DodajKlijentaEvent(UCKlijentiOpste uCKlijentiOpste)
+        internal void DodajKlijentaEvent(UCKlijentiOpste uCKlijentiOpste,bool promena)
         {
             UpisUKlijenta(uCKlijentiOpste, false);
         }
 
-        internal void KrajDodajPromeniEvent(UCKlijentiOpste uCKlijentiOpste)
+        internal void KrajDodajPromeniEvent(UCKlijentiOpste uCKlijentiOpste,Klijent selektovaniKlijent, bool promena)
         {
+ 
             Mesto m = uCKlijentiOpste.CmbDodajMesto.SelectedItem as Mesto;
-            Klijent novKlijent = new Klijent()
+            if (!promena)
+            {           
+                Klijent novKlijent = new Klijent()
+                {
+                    ImePrezime = uCKlijentiOpste.TbDodajImePrezime.Text,
+                    Kontakt = uCKlijentiOpste.TbDodajKontakt.Text,
+                    TipKlijenta = ((int)(TipKlijentaEnum)uCKlijentiOpste.CmbDodajTipKlijenta.SelectedItem).ToString(),
+                    Pol = uCKlijentiOpste.CmbDodajPol.SelectedItem.ToString(),
+                    IdMesto = m.IdMesto,
+                };
+                novKlijent = Communication.Instance.KreirajKlijent(novKlijent);
+                InitDgvKlijenti(uCKlijentiOpste);
+                UpisUKlijenta(uCKlijentiOpste, true);
+            }
+            else if(selektovaniKlijent!=null)
             {
-                ImePrezime = uCKlijentiOpste.TbDodajImePrezime.Text,
-                Kontakt = uCKlijentiOpste.TbDodajKontakt.Text,
-                TipKlijenta = ((int)(TipKlijentaEnum)uCKlijentiOpste.CmbDodajTipKlijenta.SelectedItem).ToString(),
-                Pol = uCKlijentiOpste.CmbDodajPol.SelectedItem.ToString(),
-                IdMesto = m.IdMesto,
-            };
-            novKlijent = Communication.Instance.KreirajKlijent(novKlijent);
-            klijenti.Add(novKlijent);
-            UpisUKlijenta(uCKlijentiOpste, true);
+                selektovaniKlijent.ImePrezime = uCKlijentiOpste.TbDodajImePrezime.Text;
+                selektovaniKlijent.Kontakt = uCKlijentiOpste.TbDodajKontakt.Text;
+                selektovaniKlijent.TipKlijenta = ((int)(TipKlijentaEnum)uCKlijentiOpste.CmbDodajTipKlijenta.SelectedItem).ToString();
+                selektovaniKlijent.Pol = uCKlijentiOpste.CmbDodajPol.SelectedItem.ToString();
+                selektovaniKlijent.IdMesto = m.IdMesto;
+                Communication.Instance.PromeniKlijent(selektovaniKlijent);
+                InitDgvKlijenti(uCKlijentiOpste);
+                UpisUKlijenta(uCKlijentiOpste, true);
+            }
         }
 
-        internal void ObrisiKlijenta(UCKlijentiOpste uCKlijentiOpste)
+        internal void ObrisiKlijenta(UCKlijentiOpste uCKlijentiOpste,Klijent selektovaniKlijent)
         {
-            if (uCKlijentiOpste.DgvKlijenti.SelectedRows.Count == 0)
-            {
-                MessageBox.Show("Molimo vas da selektujete red za promenu.");
-                return;
-            }
-            selektovaniKlijent = (Klijent)uCKlijentiOpste.DgvKlijenti.SelectedRows[0]?.DataBoundItem;
 
             Communication.Instance.ObrisiKlijent(selektovaniKlijent);
             InitDgvKlijenti(uCKlijentiOpste);
+        }
+
+        internal void PromenaKlijentaEvent(UCKlijentiOpste uCKlijentiOpste,Klijent selektovaniKlijent, bool promena)
+        {
+            UpisUKlijenta(uCKlijentiOpste, false);
+
+            Klijent proveren = Communication.Instance.PretraziKlijent(selektovaniKlijent);
+            if(proveren != null) {
+                Mesto m = Communication.Instance.VratiJednoMesto(selektovaniKlijent.IdMesto);
+                uCKlijentiOpste.LblDodajPromeniKlijenta.Text = "Promeni klijenta";
+                uCKlijentiOpste.CmbDodajMesto.ValueMember = "Naziv";
+
+                uCKlijentiOpste.TbDodajImePrezime.Text = selektovaniKlijent.ImePrezime;
+                uCKlijentiOpste.TbDodajKontakt.Text = selektovaniKlijent.Kontakt;
+                uCKlijentiOpste.CmbDodajMesto.SelectedValue = m.Naziv;
+                uCKlijentiOpste.CmbDodajPol.SelectedItem = selektovaniKlijent.Pol;
+                if (Enum.TryParse(typeof(TipKlijentaEnum), selektovaniKlijent.TipKlijenta, out var tipKlijentaEnum))
+                {
+                    uCKlijentiOpste.CmbDodajTipKlijenta.SelectedItem = tipKlijentaEnum;
+                }
+            }
         }
     }
 }

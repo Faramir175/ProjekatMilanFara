@@ -33,5 +33,7 @@ namespace Common.Communication
         VratiListuKlijentMesto,
         KreirajKlijent,
         ObrisiKlijent,
+        VratiJednoMesto,
+        PromeniKlijent,
     }
 }

@@ -130,6 +130,12 @@ namespace Server
                     case Operation.ObrisiKlijent:
                         Controller.Instance.ObrisiKlijent((Klijent)request.Object);
                         break;
+                    case Operation.VratiJednoMesto:
+                        response.Result = Controller.Instance.VratiJednoMesto((int)request.Object);
+                        break;
+                    case Operation.PromeniKlijent:
+                        Controller.Instance.PromeniKlijent((Klijent)request.Object);
+                        break;
                 }
             }
             catch (Exception ex)

@@ -24,7 +24,7 @@ namespace Common.Domain
 
         public string InsertVrednosti => $"'{ImePrezime}','{Kontakt}','{TipKlijenta}','{Pol}','{IdMesto}'";
 
-        public string UpdateVrednost => $"imePrezime='{ImePrezime}',kontakt= '{Kontakt}',tipKlijenta='{TipKlijenta}',pol='{Pol}',idMesto'{IdMesto}'";
+        public string UpdateVrednost => $"imePrezime='{ImePrezime}',kontakt= '{Kontakt}',tipKlijenta='{TipKlijenta}',pol='{Pol}',idMesto='{IdMesto}'";
 
         public object PrimaryKey => "idKlijent";
 

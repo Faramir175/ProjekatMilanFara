@@ -41,6 +41,8 @@ namespace Broker.Broker
         {
             SqlCommand cmd = DbBroker.Instance.GetConnection().GetCommand();
             cmd.CommandText = $"update {entity.NazivTabele} set {entity.UpdateVrednost} where {entity.PrimaryKey}='{id}'";
+            Debug.WriteLine(cmd.CommandText);
+
             cmd.ExecuteNonQuery();
         }
 

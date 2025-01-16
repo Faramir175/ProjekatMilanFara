@@ -127,6 +127,7 @@
             btnPromeniKlijenta.TabIndex = 7;
             btnPromeniKlijenta.Text = "Promeni klijenta";
             btnPromeniKlijenta.UseVisualStyleBackColor = true;
+            btnPromeniKlijenta.Click += btnPromeniKlijenta_Click;
             // 
             // btnObrisiKlijenta
             // 

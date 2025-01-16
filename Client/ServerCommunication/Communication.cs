@@ -400,5 +400,34 @@ namespace Client.ServerCommunication
                 throw response.Exception;
             }
         }
+
+        internal Mesto VratiJednoMesto(int idMesto)
+        {
+            Request request = new Request();
+            request.Operation = Operation.VratiJednoMesto;
+            request.Object = idMesto;
+            sender.Send(request);
+
+            Response response = receiver.Receive<Response>();
+            if (response.Exception != null)
+            {
+                throw response.Exception;
+            }
+            return (Mesto)response.Result;
+        }
+
+        internal void PromeniKlijent(Klijent selektovaniKlijent)
+        {
+            Request request = new Request();
+            request.Operation = Operation.PromeniKlijent;
+            request.Object = selektovaniKlijent;
+            sender.Send(request);
+
+            Response response = receiver.Receive<Response>();
+            if (response.Exception != null)
+            {
+                throw response.Exception;
+            }
+        }
     }
 }

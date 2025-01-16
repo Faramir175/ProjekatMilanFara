@@ -192,5 +192,18 @@ namespace Server
             SystemOperationBase so = new ObrisiKlijent(klijent);
             so.Execute();
         }
+
+        internal object VratiJednoMesto(int idMesto)
+        {
+            SystemOperationBase so = new VratiJednoMesto(idMesto);
+            so.Execute();
+            return ((VratiJednoMesto)so).Result;
+        }
+
+        internal void PromeniKlijent(Klijent klijentZaPromenu)
+        {
+            SystemOperationBase so = new PromeniKlijent(klijentZaPromenu);
+            so.Execute();
+        }
     }
 }
