@@ -31,5 +31,7 @@ namespace Common.Communication
         VratiListuSviMesto,
         VratiListuKlijentKlijent,
         VratiListuKlijentMesto,
+        KreirajKlijent,
+        ObrisiKlijent,
     }
 }

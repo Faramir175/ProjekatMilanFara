@@ -1,6 +1,7 @@
 ﻿using Client.ServerCommunication;
 using Client.UserControls;
 using Common.Domain;
+using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,6 +17,7 @@ namespace Client.GuiController
         private BindingList<Klijent> klijenti;
         private List<Mesto> mesta;
         private static KlijentGuiController instance;
+        private Klijent selektovaniKlijent;
         public static KlijentGuiController Instance { get { if (instance == null) instance = new KlijentGuiController(); return instance; } }
 
         public UserControl CreateUCKlijentiOpste()
@@ -64,7 +66,6 @@ namespace Client.GuiController
         private void InitDgvColumns(DataGridView dgvStavkeRacuna)
         {
             dgvStavkeRacuna.Columns["idKlijent"].Visible = false;
-            dgvStavkeRacuna.Columns["idFrizer"].Visible = false;
             dgvStavkeRacuna.Columns["idMesto"].Visible = false;
             dgvStavkeRacuna.Columns["NazivTabele"].Visible = false;
             dgvStavkeRacuna.Columns["InsertKolone"].Visible = false;
@@ -117,6 +118,40 @@ namespace Client.GuiController
                 klijenti.Add(k);
             }
             uCKlijentiOpste.DgvKlijenti.DataSource = klijenti;
+        }
+
+        internal void DodajKlijentaEvent(UCKlijentiOpste uCKlijentiOpste)
+        {
+            UpisUKlijenta(uCKlijentiOpste, false);
+        }
+
+        internal void KrajDodajPromeniEvent(UCKlijentiOpste uCKlijentiOpste)
+        {
+            Mesto m = uCKlijentiOpste.CmbDodajMesto.SelectedItem as Mesto;
+            Klijent novKlijent = new Klijent()
+            {
+                ImePrezime = uCKlijentiOpste.TbDodajImePrezime.Text,
+                Kontakt = uCKlijentiOpste.TbDodajKontakt.Text,
+                TipKlijenta = ((int)(TipKlijentaEnum)uCKlijentiOpste.CmbDodajTipKlijenta.SelectedItem).ToString(),
+                Pol = uCKlijentiOpste.CmbDodajPol.SelectedItem.ToString(),
+                IdMesto = m.IdMesto,
+            };
+            novKlijent = Communication.Instance.KreirajKlijent(novKlijent);
+            klijenti.Add(novKlijent);
+            UpisUKlijenta(uCKlijentiOpste, true);
+        }
+
+        internal void ObrisiKlijenta(UCKlijentiOpste uCKlijentiOpste)
+        {
+            if (uCKlijentiOpste.DgvKlijenti.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Molimo vas da selektujete red za promenu.");
+                return;
+            }
+            selektovaniKlijent = (Klijent)uCKlijentiOpste.DgvKlijenti.SelectedRows[0]?.DataBoundItem;
+
+            Communication.Instance.ObrisiKlijent(selektovaniKlijent);
+            InitDgvKlijenti(uCKlijentiOpste);
         }
     }
 }

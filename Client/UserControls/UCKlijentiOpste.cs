@@ -28,5 +28,20 @@ namespace Client.UserControls
             KlijentGuiController.Instance.FiltrirajKlijentaMesto(this);
 
         }
+
+        private void btnDodajKlijenta_Click(object sender, EventArgs e)
+        {
+            KlijentGuiController.Instance.DodajKlijentaEvent(this);
+        }
+
+        private void btnKrajUnosaKlijenta_Click(object sender, EventArgs e)
+        {
+            KlijentGuiController.Instance.KrajDodajPromeniEvent(this);
+        }
+
+        private void btnObrisiKlijenta_Click(object sender, EventArgs e)
+        {
+            KlijentGuiController.Instance.ObrisiKlijenta(this);
+        }
     }
 }

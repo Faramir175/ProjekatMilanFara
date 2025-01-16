@@ -33,6 +33,7 @@ namespace Broker.Broker
         {
             SqlCommand cmd = DbBroker.Instance.GetConnection().GetCommand();
             cmd.CommandText = $"insert into {entity.NazivTabele} ({entity.InsertKolone}) values ({entity.InsertVrednosti})";
+            Debug.WriteLine(cmd.CommandText);
             cmd.ExecuteNonQuery();
         }
 

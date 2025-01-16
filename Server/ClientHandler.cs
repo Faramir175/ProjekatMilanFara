@@ -124,6 +124,12 @@ namespace Server
                     case Operation.VratiListuKlijentMesto:
                         response.Result = Controller.Instance.VratiListuKlijent((Mesto)request.Object);
                         break;
+                    case Operation.KreirajKlijent:
+                        response.Result = Controller.Instance.KreirajKlijent((Klijent)request.Object);
+                        break;
+                    case Operation.ObrisiKlijent:
+                        Controller.Instance.ObrisiKlijent((Klijent)request.Object);
+                        break;
                 }
             }
             catch (Exception ex)

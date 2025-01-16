@@ -179,5 +179,18 @@ namespace Server
             so.Execute();
             return ((VratiListuKlijentKriterijumMesto)so).Result;
         }
+
+        internal object KreirajKlijent(Klijent klijent)
+        {
+            SystemOperationBase so = new KreirajKlijent(klijent);
+            so.Execute();
+            return ((KreirajKlijent)so).Result;
+        }
+
+        internal void ObrisiKlijent(Klijent klijent)
+        {
+            SystemOperationBase so = new ObrisiKlijent(klijent);
+            so.Execute();
+        }
     }
 }

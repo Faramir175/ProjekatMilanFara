@@ -371,5 +371,34 @@ namespace Client.ServerCommunication
             }
             return (List<Klijent>)response.Result;
         }
+
+        internal Klijent KreirajKlijent(Klijent novKlijent)
+        {
+            Request request = new Request();
+            request.Operation = Operation.KreirajKlijent;
+            request.Object = novKlijent;
+            sender.Send(request);
+
+            Response response = receiver.Receive<Response>();
+            if (response.Exception != null)
+            {
+                throw response.Exception;
+            }
+            return (Klijent)response.Result;
+        }
+
+        internal void ObrisiKlijent(Klijent selektovaniKlijent)
+        {
+            Request request = new Request();
+            request.Operation = Operation.ObrisiKlijent;
+            request.Object = selektovaniKlijent;
+            sender.Send(request);
+
+            Response response = receiver.Receive<Response>();
+            if (response.Exception != null)
+            {
+                throw response.Exception;
+            }
+        }
     }
 }

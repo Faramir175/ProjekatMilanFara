@@ -12,7 +12,6 @@ namespace Common.Domain
     public class Klijent : IEntity
     {
         public int IdKlijent { get; set; }
-        public int IdFrizer { get; set; }
         public string ImePrezime { get; set; }
         public string Kontakt { get; set; }
         public string TipKlijenta { get; set; }

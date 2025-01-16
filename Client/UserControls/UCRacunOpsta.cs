@@ -53,7 +53,6 @@ namespace Client.UserControls
         private void cmbUsluga_SelectionChangeCommitted(object sender, EventArgs e)
         {
             RacunGuiController.Instance.FiltrirajUsluga(this);
-
         }
 
         private void tbCenaRacuna_TextChanged(object sender, EventArgs e)

@@ -117,6 +117,7 @@
             btnDodajKlijenta.TabIndex = 6;
             btnDodajKlijenta.Text = "Dodaj klijenta";
             btnDodajKlijenta.UseVisualStyleBackColor = true;
+            btnDodajKlijenta.Click += btnDodajKlijenta_Click;
             // 
             // btnPromeniKlijenta
             // 
@@ -135,6 +136,7 @@
             btnObrisiKlijenta.TabIndex = 8;
             btnObrisiKlijenta.Text = "Obrisi klijenta";
             btnObrisiKlijenta.UseVisualStyleBackColor = true;
+            btnObrisiKlijenta.Click += btnObrisiKlijenta_Click;
             // 
             // lblDodajImePrezime
             // 
@@ -219,6 +221,7 @@
             btnKrajUnosaKlijenta.TabIndex = 21;
             btnKrajUnosaKlijenta.Text = "Kraj unosa";
             btnKrajUnosaKlijenta.UseVisualStyleBackColor = true;
+            btnKrajUnosaKlijenta.Click += btnKrajUnosaKlijenta_Click;
             // 
             // tbDodajKontakt
             // 
