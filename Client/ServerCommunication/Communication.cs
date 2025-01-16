@@ -312,5 +312,34 @@ namespace Client.ServerCommunication
             }
             return (Racun)response.Result;
         }
+
+        internal Klijent PretraziKlijent(Klijent klijent)
+        {
+            Request request = new Request();
+            request.Operation = Operation.PretraziKlijent;
+            request.Object = klijent;
+            sender.Send(request);
+
+            Response response = receiver.Receive<Response>();
+            if (response.Exception != null)
+            {
+                throw response.Exception;
+            }
+            return (Klijent)response.Result;
+        }
+
+        internal List<Mesto> VratiListuSviMesto()
+        {
+            Request request = new Request();
+            request.Operation = Operation.VratiListuSviMesto;
+            sender.Send(request);
+
+            Response response = receiver.Receive<Response>();
+            if (response.Exception != null)
+            {
+                throw response.Exception;
+            }
+            return (List<Mesto>)response.Result;
+        }
     }
 }

@@ -303,5 +303,58 @@
         private Button btnKrajUnosaKlijenta;
         private TextBox tbDodajKontakt;
         private TextBox tbDodajImePrezime;
+
+        public DataGridView DgvKlijenti
+        {
+            get { return dgvKlijenti; }
+        }
+        public ComboBox CmbMesto
+        {
+            get { return cmbMesto; }
+        }
+        public ComboBox CmbDodajMesto
+        {
+            get { return cmbDodajMesto; }
+        }
+        public ComboBox CmbDodajPol
+        {
+            get { return cmbDodajPol; }
+        }
+        public ComboBox CmbDodajTipKlijenta
+        {
+            get { return cmbDodajTipKlijenta; }
+        }
+        public Label LblDodajPromeniKlijenta
+        {
+            get { return lblDodajPromeniKlijenta; }
+        }
+        public Button BtnKrajUnosaKlijenta
+        {
+            get { return btnKrajUnosaKlijenta; }
+        }
+        public TextBox TbDodajImePrezime
+        {
+            get { return tbDodajImePrezime; }
+        }
+        public TextBox TbDodajKontakt
+        {
+            get { return tbDodajKontakt; }
+        }
+        public TextBox TbImePrezime
+        {
+            get { return tbImePrezime; }
+        }
+        public Button BtnDodajKlijenta
+        {
+            get { return btnDodajKlijenta; }
+        }
+        public Button BtnObrisiKlijenta
+        {
+            get { return btnObrisiKlijenta; }
+        }
+        public Button BtnPromeniKlijenta
+        {
+            get { return btnPromeniKlijenta; }
+        }
     }
 }

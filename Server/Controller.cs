@@ -150,5 +150,19 @@ namespace Server
             so.Execute();
             return ((PretraziRacun)so).Result;
         }
+
+        internal object PretraziKlijent(Klijent klijent)
+        {
+            SystemOperationBase so = new PretraziKlijent(klijent);
+            so.Execute();
+            return ((PretraziKlijent)so).Result;
+        }
+
+        internal object VratiListuSviMesto()
+        {
+            SystemOperationBase so = new VratiListuSviMesto();
+            so.Execute();
+            return ((VratiListuSviMesto)so).Result;
+        }
     }
 }

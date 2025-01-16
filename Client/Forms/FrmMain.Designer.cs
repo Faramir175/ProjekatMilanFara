@@ -57,6 +57,7 @@
             TSMIklijent.Name = "TSMIklijent";
             TSMIklijent.Size = new Size(52, 20);
             TSMIklijent.Text = "Klijent";
+            TSMIklijent.Click += TSMIklijent_Click;
             // 
             // TSMIkvalifikacija
             // 
