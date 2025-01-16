@@ -282,5 +282,35 @@ namespace Client.ServerCommunication
             }
             return (List<Racun>)response.Result;
         }
+
+        internal Klijent VratiJednogKlijenta(int idKlijent)
+        {
+            Request request = new Request();
+            request.Operation = Operation.VratiJednogKlijenta;
+            request.Object = idKlijent;
+            sender.Send(request);
+
+            Response response = receiver.Receive<Response>();
+            if (response.Exception != null)
+            {
+                throw response.Exception;
+            }
+            return (Klijent)response.Result;
+        }
+
+        internal Racun PretraziRacun(Racun selektovaniRacun)
+        {
+            Request request = new Request();
+            request.Operation = Operation.PretraziRacun;
+            request.Object = selektovaniRacun;
+            sender.Send(request);
+
+            Response response = receiver.Receive<Response>();
+            if (response.Exception != null)
+            {
+                throw response.Exception;
+            }
+            return (Racun)response.Result;
+        }
     }
 }

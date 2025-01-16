@@ -136,5 +136,19 @@ namespace Server
             so.Execute();
             return ((VratiListuRacunKriterijumRacun)so).Result;
         }
+
+        internal object VratiJednogKlijenta(int idKlijent)
+        {
+            SystemOperationBase so = new VratiJednogKlijenta(idKlijent);
+            so.Execute();
+            return ((VratiJednogKlijenta)so).Result;
+        }
+
+        internal object PretraziRacun(Racun racun)
+        {
+            SystemOperationBase so = new PretraziRacun(racun);
+            so.Execute();
+            return ((PretraziRacun)so).Result;
+        }
     }
 }

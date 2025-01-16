@@ -103,6 +103,12 @@ namespace Server
                     case Operation.VratiListuRacunRacun:
                         response.Result = Controller.Instance.VratiListuRacun((double)request.Object);
                         break;
+                    case Operation.VratiJednogKlijenta:
+                        response.Result = Controller.Instance.VratiJednogKlijenta((int)request.Object);
+                        break;
+                    case Operation.PretraziRacun:
+                        response.Result = Controller.Instance.PretraziRacun((Racun)request.Object);
+                        break;
                     default:
                         response.Exception = new Exception("Operation is not implemented!");
                     break;

@@ -25,5 +25,7 @@ namespace Common.Communication
         VratiListuRacunUsluga,
         VratiListuRacunFrizer,
         VratiListuRacunRacun,
+        VratiJednogKlijenta,
+        PretraziRacun,
     }
 }

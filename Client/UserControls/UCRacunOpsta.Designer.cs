@@ -83,9 +83,9 @@
             // 
             // btnUnosNovogRacuna
             // 
-            btnUnosNovogRacuna.Location = new Point(608, 229);
+            btnUnosNovogRacuna.Location = new Point(625, 230);
             btnUnosNovogRacuna.Name = "btnUnosNovogRacuna";
-            btnUnosNovogRacuna.Size = new Size(99, 47);
+            btnUnosNovogRacuna.Size = new Size(99, 55);
             btnUnosNovogRacuna.TabIndex = 4;
             btnUnosNovogRacuna.Text = "Unos novog racuna";
             btnUnosNovogRacuna.UseVisualStyleBackColor = true;
@@ -95,7 +95,7 @@
             // 
             btnPromeniRacun.Location = new Point(755, 230);
             btnPromeniRacun.Name = "btnPromeniRacun";
-            btnPromeniRacun.Size = new Size(96, 46);
+            btnPromeniRacun.Size = new Size(96, 55);
             btnPromeniRacun.TabIndex = 5;
             btnPromeniRacun.Text = "Promeni racun";
             btnPromeniRacun.UseVisualStyleBackColor = true;

@@ -59,7 +59,19 @@ namespace Common.Domain
 
         public IEntity GetEntity(SqlDataReader reader)
         {
-            throw new NotImplementedException();
+            IEntity racuni = new Racun();
+            while (reader.Read())
+            {
+                Racun racun = new Racun();
+                racun.IdRacun = (int)reader["idRacun"]; ;
+                racun.Datum = (DateTime)reader["datum"];
+                racun.Popust = (int)reader["popust"];
+                racun.UkupanIznos = (double)reader["ukupanIznos"];
+                racun.IdFrizer = (int)reader["idFrizer"];
+                racun.IdKlijent = (int)reader["idKlijent"];
+                racuni = racun;
+            }
+            return racuni;
         }
 
         public List<IEntity> GetJoinEntities(SqlDataReader reader)

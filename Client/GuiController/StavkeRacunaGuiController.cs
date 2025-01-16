@@ -44,16 +44,26 @@ namespace Client.GuiController
 
         internal void FormaZaPromenu(FrmStavkeRacuna frmStavkeRacuna,Racun selektovaniRacun, bool promena)
         {
-            frmStavkeRacuna = new FrmStavkeRacuna();
-            pr = promena;
-            racunZaPromenu = selektovaniRacun;
-            frmStavkeRacuna.AutoSize = true;
-            InitUslugaCmb(frmStavkeRacuna);
-            InitKlijentCmb(frmStavkeRacuna);
-            InitCenaLbl(frmStavkeRacuna);
-            UpisURacun(frmStavkeRacuna, true);
-            InitStavkeRacunaDgv(frmStavkeRacuna,selektovaniRacun);
-            frmStavkeRacuna.ShowDialog();
+            Racun proverenRacun = null;
+            proverenRacun = Communication.Instance.PretraziRacun(selektovaniRacun);
+            if (proverenRacun!=null)
+            {
+                frmStavkeRacuna = new FrmStavkeRacuna();
+                pr = promena;
+                frmStavkeRacuna.AutoSize = true;
+                frmStavkeRacuna.CmbKlijent.ValueMember = "ImePrezime";
+                InitUslugaCmb(frmStavkeRacuna);
+                InitKlijentCmb(frmStavkeRacuna);
+                InitCenaLbl(frmStavkeRacuna);
+                UpisURacun(frmStavkeRacuna, true);
+                InitStavkeRacunaDgv(frmStavkeRacuna,selektovaniRacun);
+                frmStavkeRacuna.DtpDatum.Text = selektovaniRacun.Datum.ToString();
+                frmStavkeRacuna.LblUkupanIznos.Text = selektovaniRacun.UkupanIznos.ToString();
+                frmStavkeRacuna.LblPopust.Text = selektovaniRacun.Popust.ToString();
+                Klijent k = Communication.Instance.VratiJednogKlijenta(selektovaniRacun.IdKlijent);
+                frmStavkeRacuna.CmbKlijent.SelectedValue = k.ImePrezime;
+                frmStavkeRacuna.ShowDialog();
+            }
         }
 
         internal void InitCenaLbl(FrmStavkeRacuna frmStavkeRacuna)
