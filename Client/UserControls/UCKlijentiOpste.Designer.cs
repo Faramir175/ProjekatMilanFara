@@ -98,6 +98,7 @@
             tbImePrezime.Name = "tbImePrezime";
             tbImePrezime.Size = new Size(190, 23);
             tbImePrezime.TabIndex = 4;
+            tbImePrezime.TextChanged += tbImePrezime_TextChanged;
             // 
             // cmbMesto
             // 
@@ -106,6 +107,7 @@
             cmbMesto.Name = "cmbMesto";
             cmbMesto.Size = new Size(190, 23);
             cmbMesto.TabIndex = 5;
+            cmbMesto.SelectionChangeCommitted += cmbMesto_SelectionChangeCommitted;
             // 
             // btnDodajKlijenta
             // 

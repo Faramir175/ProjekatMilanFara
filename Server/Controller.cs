@@ -8,6 +8,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
 
 namespace Server
 {
@@ -163,6 +164,20 @@ namespace Server
             SystemOperationBase so = new VratiListuSviMesto();
             so.Execute();
             return ((VratiListuSviMesto)so).Result;
+        }
+
+        internal object VratiListuKlijent(string ime)
+        {
+            SystemOperationBase so = new VratiListuKlijentKriterijumKlijent(ime);
+            so.Execute();
+            return ((VratiListuKlijentKriterijumKlijent)so).Result;
+        }
+
+        internal object VratiListuKlijent(Mesto mesto)
+        {
+            SystemOperationBase so = new VratiListuKlijentKriterijumMesto(mesto);
+            so.Execute();
+            return ((VratiListuKlijentKriterijumMesto)so).Result;
         }
     }
 }

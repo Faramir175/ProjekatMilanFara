@@ -93,5 +93,30 @@ namespace Client.GuiController
             ucKlijent.TbDodajKontakt.Enabled = !uslov;
 
         }
+
+        internal void FiltrirajKlijentaIme(UCKlijentiOpste uCKlijentiOpste)
+        {
+            klijenti = new BindingList<Klijent>();
+            string imeZaFiltriranje ;
+            imeZaFiltriranje=uCKlijentiOpste.TbImePrezime.Text.ToString();
+            List<Klijent> listaklijenata = Communication.Instance.VratiListuKlijent(imeZaFiltriranje);
+            foreach (Klijent k in listaklijenata)
+            {
+                klijenti.Add(k);
+            }
+            uCKlijentiOpste.DgvKlijenti.DataSource = klijenti;
+        }
+
+        internal void FiltrirajKlijentaMesto(UCKlijentiOpste uCKlijentiOpste)
+        {
+            klijenti = new BindingList<Klijent>();
+            Mesto mestoZafiltriranje = (Mesto)uCKlijentiOpste.CmbMesto.SelectedItem;
+            List<Klijent> listaklijenta = Communication.Instance.VratiListuKlijent(mestoZafiltriranje);
+            foreach (Klijent k in listaklijenta)
+            {
+                klijenti.Add(k);
+            }
+            uCKlijentiOpste.DgvKlijenti.DataSource = klijenti;
+        }
     }
 }

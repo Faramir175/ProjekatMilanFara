@@ -341,5 +341,35 @@ namespace Client.ServerCommunication
             }
             return (List<Mesto>)response.Result;
         }
+
+        internal List<Klijent> VratiListuKlijent(string imeZaFiltriranje)
+        {
+            Request request = new Request();
+            request.Operation = Operation.VratiListuKlijentKlijent;
+            request.Object = imeZaFiltriranje;
+            sender.Send(request);
+
+            Response response = receiver.Receive<Response>();
+            if (response.Exception != null)
+            {
+                throw response.Exception;
+            }
+            return (List<Klijent>)response.Result;
+        }
+
+        internal List<Klijent> VratiListuKlijent(Mesto mestoZafiltriranje)
+        {
+            Request request = new Request();
+            request.Operation = Operation.VratiListuKlijentMesto;
+            request.Object = mestoZafiltriranje;
+            sender.Send(request);
+
+            Response response = receiver.Receive<Response>();
+            if (response.Exception != null)
+            {
+                throw response.Exception;
+            }
+            return (List<Klijent>)response.Result;
+        }
     }
 }

@@ -35,7 +35,7 @@ namespace Common.Domain
 
         public string Criteria => throw new NotImplementedException();
 
-        public string Search => throw new NotImplementedException();
+        public string Search => "imePrezime";
 
         public List<IEntity> GetEntities(SqlDataReader reader)
         {

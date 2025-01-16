@@ -118,6 +118,12 @@ namespace Server
                     default:
                         response.Exception = new Exception("Operation is not implemented!");
                     break;
+                    case Operation.VratiListuKlijentKlijent:
+                        response.Result = Controller.Instance.VratiListuKlijent((string)request.Object);
+                        break;
+                    case Operation.VratiListuKlijentMesto:
+                        response.Result = Controller.Instance.VratiListuKlijent((Mesto)request.Object);
+                        break;
                 }
             }
             catch (Exception ex)

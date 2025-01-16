@@ -29,5 +29,7 @@ namespace Common.Communication
         PretraziRacun,
         PretraziKlijent,
         VratiListuSviMesto,
+        VratiListuKlijentKlijent,
+        VratiListuKlijentMesto,
     }
 }

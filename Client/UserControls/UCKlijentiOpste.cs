@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Client.GuiController;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +16,17 @@ namespace Client.UserControls
         public UCKlijentiOpste()
         {
             InitializeComponent();
+        }
+
+        private void tbImePrezime_TextChanged(object sender, EventArgs e)
+        {
+            KlijentGuiController.Instance.FiltrirajKlijentaIme(this);
+        }
+
+        private void cmbMesto_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            KlijentGuiController.Instance.FiltrirajKlijentaMesto(this);
+
         }
     }
 }
