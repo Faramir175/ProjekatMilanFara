@@ -18,6 +18,7 @@ namespace Client.GuiController
         private List<Klijent> klijenti;
         private List<Usluga> usluge;
         private BindingList<StavkaRacuna> stavke;
+        private Racun proverenRacun;
         public static StavkeRacunaGuiController Instance {
             get 
             { 
@@ -44,7 +45,7 @@ namespace Client.GuiController
 
         internal void FormaZaPromenu(FrmStavkeRacuna frmStavkeRacuna,Racun selektovaniRacun, bool promena)
         {
-            Racun proverenRacun = null;
+            proverenRacun = null;
             proverenRacun = Communication.Instance.PretraziRacun(selektovaniRacun);
             if (proverenRacun!=null)
             {
@@ -235,12 +236,14 @@ namespace Client.GuiController
             }
             else
             {
-            racunZaPromenu.Datum = frmStavkeRacuna.DtpDatum.Value;
-            racunZaPromenu.Popust = (int)double.Parse(frmStavkeRacuna.LblPopust.Text);
-            racunZaPromenu.UkupanIznos = double.Parse(frmStavkeRacuna.LblUkupanIznos.Text);
-            racunZaPromenu.IdKlijent = k.IdKlijent;
-            racunZaPromenu.IdFrizer = MainGuiController.Instance.logedUser.IdFrizer;
-            PromenaRacuna(racunZaPromenu);
+                Racun racunZaPromenu = new Racun();
+                racunZaPromenu.Datum = frmStavkeRacuna.DtpDatum.Value;
+                racunZaPromenu.Popust = (int)double.Parse(frmStavkeRacuna.LblPopust.Text);
+                racunZaPromenu.UkupanIznos = double.Parse(frmStavkeRacuna.LblUkupanIznos.Text);
+                racunZaPromenu.IdKlijent = k.IdKlijent;
+                racunZaPromenu.IdFrizer = MainGuiController.Instance.logedUser.IdFrizer;
+                racunZaPromenu.IdRacun = proverenRacun.IdRacun;
+                PromenaRacuna(racunZaPromenu);
             }
             RacunGuiController.Instance.InitDgvRacun();
             frmStavkeRacuna.Close();
