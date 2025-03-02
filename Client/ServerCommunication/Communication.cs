@@ -139,20 +139,6 @@ namespace Client.ServerCommunication
             return (Racun)response.Result;
         }
 
-        internal void KreirajStavke(StavkaRacuna stavka)
-        {
-            Request request = new Request();
-            request.Operation = Operation.KreirajStavke;
-            request.Object = stavka;
-            sender.Send(request);
-
-            Response response = receiver.Receive<Response>();
-            if (response.Exception != null)
-            {
-                throw response.Exception;
-            }
-        }
-
         internal void PromeniStavkeRacuna(StavkaRacuna s)
         {
             Request request = new Request();

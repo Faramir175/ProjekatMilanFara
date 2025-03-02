@@ -20,6 +20,7 @@ namespace Common.Domain
         public int Cena { get; set; }
         public int IdUsluga { get; set; }
         public string NazivUsluga { get; set; }
+        public Racun Racun { get; set; }
 
         public string NazivTabele => "StavkaRacuna";
 

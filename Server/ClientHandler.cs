@@ -73,9 +73,6 @@ namespace Server
                     case Operation.KreirajRacun:
                         response.Result = Controller.Instance.KreirajRacun((Racun)request.Object);
                         break;
-                    case Operation.KreirajStavke:
-                        Controller.Instance.KreirajStavke((StavkaRacuna)request.Object);
-                        break;
                     case Operation.PromeniStavkeRacuna:
                         Controller.Instance.PromeniStavkeRacuna((StavkaRacuna)request.Object);
                         break;

@@ -24,7 +24,13 @@ namespace SysOp
             broker.Add(racun);
             racun.IdRacun = (int)broker.GetMaxId(new Racun());
             Debug.WriteLine(racun.IdRacun);
+            foreach (StavkaRacuna s in racun.StavkeRacuna)
+            {
+                s.IdRacun = racun.IdRacun;
+                broker.Add(s);
+            }
             Result = racun;
+
         }
     }
 }

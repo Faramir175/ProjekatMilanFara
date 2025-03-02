@@ -1,6 +1,8 @@
 ﻿using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.Intrinsics.X86;
 using System.Text;
@@ -20,6 +22,8 @@ namespace Common.Domain
         public int IdKlijent { get; set; }
         public string KlijentImePrezime { get; set; }
         public string FrizerImePrezime { get; set; }
+
+        public BindingList<StavkaRacuna> StavkeRacuna { get; set; } = new BindingList<StavkaRacuna>();
 
         public string NazivTabele => "Racun";
 

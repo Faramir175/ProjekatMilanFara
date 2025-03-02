@@ -19,14 +19,15 @@ namespace Client.GuiController
         private List<Usluga> usluge;
         private BindingList<StavkaRacuna> stavke;
         private Racun proverenRacun;
-        public static StavkeRacunaGuiController Instance {
-            get 
-            { 
+        public static StavkeRacunaGuiController Instance
+        {
+            get
+            {
                 if (instance == null) instance = new StavkeRacunaGuiController();
-                return instance; 
-            } 
+                return instance;
+            }
         }
-        private bool pr=false;
+        private bool pr = false;
         private Racun racunZaPromenu;
 
         internal void FormaZaUnos(FrmStavkeRacuna frmStavkeRacuna)
@@ -43,11 +44,11 @@ namespace Client.GuiController
             frmStavkeRacuna.ShowDialog();
         }
 
-        internal void FormaZaPromenu(FrmStavkeRacuna frmStavkeRacuna,Racun selektovaniRacun, bool promena)
+        internal void FormaZaPromenu(FrmStavkeRacuna frmStavkeRacuna, Racun selektovaniRacun, bool promena)
         {
             proverenRacun = null;
             proverenRacun = Communication.Instance.PretraziRacun(selektovaniRacun);
-            if (proverenRacun!=null)
+            if (proverenRacun != null)
             {
                 frmStavkeRacuna = new FrmStavkeRacuna();
                 pr = promena;
@@ -57,7 +58,7 @@ namespace Client.GuiController
                 InitKlijentCmb(frmStavkeRacuna);
                 InitCenaLbl(frmStavkeRacuna);
                 UpisURacun(frmStavkeRacuna, true);
-                InitStavkeRacunaDgv(frmStavkeRacuna,selektovaniRacun);
+                InitStavkeRacunaDgv(frmStavkeRacuna, selektovaniRacun);
                 frmStavkeRacuna.DtpDatum.Text = selektovaniRacun.Datum.ToString();
                 frmStavkeRacuna.LblUkupanIznos.Text = selektovaniRacun.UkupanIznos.ToString();
                 frmStavkeRacuna.LblPopust.Text = selektovaniRacun.Popust.ToString();
@@ -123,7 +124,7 @@ namespace Client.GuiController
             frmStavkeRacuna.LblNaslov.Enabled = !uslov;
             frmStavkeRacuna.LblCena.Enabled = !uslov;
             frmStavkeRacuna.BtnIzbaci.Enabled = !uslov;
-            frmStavkeRacuna.TbKolicina.Enabled = !uslov; 
+            frmStavkeRacuna.TbKolicina.Enabled = !uslov;
             frmStavkeRacuna.CmbUsluga.Enabled = !uslov;
 
         }
@@ -153,7 +154,7 @@ namespace Client.GuiController
                 IdUsluga = u.IdUsluga,
                 NazivUsluga = u.Naziv
             };
-            
+
             stavke.Add(novaStavka);
         }
 
@@ -191,10 +192,11 @@ namespace Client.GuiController
             double popust = double.Parse(frmStavkeRacuna.LblPopust.Text);
             double uIznos = 0;
             if (stavke != null)
-            {foreach (StavkaRacuna st in stavke)
             {
-                uIznos += (double)st.Iznos;
-            }
+                foreach (StavkaRacuna st in stavke)
+                {
+                    uIznos += (double)st.Iznos;
+                }
                 switch (popust)
                 {
                     case 0:
@@ -219,20 +221,20 @@ namespace Client.GuiController
         internal void KrajUnosaEvent(FrmStavkeRacuna frmStavkeRacuna)
         {
             Klijent k = (Klijent)frmStavkeRacuna.CmbKlijent.SelectedItem;
-            if (!pr) {
-            Racun racunZaBazu = new Racun();
-
-            racunZaBazu.Datum = frmStavkeRacuna.DtpDatum.Value;
-            racunZaBazu.Popust = (int)double.Parse(frmStavkeRacuna.LblPopust.Text);
-            racunZaBazu.UkupanIznos = double.Parse(frmStavkeRacuna.LblUkupanIznos.Text);
-            racunZaBazu.IdKlijent = k.IdKlijent;
-            racunZaBazu.IdFrizer = MainGuiController.Instance.logedUser.IdFrizer;
-            racunZaBazu = UpisRacunaUBazu(frmStavkeRacuna, racunZaBazu);
-            foreach (StavkaRacuna s in stavke)
+            if (!pr)
             {
-                s.IdRacun = racunZaBazu.IdRacun;
-            }
-            UpisStavkiRacunaUBazu(frmStavkeRacuna,stavke);
+                Racun racunZaBazu = new Racun();
+
+                racunZaBazu.Datum = frmStavkeRacuna.DtpDatum.Value;
+                racunZaBazu.Popust = (int)double.Parse(frmStavkeRacuna.LblPopust.Text);
+                racunZaBazu.UkupanIznos = double.Parse(frmStavkeRacuna.LblUkupanIznos.Text);
+                racunZaBazu.IdKlijent = k.IdKlijent;
+                racunZaBazu.IdFrizer = MainGuiController.Instance.logedUser.IdFrizer;
+                foreach (StavkaRacuna s in stavke)
+                {
+                    racunZaBazu.StavkeRacuna.Add(s);
+                }
+                racunZaBazu = UpisRacunaUBazu(frmStavkeRacuna, racunZaBazu);
             }
             else
             {
@@ -254,15 +256,7 @@ namespace Client.GuiController
             return Communication.Instance.KreirajRacun(racunZaBazu);
         }
 
-        private void UpisStavkiRacunaUBazu(FrmStavkeRacuna frmStavkeRacuna, BindingList<StavkaRacuna> stavke)
-        {
-            foreach (StavkaRacuna stavka in stavke)
-            {
-                Communication.Instance.KreirajStavke(stavka); 
-            }
-        }
-
-        private void PromenaRacuna( Racun selektovaniRacun)
+        private void PromenaRacuna(Racun selektovaniRacun)
         {
             Communication.Instance.PromeniRacun(selektovaniRacun);
         }

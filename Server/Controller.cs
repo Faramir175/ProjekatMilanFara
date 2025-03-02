@@ -73,11 +73,6 @@ namespace Server
             return ((KreirajRacun)so).Result;
         }
 
-        internal void KreirajStavke(StavkaRacuna stavka)
-        {
-            SystemOperationBase so = new KreirajStavke(stavka);
-            so.Execute();
-        }
 
         internal void PromeniStavkeRacuna(StavkaRacuna stavka)
         {
