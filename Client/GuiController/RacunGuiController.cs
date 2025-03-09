@@ -125,6 +125,7 @@ namespace Client.GuiController
             List<Racun> listaRacuna = Communication.Instance.VratiListuRacun(klijentZaFiltriranje);
             InitCmbKlijent();
             InitCmbFrizer();
+            ucRacunView.CmbKlijent.SelectedItem = klijenti.FirstOrDefault(k => k.IdKlijent == klijentZaFiltriranje?.IdKlijent);
             foreach (Racun r in listaRacuna)
             {
                 foreach (Klijent klijent in klijenti)
@@ -144,7 +145,6 @@ namespace Client.GuiController
                 racuni.Add(r);
             }
             ucRacunView.DgvRacuni.DataSource = racuni;
-
         }
 
         internal void FiltrirajFrizer(UCRacunOpsta uCRacunOpsta)
@@ -154,6 +154,7 @@ namespace Client.GuiController
             List<Racun> listaRacuna = Communication.Instance.VratiListuRacun(frizerZaFiltriranje);
             InitCmbFrizer();
             InitCmbKlijent();
+            ucRacunView.CmbFrizer.SelectedItem = frizeri.FirstOrDefault(k => k.IdFrizer == frizerZaFiltriranje?.IdFrizer);
             foreach (Racun r in listaRacuna)
             {
                 foreach (Klijent klijent in klijenti)
@@ -182,7 +183,6 @@ namespace Client.GuiController
             List<Racun> listaracuna = Communication.Instance.VratiListuRacun(uslugazafiltriranje);
             InitCmbFrizer();
             InitCmbKlijent();
-            InitCmbUsluga();
             foreach (Racun r in listaracuna)
             {
                 foreach (Klijent klijent in klijenti)
@@ -202,6 +202,7 @@ namespace Client.GuiController
                 racuni.Add(r);
             }
             ucRacunView.DgvRacuni.DataSource = racuni;
+
         }
 
         internal void FiltrirajCenaRacun(UCRacunOpsta uCRacunOpsta)
@@ -231,6 +232,7 @@ namespace Client.GuiController
                 racuni.Add(r);
             }
             ucRacunView.DgvRacuni.DataSource = racuni;
+            ucRacunView.TbCenaRacuna.Text = cenaZaFiltriranje.ToString();
         }
     }
 }
