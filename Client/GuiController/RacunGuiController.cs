@@ -122,9 +122,11 @@ namespace Client.GuiController
         {
             racuni = new BindingList<Racun>();
             Klijent klijentZaFiltriranje = (Klijent)uCRacunOpsta.CmbKlijent.SelectedItem;
+            Frizer frizerZaFiltriranje = (Frizer)uCRacunOpsta.CmbFrizer.SelectedItem;
             List<Racun> listaRacuna = Communication.Instance.VratiListuRacun(klijentZaFiltriranje);
             InitCmbKlijent();
             InitCmbFrizer();
+            ucRacunView.CmbFrizer.SelectedItem = frizeri.FirstOrDefault(k => k.IdFrizer == frizerZaFiltriranje?.IdFrizer);
             ucRacunView.CmbKlijent.SelectedItem = klijenti.FirstOrDefault(k => k.IdKlijent == klijentZaFiltriranje?.IdKlijent);
             foreach (Racun r in listaRacuna)
             {
@@ -151,9 +153,11 @@ namespace Client.GuiController
         {
             racuni = new BindingList<Racun>();
             Frizer frizerZaFiltriranje = (Frizer)uCRacunOpsta.CmbFrizer.SelectedItem;
+            Klijent klijentZaFiltriranje = (Klijent)uCRacunOpsta.CmbKlijent.SelectedItem;
             List<Racun> listaRacuna = Communication.Instance.VratiListuRacun(frizerZaFiltriranje);
             InitCmbFrizer();
             InitCmbKlijent();
+            ucRacunView.CmbKlijent.SelectedItem = klijenti.FirstOrDefault(k => k.IdKlijent == klijentZaFiltriranje?.IdKlijent);
             ucRacunView.CmbFrizer.SelectedItem = frizeri.FirstOrDefault(k => k.IdFrizer == frizerZaFiltriranje?.IdFrizer);
             foreach (Racun r in listaRacuna)
             {
@@ -180,9 +184,13 @@ namespace Client.GuiController
         {
             racuni = new BindingList<Racun>();
             Usluga uslugazafiltriranje = (Usluga)uCRacunOpsta.CmbUsluga.SelectedItem;
+            Frizer frizerZaFiltriranje = (Frizer)uCRacunOpsta.CmbFrizer.SelectedItem;
+            Klijent klijentZaFiltriranje = (Klijent)uCRacunOpsta.CmbKlijent.SelectedItem;
             List<Racun> listaracuna = Communication.Instance.VratiListuRacun(uslugazafiltriranje);
             InitCmbFrizer();
             InitCmbKlijent();
+            ucRacunView.CmbKlijent.SelectedItem = klijenti.FirstOrDefault(k => k.IdKlijent == klijentZaFiltriranje?.IdKlijent);
+            ucRacunView.CmbFrizer.SelectedItem = frizeri.FirstOrDefault(k => k.IdFrizer == frizerZaFiltriranje?.IdFrizer);
             foreach (Racun r in listaracuna)
             {
                 foreach (Klijent klijent in klijenti)
