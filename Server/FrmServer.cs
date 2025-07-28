@@ -14,6 +14,7 @@ namespace Server
             server.Stop();
             btnServerStop.Enabled = false;
             btnServerStart.Enabled = true;
+            lblServer.Text = "Server nije pokrenut";
             server.Listen();
         }
 
@@ -23,6 +24,7 @@ namespace Server
             server.Start();
             btnServerStop.Enabled=true;
             btnServerStart.Enabled=false;
+            lblServer.Text = "Server je pokrenut";
         }
     }
 }

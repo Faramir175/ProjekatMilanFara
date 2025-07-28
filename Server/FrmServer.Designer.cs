@@ -30,13 +30,15 @@
         {
             btnServerStop = new Button();
             btnServerStart = new Button();
+            lblServer = new Label();
             SuspendLayout();
             // 
             // btnServerStop
             // 
-            btnServerStop.Location = new Point(510, 156);
+            btnServerStop.Location = new Point(384, 106);
+            btnServerStop.Margin = new Padding(4, 5, 4, 5);
             btnServerStop.Name = "btnServerStop";
-            btnServerStop.Size = new Size(139, 106);
+            btnServerStop.Size = new Size(198, 124);
             btnServerStop.TabIndex = 0;
             btnServerStop.Text = "Zaustavi server";
             btnServerStop.UseVisualStyleBackColor = true;
@@ -44,29 +46,43 @@
             // 
             // btnServerStart
             // 
-            btnServerStart.Location = new Point(171, 156);
+            btnServerStart.Location = new Point(64, 106);
+            btnServerStart.Margin = new Padding(4, 5, 4, 5);
             btnServerStart.Name = "btnServerStart";
-            btnServerStart.Size = new Size(139, 106);
+            btnServerStart.Size = new Size(198, 124);
             btnServerStart.TabIndex = 1;
             btnServerStart.Text = "Pokreni server";
             btnServerStart.UseVisualStyleBackColor = true;
             btnServerStart.Click += btnServerStart_Click;
             // 
+            // lblServer
+            // 
+            lblServer.AutoSize = true;
+            lblServer.Location = new Point(240, 293);
+            lblServer.Name = "lblServer";
+            lblServer.Size = new Size(170, 25);
+            lblServer.TabIndex = 2;
+            lblServer.Text = "Server nije pokrenut";
+            // 
             // FrmServer
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(651, 411);
+            Controls.Add(lblServer);
             Controls.Add(btnServerStart);
             Controls.Add(btnServerStop);
+            Margin = new Padding(4, 5, 4, 5);
             Name = "FrmServer";
             Text = "Server";
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
 
         private Button btnServerStop;
         private Button btnServerStart;
+        private Label lblServer;
     }
 }
