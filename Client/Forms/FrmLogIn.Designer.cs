@@ -37,9 +37,10 @@
             // 
             // btnPrijava
             // 
-            btnPrijava.Location = new Point(127, 229);
+            btnPrijava.Location = new Point(181, 382);
+            btnPrijava.Margin = new Padding(4, 5, 4, 5);
             btnPrijava.Name = "btnPrijava";
-            btnPrijava.Size = new Size(116, 50);
+            btnPrijava.Size = new Size(166, 83);
             btnPrijava.TabIndex = 0;
             btnPrijava.Text = "Prijava";
             btnPrijava.UseVisualStyleBackColor = true;
@@ -48,47 +49,53 @@
             // lblKorisnickoIme
             // 
             lblKorisnickoIme.AutoSize = true;
-            lblKorisnickoIme.Location = new Point(25, 74);
+            lblKorisnickoIme.Location = new Point(36, 123);
+            lblKorisnickoIme.Margin = new Padding(4, 0, 4, 0);
             lblKorisnickoIme.Name = "lblKorisnickoIme";
-            lblKorisnickoIme.Size = new Size(85, 15);
+            lblKorisnickoIme.Size = new Size(127, 25);
             lblKorisnickoIme.TabIndex = 1;
             lblKorisnickoIme.Text = "Korisnicko ime";
             // 
             // lblSifra
             // 
             lblSifra.AutoSize = true;
-            lblSifra.Location = new Point(80, 164);
+            lblSifra.Location = new Point(114, 273);
+            lblSifra.Margin = new Padding(4, 0, 4, 0);
             lblSifra.Name = "lblSifra";
-            lblSifra.Size = new Size(30, 15);
+            lblSifra.Size = new Size(47, 25);
             lblSifra.TabIndex = 2;
             lblSifra.Text = "Sifra";
             // 
             // tbUsername
             // 
-            tbUsername.Location = new Point(127, 71);
+            tbUsername.Location = new Point(181, 118);
+            tbUsername.Margin = new Padding(4, 5, 4, 5);
             tbUsername.Name = "tbUsername";
-            tbUsername.Size = new Size(116, 23);
+            tbUsername.Size = new Size(164, 31);
             tbUsername.TabIndex = 3;
             tbUsername.Text = "Zoki2015";
             // 
             // tbPassword
             // 
-            tbPassword.Location = new Point(127, 161);
+            tbPassword.Location = new Point(181, 268);
+            tbPassword.Margin = new Padding(4, 5, 4, 5);
             tbPassword.Name = "tbPassword";
-            tbPassword.Size = new Size(116, 23);
+            tbPassword.PasswordChar = '*';
+            tbPassword.Size = new Size(164, 31);
             tbPassword.TabIndex = 4;
             tbPassword.Text = "zoki2015!";
             // 
             // FrmLogIn
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(360, 321);
+            ClientSize = new Size(514, 535);
             Controls.Add(tbPassword);
             Controls.Add(tbUsername);
             Controls.Add(lblSifra);
             Controls.Add(lblKorisnickoIme);
             Controls.Add(btnPrijava);
+            Margin = new Padding(4, 5, 4, 5);
             Name = "FrmLogIn";
             Text = "Prijava frizera";
             ResumeLayout(false);

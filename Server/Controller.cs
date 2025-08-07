@@ -26,9 +26,9 @@ namespace Server
 
         internal object LoginUser(Frizer user)
         {
-            SystemOperationBase so = new LogInSysOp(user);
+            SystemOperationBase so = new PrijaviFrizer(user);
             so.Execute();
-            return ((LogInSysOp)so).Result;
+            return ((PrijaviFrizer)so).Result;
         }
 
         internal object VratiListuSviKlijent()

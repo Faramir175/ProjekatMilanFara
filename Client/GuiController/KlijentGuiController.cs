@@ -80,10 +80,10 @@ namespace Client.GuiController
 
         internal void UpisUKlijenta(UCKlijentiOpste ucKlijent, bool uslov)
         {
-            ucKlijent.TbImePrezime.Enabled = uslov;
-            ucKlijent.CmbMesto.Enabled = uslov;
+            //ucKlijent.TbImePrezime.Enabled = uslov;
+            //ucKlijent.CmbMesto.Enabled = uslov;
             ucKlijent.BtnDodajKlijenta.Enabled = uslov;
-            ucKlijent.BtnObrisiKlijenta.Enabled = uslov;
+            //ucKlijent.BtnObrisiKlijenta.Enabled = uslov;
             ucKlijent.BtnPromeniKlijenta.Enabled = uslov;
 
             ucKlijent.BtnKrajUnosaKlijenta.Enabled = !uslov;
@@ -106,6 +106,14 @@ namespace Client.GuiController
                 klijenti.Add(k);
             }
             uCKlijentiOpste.DgvKlijenti.DataSource = klijenti;
+            if(listaklijenata.Count > 0)
+            {
+                MessageBox.Show("Систем је нашао клијенте по задатим критеријумима");
+            }
+            else
+            {
+                MessageBox.Show("Систем не може да нађе клијенте по задатим критеријумима");
+            }
         }
 
         internal void FiltrirajKlijentaMesto(UCKlijentiOpste uCKlijentiOpste)
@@ -161,6 +169,19 @@ namespace Client.GuiController
 
             Communication.Instance.ObrisiKlijent(selektovaniKlijent);
             InitDgvKlijenti(uCKlijentiOpste);
+        }
+
+        internal void PretraziKlijenta(UCKlijentiOpste uCKlijentiOpste, Klijent? selektovaniKlijent)
+        {
+            Klijent provera = Communication.Instance.PretraziKlijent(selektovaniKlijent);
+            if (provera != null)
+            {
+                MessageBox.Show("Систем је нашао клијента");
+            }
+            else
+            {
+                MessageBox.Show("Систем не може да нађе клијента");
+            }
         }
 
         internal void PromenaKlijentaEvent(UCKlijentiOpste uCKlijentiOpste,Klijent selektovaniKlijent, bool promena)

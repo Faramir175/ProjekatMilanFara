@@ -50,70 +50,85 @@
             cmbDodajTipKlijenta = new ComboBox();
             cmbDodajPol = new ComboBox();
             cmbDodajMesto = new ComboBox();
+            groupBox1 = new GroupBox();
+            rbImePrezime = new RadioButton();
+            rbMesto = new RadioButton();
+            btnPretrazi = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvKlijenti).BeginInit();
             gbDodajPromeniKlijenta.SuspendLayout();
+            groupBox1.SuspendLayout();
             SuspendLayout();
             // 
             // dgvKlijenti
             // 
             dgvKlijenti.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvKlijenti.Location = new Point(3, 3);
+            dgvKlijenti.Location = new Point(4, 5);
+            dgvKlijenti.Margin = new Padding(4, 5, 4, 5);
             dgvKlijenti.Name = "dgvKlijenti";
             dgvKlijenti.ReadOnly = true;
+            dgvKlijenti.RowHeadersWidth = 62;
             dgvKlijenti.RowTemplate.Height = 25;
-            dgvKlijenti.Size = new Size(470, 465);
+            dgvKlijenti.Size = new Size(656, 775);
             dgvKlijenti.TabIndex = 0;
             // 
             // lblPretraziKlienta
             // 
             lblPretraziKlienta.AutoSize = true;
             lblPretraziKlienta.Font = new Font("Segoe UI", 17F, FontStyle.Regular, GraphicsUnit.Point);
-            lblPretraziKlienta.Location = new Point(579, 15);
+            lblPretraziKlienta.Location = new Point(827, 25);
+            lblPretraziKlienta.Margin = new Padding(4, 0, 4, 0);
             lblPretraziKlienta.Name = "lblPretraziKlienta";
-            lblPretraziKlienta.Size = new Size(171, 31);
+            lblPretraziKlienta.Size = new Size(249, 46);
             lblPretraziKlienta.TabIndex = 1;
             lblPretraziKlienta.Text = "Pretrazi klijenta";
             // 
             // lblImePrezime
             // 
             lblImePrezime.AutoSize = true;
-            lblImePrezime.Location = new Point(511, 68);
+            lblImePrezime.Location = new Point(730, 113);
+            lblImePrezime.Margin = new Padding(4, 0, 4, 0);
             lblImePrezime.Name = "lblImePrezime";
-            lblImePrezime.Size = new Size(78, 15);
+            lblImePrezime.Size = new Size(119, 25);
             lblImePrezime.TabIndex = 2;
             lblImePrezime.Text = "Ime i prezime";
             // 
             // lblMesto
             // 
             lblMesto.AutoSize = true;
-            lblMesto.Location = new Point(511, 117);
+            lblMesto.Location = new Point(730, 195);
+            lblMesto.Margin = new Padding(4, 0, 4, 0);
             lblMesto.Name = "lblMesto";
-            lblMesto.Size = new Size(40, 15);
+            lblMesto.Size = new Size(62, 25);
             lblMesto.TabIndex = 3;
             lblMesto.Text = "Mesto";
             // 
             // tbImePrezime
             // 
-            tbImePrezime.Location = new Point(604, 60);
+            tbImePrezime.Enabled = false;
+            tbImePrezime.Location = new Point(863, 111);
+            tbImePrezime.Margin = new Padding(4, 5, 4, 5);
             tbImePrezime.Name = "tbImePrezime";
-            tbImePrezime.Size = new Size(190, 23);
+            tbImePrezime.Size = new Size(270, 31);
             tbImePrezime.TabIndex = 4;
             tbImePrezime.TextChanged += tbImePrezime_TextChanged;
             // 
             // cmbMesto
             // 
+            cmbMesto.Enabled = false;
             cmbMesto.FormattingEnabled = true;
-            cmbMesto.Location = new Point(604, 114);
+            cmbMesto.Location = new Point(863, 190);
+            cmbMesto.Margin = new Padding(4, 5, 4, 5);
             cmbMesto.Name = "cmbMesto";
-            cmbMesto.Size = new Size(190, 23);
+            cmbMesto.Size = new Size(270, 33);
             cmbMesto.TabIndex = 5;
             cmbMesto.SelectionChangeCommitted += cmbMesto_SelectionChangeCommitted;
             // 
             // btnDodajKlijenta
             // 
-            btnDodajKlijenta.Location = new Point(511, 155);
+            btnDodajKlijenta.Location = new Point(729, 245);
+            btnDodajKlijenta.Margin = new Padding(4, 5, 4, 5);
             btnDodajKlijenta.Name = "btnDodajKlijenta";
-            btnDodajKlijenta.Size = new Size(87, 44);
+            btnDodajKlijenta.Size = new Size(151, 58);
             btnDodajKlijenta.TabIndex = 6;
             btnDodajKlijenta.Text = "Dodaj klijenta";
             btnDodajKlijenta.UseVisualStyleBackColor = true;
@@ -121,9 +136,10 @@
             // 
             // btnPromeniKlijenta
             // 
-            btnPromeniKlijenta.Location = new Point(604, 155);
+            btnPromeniKlijenta.Location = new Point(730, 313);
+            btnPromeniKlijenta.Margin = new Padding(4, 5, 4, 5);
             btnPromeniKlijenta.Name = "btnPromeniKlijenta";
-            btnPromeniKlijenta.Size = new Size(98, 44);
+            btnPromeniKlijenta.Size = new Size(150, 58);
             btnPromeniKlijenta.TabIndex = 7;
             btnPromeniKlijenta.Text = "Promeni klijenta";
             btnPromeniKlijenta.UseVisualStyleBackColor = true;
@@ -131,9 +147,10 @@
             // 
             // btnObrisiKlijenta
             // 
-            btnObrisiKlijenta.Location = new Point(708, 155);
+            btnObrisiKlijenta.Location = new Point(982, 313);
+            btnObrisiKlijenta.Margin = new Padding(4, 5, 4, 5);
             btnObrisiKlijenta.Name = "btnObrisiKlijenta";
-            btnObrisiKlijenta.Size = new Size(92, 44);
+            btnObrisiKlijenta.Size = new Size(151, 58);
             btnObrisiKlijenta.TabIndex = 8;
             btnObrisiKlijenta.Text = "Obrisi klijenta";
             btnObrisiKlijenta.UseVisualStyleBackColor = true;
@@ -142,45 +159,50 @@
             // lblDodajImePrezime
             // 
             lblDodajImePrezime.AutoSize = true;
-            lblDodajImePrezime.Location = new Point(5, 68);
+            lblDodajImePrezime.Location = new Point(7, 101);
+            lblDodajImePrezime.Margin = new Padding(4, 0, 4, 0);
             lblDodajImePrezime.Name = "lblDodajImePrezime";
-            lblDodajImePrezime.Size = new Size(78, 15);
+            lblDodajImePrezime.Size = new Size(119, 25);
             lblDodajImePrezime.TabIndex = 9;
             lblDodajImePrezime.Text = "Ime i prezime";
             // 
             // lblDodajKontakt
             // 
             lblDodajKontakt.AutoSize = true;
-            lblDodajKontakt.Location = new Point(5, 96);
+            lblDodajKontakt.Location = new Point(7, 148);
+            lblDodajKontakt.Margin = new Padding(4, 0, 4, 0);
             lblDodajKontakt.Name = "lblDodajKontakt";
-            lblDodajKontakt.Size = new Size(48, 15);
+            lblDodajKontakt.Size = new Size(73, 25);
             lblDodajKontakt.TabIndex = 10;
             lblDodajKontakt.Text = "Kontakt";
             // 
             // lblDodajTipKlijenta
             // 
             lblDodajTipKlijenta.AutoSize = true;
-            lblDodajTipKlijenta.Location = new Point(5, 126);
+            lblDodajTipKlijenta.Location = new Point(7, 198);
+            lblDodajTipKlijenta.Margin = new Padding(4, 0, 4, 0);
             lblDodajTipKlijenta.Name = "lblDodajTipKlijenta";
-            lblDodajTipKlijenta.Size = new Size(65, 15);
+            lblDodajTipKlijenta.Size = new Size(96, 25);
             lblDodajTipKlijenta.TabIndex = 11;
             lblDodajTipKlijenta.Text = "Tip klijenta";
             // 
             // lblDodajPol
             // 
             lblDodajPol.AutoSize = true;
-            lblDodajPol.Location = new Point(5, 155);
+            lblDodajPol.Location = new Point(7, 246);
+            lblDodajPol.Margin = new Padding(4, 0, 4, 0);
             lblDodajPol.Name = "lblDodajPol";
-            lblDodajPol.Size = new Size(24, 15);
+            lblDodajPol.Size = new Size(36, 25);
             lblDodajPol.TabIndex = 12;
             lblDodajPol.Text = "Pol";
             // 
             // lblDodajMesto
             // 
             lblDodajMesto.AutoSize = true;
-            lblDodajMesto.Location = new Point(5, 184);
+            lblDodajMesto.Location = new Point(7, 295);
+            lblDodajMesto.Margin = new Padding(4, 0, 4, 0);
             lblDodajMesto.Name = "lblDodajMesto";
-            lblDodajMesto.Size = new Size(40, 15);
+            lblDodajMesto.Size = new Size(62, 25);
             lblDodajMesto.TabIndex = 13;
             lblDodajMesto.Text = "Mesto";
             // 
@@ -188,9 +210,10 @@
             // 
             lblDodajPromeniKlijenta.AutoSize = true;
             lblDodajPromeniKlijenta.Font = new Font("Segoe UI", 17F, FontStyle.Regular, GraphicsUnit.Point);
-            lblDodajPromeniKlijenta.Location = new Point(80, 19);
+            lblDodajPromeniKlijenta.Location = new Point(111, 29);
+            lblDodajPromeniKlijenta.Margin = new Padding(4, 0, 4, 0);
             lblDodajPromeniKlijenta.Name = "lblDodajPromeniKlijenta";
-            lblDodajPromeniKlijenta.Size = new Size(155, 31);
+            lblDodajPromeniKlijenta.Size = new Size(225, 46);
             lblDodajPromeniKlijenta.TabIndex = 14;
             lblDodajPromeniKlijenta.Text = "Dodaj klijenta";
             // 
@@ -208,17 +231,20 @@
             gbDodajPromeniKlijenta.Controls.Add(lblDodajImePrezime);
             gbDodajPromeniKlijenta.Controls.Add(lblDodajTipKlijenta);
             gbDodajPromeniKlijenta.Controls.Add(lblDodajKontakt);
-            gbDodajPromeniKlijenta.Location = new Point(511, 205);
+            gbDodajPromeniKlijenta.Location = new Point(730, 373);
+            gbDodajPromeniKlijenta.Margin = new Padding(4, 5, 4, 5);
             gbDodajPromeniKlijenta.Name = "gbDodajPromeniKlijenta";
-            gbDodajPromeniKlijenta.Size = new Size(289, 263);
+            gbDodajPromeniKlijenta.Padding = new Padding(4, 5, 4, 5);
+            gbDodajPromeniKlijenta.Size = new Size(413, 407);
             gbDodajPromeniKlijenta.TabIndex = 15;
             gbDodajPromeniKlijenta.TabStop = false;
             // 
             // btnKrajUnosaKlijenta
             // 
-            btnKrajUnosaKlijenta.Location = new Point(105, 219);
+            btnKrajUnosaKlijenta.Location = new Point(149, 333);
+            btnKrajUnosaKlijenta.Margin = new Padding(4, 5, 4, 5);
             btnKrajUnosaKlijenta.Name = "btnKrajUnosaKlijenta";
-            btnKrajUnosaKlijenta.Size = new Size(98, 44);
+            btnKrajUnosaKlijenta.Size = new Size(140, 73);
             btnKrajUnosaKlijenta.TabIndex = 21;
             btnKrajUnosaKlijenta.Text = "Kraj unosa";
             btnKrajUnosaKlijenta.UseVisualStyleBackColor = true;
@@ -226,46 +252,96 @@
             // 
             // tbDodajKontakt
             // 
-            tbDodajKontakt.Location = new Point(93, 94);
+            tbDodajKontakt.Location = new Point(133, 145);
+            tbDodajKontakt.Margin = new Padding(4, 5, 4, 5);
             tbDodajKontakt.Name = "tbDodajKontakt";
-            tbDodajKontakt.Size = new Size(190, 23);
+            tbDodajKontakt.Size = new Size(270, 31);
             tbDodajKontakt.TabIndex = 20;
             // 
             // tbDodajImePrezime
             // 
-            tbDodajImePrezime.Location = new Point(93, 65);
+            tbDodajImePrezime.Location = new Point(133, 96);
+            tbDodajImePrezime.Margin = new Padding(4, 5, 4, 5);
             tbDodajImePrezime.Name = "tbDodajImePrezime";
-            tbDodajImePrezime.Size = new Size(190, 23);
+            tbDodajImePrezime.Size = new Size(270, 31);
             tbDodajImePrezime.TabIndex = 19;
             // 
             // cmbDodajTipKlijenta
             // 
             cmbDodajTipKlijenta.FormattingEnabled = true;
-            cmbDodajTipKlijenta.Location = new Point(93, 123);
+            cmbDodajTipKlijenta.Location = new Point(133, 193);
+            cmbDodajTipKlijenta.Margin = new Padding(4, 5, 4, 5);
             cmbDodajTipKlijenta.Name = "cmbDodajTipKlijenta";
-            cmbDodajTipKlijenta.Size = new Size(190, 23);
+            cmbDodajTipKlijenta.Size = new Size(270, 33);
             cmbDodajTipKlijenta.TabIndex = 18;
             // 
             // cmbDodajPol
             // 
             cmbDodajPol.FormattingEnabled = true;
-            cmbDodajPol.Location = new Point(93, 152);
+            cmbDodajPol.Location = new Point(133, 241);
+            cmbDodajPol.Margin = new Padding(4, 5, 4, 5);
             cmbDodajPol.Name = "cmbDodajPol";
-            cmbDodajPol.Size = new Size(190, 23);
+            cmbDodajPol.Size = new Size(270, 33);
             cmbDodajPol.TabIndex = 17;
             // 
             // cmbDodajMesto
             // 
             cmbDodajMesto.FormattingEnabled = true;
-            cmbDodajMesto.Location = new Point(93, 181);
+            cmbDodajMesto.Location = new Point(133, 290);
+            cmbDodajMesto.Margin = new Padding(4, 5, 4, 5);
             cmbDodajMesto.Name = "cmbDodajMesto";
-            cmbDodajMesto.Size = new Size(190, 23);
+            cmbDodajMesto.Size = new Size(270, 33);
             cmbDodajMesto.TabIndex = 16;
+            // 
+            // groupBox1
+            // 
+            groupBox1.Controls.Add(rbImePrezime);
+            groupBox1.Controls.Add(rbMesto);
+            groupBox1.Location = new Point(682, 89);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Size = new Size(41, 148);
+            groupBox1.TabIndex = 17;
+            groupBox1.TabStop = false;
+            // 
+            // rbImePrezime
+            // 
+            rbImePrezime.AutoSize = true;
+            rbImePrezime.Location = new Point(6, 27);
+            rbImePrezime.Name = "rbImePrezime";
+            rbImePrezime.Size = new Size(21, 20);
+            rbImePrezime.TabIndex = 13;
+            rbImePrezime.TabStop = true;
+            rbImePrezime.UseVisualStyleBackColor = true;
+            rbImePrezime.CheckedChanged += rbImePrezime_CheckedChanged;
+            // 
+            // rbMesto
+            // 
+            rbMesto.AutoSize = true;
+            rbMesto.Location = new Point(6, 109);
+            rbMesto.Name = "rbMesto";
+            rbMesto.Size = new Size(21, 20);
+            rbMesto.TabIndex = 12;
+            rbMesto.TabStop = true;
+            rbMesto.UseVisualStyleBackColor = true;
+            rbMesto.CheckedChanged += rbMesto_CheckedChanged;
+            // 
+            // btnPretrazi
+            // 
+            btnPretrazi.Location = new Point(982, 245);
+            btnPretrazi.Margin = new Padding(4, 5, 4, 5);
+            btnPretrazi.Name = "btnPretrazi";
+            btnPretrazi.Size = new Size(151, 58);
+            btnPretrazi.TabIndex = 18;
+            btnPretrazi.Text = "Pretrazi klijenta";
+            btnPretrazi.UseVisualStyleBackColor = true;
+            btnPretrazi.Click += btnPretrazi_Click;
             // 
             // UCKlijentiOpste
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(btnPretrazi);
+            Controls.Add(groupBox1);
             Controls.Add(gbDodajPromeniKlijenta);
             Controls.Add(btnObrisiKlijenta);
             Controls.Add(btnPromeniKlijenta);
@@ -276,11 +352,14 @@
             Controls.Add(lblImePrezime);
             Controls.Add(lblPretraziKlienta);
             Controls.Add(dgvKlijenti);
+            Margin = new Padding(4, 5, 4, 5);
             Name = "UCKlijentiOpste";
-            Size = new Size(821, 471);
+            Size = new Size(1173, 785);
             ((System.ComponentModel.ISupportInitialize)dgvKlijenti).EndInit();
             gbDodajPromeniKlijenta.ResumeLayout(false);
             gbDodajPromeniKlijenta.PerformLayout();
+            groupBox1.ResumeLayout(false);
+            groupBox1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -309,6 +388,10 @@
         private Button btnKrajUnosaKlijenta;
         private TextBox tbDodajKontakt;
         private TextBox tbDodajImePrezime;
+        private GroupBox groupBox1;
+        private RadioButton rbImePrezime;
+        private RadioButton rbMesto;
+        private Button btnPretrazi;
 
         public DataGridView DgvKlijenti
         {
@@ -361,6 +444,10 @@
         public Button BtnPromeniKlijenta
         {
             get { return btnPromeniKlijenta; }
+        }
+        public Button BtnPretrazi
+        {
+            get { return btnPretrazi; }
         }
     }
 }

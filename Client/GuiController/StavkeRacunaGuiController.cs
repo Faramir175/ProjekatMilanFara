@@ -18,7 +18,7 @@ namespace Client.GuiController
         private List<Klijent> klijenti;
         private List<Usluga> usluge;
         private BindingList<StavkaRacuna> stavke;
-        private Racun proverenRacun;
+        private Racun proverenRacun = null;
         public static StavkeRacunaGuiController Instance
         {
             get
@@ -46,7 +46,6 @@ namespace Client.GuiController
 
         internal void FormaZaPromenu(FrmStavkeRacuna frmStavkeRacuna, Racun selektovaniRacun, bool promena)
         {
-            proverenRacun = null;
             proverenRacun = Communication.Instance.PretraziRacun(selektovaniRacun);
             if (proverenRacun != null)
             {
@@ -64,7 +63,43 @@ namespace Client.GuiController
                 frmStavkeRacuna.LblPopust.Text = selektovaniRacun.Popust.ToString();
                 Klijent k = Communication.Instance.VratiJednogKlijenta(selektovaniRacun.IdKlijent);
                 frmStavkeRacuna.CmbKlijent.SelectedValue = k.ImePrezime;
+                MessageBox.Show("Систем је нашао рачун");
                 frmStavkeRacuna.ShowDialog();
+            } else
+            {
+                MessageBox.Show("Систем не може да нађе рачун");
+                return;
+            }
+        }
+
+        internal void FormaZaDetalje(FrmStavkeRacuna frmStavkeRacuna, Racun selektovaniRacun)
+        {
+            proverenRacun = Communication.Instance.PretraziRacun(selektovaniRacun);
+            if (proverenRacun != null)
+            {
+                frmStavkeRacuna = new FrmStavkeRacuna();
+                frmStavkeRacuna.AutoSize = true;
+                frmStavkeRacuna.CmbKlijent.ValueMember = "ImePrezime";
+                InitUslugaCmb(frmStavkeRacuna);
+                InitKlijentCmb(frmStavkeRacuna);
+                UpisURacun(frmStavkeRacuna, true);
+                InitStavkeRacunaDgv(frmStavkeRacuna, selektovaniRacun);
+                frmStavkeRacuna.DtpDatum.Text = selektovaniRacun.Datum.ToString();
+                frmStavkeRacuna.LblUkupanIznos.Text = selektovaniRacun.UkupanIznos.ToString();
+                frmStavkeRacuna.LblPopust.Text = selektovaniRacun.Popust.ToString();
+                Klijent k = Communication.Instance.VratiJednogKlijenta(selektovaniRacun.IdKlijent);
+                frmStavkeRacuna.CmbKlijent.SelectedValue = k.ImePrezime;
+                frmStavkeRacuna.CmbKlijent.Enabled = false;
+                frmStavkeRacuna.CmbUsluga.Enabled = false;
+                frmStavkeRacuna.DtpDatum.Enabled = false;
+                frmStavkeRacuna.DgvStavkeRacuna.Enabled = false;
+                frmStavkeRacuna.BtnKrajUnosa.Enabled = false;
+                MessageBox.Show("Систем је нашао рачун");
+                frmStavkeRacuna.ShowDialog();
+            } else
+            {
+                MessageBox.Show("Систем не може да нађе рачун");
+                return;
             }
         }
 
@@ -234,6 +269,12 @@ namespace Client.GuiController
                 {
                     racunZaBazu.StavkeRacuna.Add(s);
                 }
+                if (racunZaBazu.IdRacun == null||racunZaBazu.Popust==null||racunZaBazu.UkupanIznos==0|| racunZaBazu.IdKlijent == null || racunZaBazu.IdFrizer == null)
+                {
+                    MessageBox.Show("Систем не може да запамти рачун");
+                    frmStavkeRacuna.Close();
+                    return;
+                }
                 racunZaBazu = UpisRacunaUBazu(frmStavkeRacuna, racunZaBazu);
             }
             else
@@ -248,6 +289,7 @@ namespace Client.GuiController
                 PromenaRacuna(racunZaPromenu);
             }
             RacunGuiController.Instance.InitDgvRacun();
+            MessageBox.Show("Систем је запамтио рачун.");
             frmStavkeRacuna.Close();
         }
 

@@ -49,17 +49,34 @@ namespace Client.GuiController
 
         internal void UnosNoveKvalifikacije(UCUnosKvalifikacije uc)
         {
-            Kvalifikacija novaKvalifikacija = new Kvalifikacija();
-            novaKvalifikacija.NazivKvalifikacije = uc.TbNazivKvalifikacije.Text;
-            Communication.Instance.UbaciKvalifikacija(novaKvalifikacija);
+            try
+            {
+                Kvalifikacija novaKvalifikacija = new Kvalifikacija();
+                novaKvalifikacija.NazivKvalifikacije = uc.TbNazivKvalifikacije.Text;
+                Communication.Instance.UbaciKvalifikacija(novaKvalifikacija);
+                MessageBox.Show("Систем је запамтио квалификацију");
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Систем не може да запамти квалификацију");
+            }
+
             InitCmbKvalifikacija(uc);
         }
 
         internal void UnosPromenjeneKvalifikacije(UCUnosKvalifikacije uc)
         {
-            Kvalifikacija kvalifikacijaZaPromenu = (Kvalifikacija)uc.CmbKvalifikacija.SelectedItem;
-            kvalifikacijaZaPromenu.NazivKvalifikacije = uc.TbNazivKvalifikacije.Text;
-            Communication.Instance.PromeniKvalifikacija(kvalifikacijaZaPromenu);
+            try
+            {
+                Kvalifikacija kvalifikacijaZaPromenu = (Kvalifikacija)uc.CmbKvalifikacija.SelectedItem;
+                kvalifikacijaZaPromenu.NazivKvalifikacije = uc.TbNazivKvalifikacije.Text;
+                Communication.Instance.PromeniKvalifikacija(kvalifikacijaZaPromenu);
+                MessageBox.Show("Систем је запамтио квалификацију");
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Систем не може да запамти квалификацију");
+            }
             InitCmbKvalifikacija(uc);
         }
     }

@@ -124,6 +124,12 @@ namespace Client.GuiController
             Klijent klijentZaFiltriranje = (Klijent)uCRacunOpsta.CmbKlijent.SelectedItem;
             Frizer frizerZaFiltriranje = (Frizer)uCRacunOpsta.CmbFrizer.SelectedItem;
             List<Racun> listaRacuna = Communication.Instance.VratiListuRacun(klijentZaFiltriranje);
+            if (listaRacuna == null || listaRacuna.Count == 0)
+            {
+                MessageBox.Show("Систем не може да нађе рачуне по задатим критеријумима.");
+                ucRacunView.DgvRacuni.DataSource = null;
+                return;
+            }
             InitCmbKlijent();
             InitCmbFrizer();
             ucRacunView.CmbFrizer.SelectedItem = frizeri.FirstOrDefault(k => k.IdFrizer == frizerZaFiltriranje?.IdFrizer);
@@ -155,6 +161,12 @@ namespace Client.GuiController
             Frizer frizerZaFiltriranje = (Frizer)uCRacunOpsta.CmbFrizer.SelectedItem;
             Klijent klijentZaFiltriranje = (Klijent)uCRacunOpsta.CmbKlijent.SelectedItem;
             List<Racun> listaRacuna = Communication.Instance.VratiListuRacun(frizerZaFiltriranje);
+            if (listaRacuna == null || listaRacuna.Count == 0)
+            {
+                MessageBox.Show("Систем не може да нађе рачуне по задатим критеријумима.");
+                ucRacunView.DgvRacuni.DataSource = null;
+                return;
+            }
             InitCmbFrizer();
             InitCmbKlijent();
             ucRacunView.CmbKlijent.SelectedItem = klijenti.FirstOrDefault(k => k.IdKlijent == klijentZaFiltriranje?.IdKlijent);
@@ -186,12 +198,18 @@ namespace Client.GuiController
             Usluga uslugazafiltriranje = (Usluga)uCRacunOpsta.CmbUsluga.SelectedItem;
             Frizer frizerZaFiltriranje = (Frizer)uCRacunOpsta.CmbFrizer.SelectedItem;
             Klijent klijentZaFiltriranje = (Klijent)uCRacunOpsta.CmbKlijent.SelectedItem;
-            List<Racun> listaracuna = Communication.Instance.VratiListuRacun(uslugazafiltriranje);
+            List<Racun> listaRacuna = Communication.Instance.VratiListuRacun(uslugazafiltriranje);
+            if (listaRacuna == null || listaRacuna.Count == 0)
+            {
+                MessageBox.Show("Систем не може да нађе рачуне по задатим критеријумима.");
+                ucRacunView.DgvRacuni.DataSource = null;
+                return;
+            }
             InitCmbFrizer();
             InitCmbKlijent();
             ucRacunView.CmbKlijent.SelectedItem = klijenti.FirstOrDefault(k => k.IdKlijent == klijentZaFiltriranje?.IdKlijent);
             ucRacunView.CmbFrizer.SelectedItem = frizeri.FirstOrDefault(k => k.IdFrizer == frizerZaFiltriranje?.IdFrizer);
-            foreach (Racun r in listaracuna)
+            foreach (Racun r in listaRacuna)
             {
                 foreach (Klijent klijent in klijenti)
                 {
@@ -218,10 +236,16 @@ namespace Client.GuiController
             racuni = new BindingList<Racun>();
             double cenaZaFiltriranje;
             double.TryParse(uCRacunOpsta.TbCenaRacuna.Text, out cenaZaFiltriranje);
-            List<Racun> listaracuna = Communication.Instance.VratiListuRacun(cenaZaFiltriranje);
+            List<Racun> listaRacuna = Communication.Instance.VratiListuRacun(cenaZaFiltriranje);
+            if (listaRacuna == null || listaRacuna.Count == 0)
+            {
+                MessageBox.Show("Систем не може да нађе рачуне по задатим критеријумима.");
+                ucRacunView.DgvRacuni.DataSource = null;
+                return;
+            }
             InitCmbKlijent();
             InitCmbFrizer();
-            foreach (Racun r in listaracuna)
+            foreach (Racun r in listaRacuna)
             {
                 foreach (Klijent klijent in klijenti)
                 {

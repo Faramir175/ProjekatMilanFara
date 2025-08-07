@@ -54,13 +54,21 @@ namespace Client.GuiController
             List<Frizer> users = Communication.Instance.LoginUser(username, password);
             if(users.Count == 1 && users.First<Frizer>().KorisnickoIme != null)
             {
-                MessageBox.Show("Successfully login!");
+                MessageBox.Show("Корисничко име и шифра су исправни");
                 MainGuiController.Instance.logedUser = users.First<Frizer>();
-                MainGuiController.Instance.ShowFrmMain(frmLogIn);
+                try
+                {
+                    MainGuiController.Instance.ShowFrmMain(frmLogIn);
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Не може да се отвори главна форма и мени");
+                }
             }
             else
             {
-                MessageBox.Show("Wrong credentials!");
+                MessageBox.Show("Не може да се отвори главна форма и мени");
+
             }
         }
     }

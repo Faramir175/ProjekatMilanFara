@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace SysOp
 {
-    public class LogInSysOp:SystemOperationBase
+    public class PrijaviFrizer:SystemOperationBase
     {
         private Frizer user;
         public List<Frizer> Result { get; set; }
-        public LogInSysOp(Frizer user)
+        public PrijaviFrizer(Frizer user)
         {
             this.user = user;
         }
